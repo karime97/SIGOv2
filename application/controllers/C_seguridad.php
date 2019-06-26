@@ -414,7 +414,7 @@ class C_seguridad extends CI_Controller {
 				$asunto = utf8_decode('Usuario bloqueado');
 				$correo_enviado = $mail->enviar_correo_gmail($usuario->vCorreo,$asunto,$mensaje);
 
-				if($correo_enviado)	echo "0"; //	Los cambios fueron gurdados
+				if($correo_enviado)	echo "0"; //	Los cambios fueron guardados
 				else echo "1";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
     		}
     		else
@@ -452,7 +452,7 @@ class C_seguridad extends CI_Controller {
 				$asunto = utf8_decode('Usuario desbloqueado');
 				$correo_enviado = $mail->enviar_correo_gmail($usuario->vCorreo,$asunto,$mensaje);
 
-				if($correo_enviado)	echo "0"; //	Los cambios fueron gurdados
+				if($correo_enviado)	echo "0"; //	Los cambios fueron guardados
 				else echo "1";	//	Los cambios fueron guardados pero los correos no pudieron ser enviados
     		}
     		else

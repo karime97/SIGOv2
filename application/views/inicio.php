@@ -10,11 +10,13 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Nice admin Template - The Ultimate Multipurpose admin template</title>
+    <title>SIGO</title>
     <!-- Custom CSS -->
     <link href="<?=base_url()?>public/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="<?=base_url()?>public/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="<?=base_url()?>public/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- This page plugin CSS -->
+    <link href="<?=base_url()?>public/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?=base_url()?>public/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -336,6 +338,9 @@
     <!--c3 charts -->
     <script src="<?=base_url()?>public/assets/extra-libs/c3/d3.min.js"></script>
     <script src="<?=base_url()?>public/assets/extra-libs/c3/c3.min.js"></script>
+     <!--This page plugins -->
+    <script src="<?=base_url()?>public/assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script src="<?=base_url()?>public/dist/js/pages/datatable/datatable-basic.init.js"></script>
     
     <script type="text/javascript">
 
