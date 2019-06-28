@@ -29,16 +29,19 @@ class C_ubps extends CI_Controller {
     	$this->load->view('UBPs/vTabla', $data);
     }
 
-    public function insertarUBP(){
-		$data = array(
-			'vClave'=>$this->input->post('claveUBP'),
-			'vUBP'=>$this->input->post('nombUBP'),
-			'iAnio'=>$this->input->post('anio'),
-			'iIdTipoUbp'=>$this->input->post('nombUBP'),
-			'iIdDependencia'=>$this->input->post('nombUBP'),
-			'iIdProgramaPresupuestario'=>$this->input->post('nombUBP')
-		);
+    public function insertar(){
+        if(isset($_POST['NombUbp']) && isset($_POST['NombUbp']) && isset($_POST['annio']) && isset($_POST['TipoUBP']) && isset($_POST['Depen']) && isset($_POST['ProgP'])){
+            $data = array(
+                'vClave'=>$this->input->post('NombUbp'),
+                'vUBP'=>$this->input->post('NombUbp'),
+                'ianio'=>$this->input->post('annio'),
+                'iIdTipoUbp'=>$this->input->post('TipoUBP'),
+                'iIdDependencia'=>$this->input->post('Depen'),
+                'iIdProgramaPresupuestario'=>$this->input->post('ProgP')
+            );
+            $resultado = $this->M_ubps->insertarUBP($data);
 
-		$this->db->insert('UBP', $data);
-	}
+            echo $resultado;
+        }        
+    }
 }

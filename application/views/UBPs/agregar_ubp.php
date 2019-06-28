@@ -9,21 +9,21 @@
                                 <div class="form-row">                                    
                                     <div class="col-md-2">
                                         <label for="validationCustom01">Clave UBP</label>
-                                        <input type="text" class="form-control" id="claveUBP" placeholder="Clave UBP" value="" required="">
+                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="" required="">
                                         <div class="valid-feedback">
                                             
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="validationCustom02">Nombre de la UBP</label>
-                                        <input type="text" class="form-control" id="nombUBP" placeholder="Nombre de la UBP" value="" required="">
+                                        <input type="text" class="form-control" id="nombUBP" name="NombUbp" placeholder="Nombre de la UBP" value="" required="">
                                         <div class="valid-feedback">
                                             
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="validationCustomUsername">Año</label>
-                                        <input type="text" class="form-control" id="anio" placeholder="Año" value="" required="">
+                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="" required="">
                                         <div class="valid-feedback">
                                             
                                         </div>
@@ -31,7 +31,7 @@
                                     <div class="col-md-4">
                                         <label for="validationCustom03">Tipo UBP</label>
                                         <div class="form-group">
-                                            <select class="custom-select" required="">
+                                            <select class="custom-select" required="" id="Tubp" name="TipoUBP">
                                                 <option value="">Seleccione...</option>
                                                 <?php
                                                     foreach ($tUBP as $value) { ?>
@@ -44,7 +44,7 @@
                                     <div class="col-md-6">
                                         <label for="validationCustom04">Dependencia</label>
                                         <div class="form-group">
-                                            <select class="custom-select" required="">
+                                            <select class="custom-select" required="" name="Depen">
                                                 <option value="">Seleccione...</option>
                                                 <?php
                                                     foreach ($Dep as $de) { ?>
@@ -57,7 +57,7 @@
                                     <div class="col-md-6">
                                         <label>Programa presupuestario (PP)</label>
                                         <div class="form-group">
-                                            <select class="custom-select" required="">
+                                            <select class="custom-select" required="" name="ProgP">
                                                 <option value="">Seleccione...</option>
                                                 <?php
                                                     foreach ($PP as $pre) { ?>
