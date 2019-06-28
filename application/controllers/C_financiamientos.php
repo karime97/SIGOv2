@@ -32,13 +32,13 @@ class C_financiamientos extends CI_Controller {
         $this->load->view('financiamientos/contenido_tabla',$data);
     }
 
+    //Funcion para insertar
     public function insert(){
 
         if(isset($_POST['clave']) && isset($_POST['anio']) && isset($_POST['financiamiento'])){
 
             $data = array();
 
-            $data['iIdFinanciamiento'] = $this->mf->get_last_id() + 1;
             $data['vClave'] = $_POST['clave'];
             $data['vFinanciamiento'] = $_POST['financiamiento'];
             $data['iAnio'] = $_POST['anio'];
@@ -48,6 +48,45 @@ class C_financiamientos extends CI_Controller {
 
             echo $resultado;
             
+        }else{
+            //Mensaje en caso de que no reciba el POST
+            echo "Falla algo";
+        }
+    }
+
+    //Muestra la pantalla de edicion para el update
+    public function edit(){
+
+        if(isset($_POST['id'])){
+
+            $id = $_POST['id'];
+
+            $data['consulta'] = $this->mf->preparar_update($id);      
+            $this->load->view('financiamientos/contenido_modificar',$data);
+
+        }else{
+            echo "No recibe la variable";
+        }
+        
+    }
+
+    //Funcion para modificar
+    public function update(){
+
+        if(isset($_POST['id']) && isset($_POST['clave']) && isset($_POST['anio']) && isset($_POST['financiamiento'])){
+
+            $data = array();
+
+            $id = $_POST['id'];
+            $data['vClave'] = $_POST['clave'];
+            $data['vFinanciamiento'] = $_POST['financiamiento'];
+            $data['iAnio'] = $_POST['anio'];
+            $data['iActivo']= 1;
+
+            $resultado = $this->mf->modificar_financiamiento($id,$data);
+
+            echo $resultado;
+
         }else{
             //Mensaje en caso de que no reciba el POST
             echo "Falla algo";

@@ -3,6 +3,7 @@ class M_financiamientos extends CI_Model {
 
 
 	private $table = 'Financiamiento';
+	private $idF = 'iIdFinanciamiento';
 
 	function __construct()
 	{
@@ -22,19 +23,32 @@ class M_financiamientos extends CI_Model {
         return $resultado;
 	}
 
-	//Guardar las fuentes de financiamiento en la DB
+	//Guarda las fuentes de financiamiento en la DB
 	public function guardar_financiamiento($data){
 
-		return $this->db->insert($this->table, $data);
-		//return $this->db->insert_id();
+		$this->db->insert($this->table, $data);
+		return $this->db->insert_id();
 	}
 
-	//Funcion para obtener el ultimo id de la tabla
-	public function get_last_id(){
-		$this->db->select_max('iIdFinanciamiento'); 
-		$result= $this->db->get('Financiamiento')->row_array(); 
-		return $result['iIdFinanciamiento']; 
+	//Modifica las fuentes de financiamiento en la DB
+	public function modificar_financiamiento($id,$data){
+
+		$this->db->where('iIdFinanciamiento', $id);
+		return $this->db->update('Financiamiento', $data);
+		
 	}
 
+	//Muestra las fuentes de financiamiento con determinado id
+	public function preparar_update($id){
+
+		$this->db->select();
+		$this->db->from('Financiamiento f');
+		$this->db->where($this->idF, $id);
+
+		$query =  $this->db->get()->row();
+        
+        return $query;
+
+	}
 	
 }
