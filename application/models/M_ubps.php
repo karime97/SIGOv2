@@ -17,6 +17,19 @@ class M_ubps extends CI_Model {
         return $resultado;
 	}
 
+	public function preparar_update($id){
+        $this->db->select();
+		$this->db->from('UBP u');
+		$this->db->join('Dependencia d','u.iIdDependencia = d.iIdDependencia','JOIN');
+		$this->db->join('TipoUBP t','t.iIdTipoUbp = u.iIdTipoUbp','JOIN');
+		$this->db->join('ProgramaPresupuestario pp','pp.iIdProgramaPresupuestario = u.iIdProgramaPresupuestario','JOIN');
+		$this->db->where('iIdUbp', $id);
+
+		$query =  $this->db->get()->row();
+        
+        return $query;
+	}
+
 	//Mostrar Tipo de UBP
 	public function mostrar_Tubps(){
         $this->db->select();
@@ -50,7 +63,14 @@ class M_ubps extends CI_Model {
         return $resultado;
 	}
 
-	public function insertarUBP(){
-		$this->db->insert('UBP');
+	public function insertarUBP($data){
+		$this->db->insert('UBP', $data);
+		return $this->db->insert_id();
+	}
+
+	public function modificarUBP($id, $data){
+		$this->db->where('iIdUbp', $id);	   
+
+		return $this->db->update('UBP', $data);
 	}
 }

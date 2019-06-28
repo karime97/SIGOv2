@@ -31,7 +31,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <button type="button" class="btn waves-effect waves-light btn-light" style="margin-top:35px">Buscar</button>
-                                                    <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="capturarUBP()">Agregar</button>                                                    
+                                                    <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="capturarUBP()">Agregar</button>
                                                 </div>
                                             </div>
                                             <!--/span-->
@@ -50,6 +50,10 @@
 <script>
      function capturarUBP(){
         cargar('<?= base_url()?>C_ubps/agregar','#contenido_modulo');
+    }
+
+    function modificarUBP(id){
+        cargar('<?= base_url()?>C_ubps/edit','#contenido_modulo', 'POST', 'id=' + id);
     }
 
     function regresar(){

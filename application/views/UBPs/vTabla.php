@@ -20,7 +20,7 @@
                                 <td><?= $value->vUBP ?></td>
                                 <td><?= $value->iAnio ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning "><i class="mdi mdi-border-color"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUBP(<?= $value->iIdUbp ?>)"><i class="mdi mdi-border-color" ></i></button>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-danger "><i class="mdi mdi-close"></i></button>
                                 </td>
                              </tr> 
@@ -32,6 +32,7 @@
         </div>
     </div>
 </div>
+<div id="holi"></div>
 
 <script>
 $(document).ready(function () {

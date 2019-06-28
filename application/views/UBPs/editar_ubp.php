@@ -9,21 +9,21 @@
                                 <div class="form-row">                                    
                                     <div class="col-md-2">
                                         <label for="validationCustom01">Clave UBP</label>
-                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="" required="">
+                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="<?= $consulta->vClave ?>" required="">
                                         <div class="valid-feedback">
                                             
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="validationCustom02">Nombre de la UBP</label>
-                                        <input type="text" class="form-control" id="nombUBP" name="NombUbp" placeholder="Nombre de la UBP" value="" required="">
+                                        <input type="text" class="form-control" id="nombUBP" name="NombUbp" placeholder="Nombre de la UBP" value="<?= $consulta->vUBP ?>" required="">
                                         <div class="valid-feedback">
                                             
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="validationCustomUsername">Año</label>
-                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="" required="">
+                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="<?= $consulta->iAnio ?>" required="">
                                         <div class="valid-feedback">
                                             
                                         </div>
@@ -32,7 +32,7 @@
                                         <label for="validationCustom03">Tipo UBP</label>
                                         <div class="form-group">
                                             <select class="custom-select" required="" id="Tubp" name="TipoUBP">
-                                                <option value="">Seleccione...</option>
+                                                <option value="<?= $consulta->iIdTipoUbp ?>"><?= $consulta->vTipoUbp ?></option>
                                                 <?php
                                                     foreach ($tUBP as $value) { ?>
                                                         <option value="<?= $value->iIdTipoUbp ?>"><?= $value->vTipoUbp ?></option>
@@ -45,7 +45,7 @@
                                         <label for="validationCustom04">Dependencia</label>
                                         <div class="form-group">
                                             <select class="custom-select" required="" name="Depen">
-                                                <option value="">Seleccione...</option>
+                                                <option value="<?= $consulta->iIdDependencia ?>"><?= $consulta->vDependencia ?></option>
                                                 <?php
                                                     foreach ($Dep as $de) { ?>
                                                         <option value="<?= $de->iIdDependencia ?>"><?= $de->vDependencia ?></option>
@@ -58,7 +58,7 @@
                                         <label>Programa presupuestario (PP)</label>
                                         <div class="form-group">
                                             <select class="custom-select" required="" name="ProgP">
-                                                <option value="">Seleccione...</option>
+                                                <option value="<?= $consulta->iIdProgramaPresupuestario ?>"><?= $consulta->vProgramaPresupuestario ?></option>
                                                 <?php
                                                     foreach ($PP as $pre) { ?>
                                                         <option value="<?= $pre->iIdProgramaPresupuestario ?>"><?= $pre->vProgramaPresupuestario ?></option>
@@ -68,6 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="id" value="<?= $consulta->iIdUbp ?>">
                                 <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
                             </form>                            
                         </div>
@@ -102,11 +103,11 @@
                                 e.preventDefault();
                                 $.ajax({
                                     type: "POST",
-                                    url: "<?= base_url() ?>C_ubps/insertar",
+                                    url: "<?= base_url() ?>C_ubps/actualizar",
                                     data: $(f).serialize(),
 
                                     success: function(resp){
-                                        if(resp > 0){
+                                        if(resp == true){
                                             cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
                                         }else{
                                             alert(resp);
