@@ -63,3 +63,5 @@ $route['participa'] = 'Sitio/matriz_ejes';
 $route['encuestas'] = 'Sitio/encuestas';
 $route['login'] = 'Sitio/login';
 $route['registro'] = 'Sitio/registrarse';
+
+

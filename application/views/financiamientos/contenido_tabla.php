@@ -9,7 +9,7 @@
                                 <th>Clave</th>
                                 <th>Fuente de Financiamiento</th>
                                 <th>Año</th>
-                                <th> </th>
+                                <th width="150px"> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,8 +20,8 @@
                                 <td><?= $value->vFinanciamiento ?></td>
                                 <td><?= $value->iAnio ?></td>
                                 <td>
-                                    <i class="m-r-10 mdi mdi-border-color"></i>
-                                    <i class="m-r-10 mdi mdi-close"></i>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_financiamiento(<?= $value->iIdFinanciamiento ?>)"><i class="mdi mdi-border-color"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close"></i></button>
                                 </td>
                              </tr> 
                              <?php }?>
