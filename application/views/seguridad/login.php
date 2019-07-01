@@ -13,6 +13,8 @@
     <title>SIGO</title>
     <!-- Custom CSS -->
     <link href="<?=base_url()?>public/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -126,6 +128,8 @@
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?=base_url()?>public/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="<?=base_url()?>public/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
+    <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->
@@ -151,13 +155,50 @@
               if(resp == 'correcto'){
                 window.location.href = '<?=base_url()?>';
               } else {
-                alert(resp);
+                alerta(resp,'error');
               }
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-              
+              alerta(resp,'error');
             }
+        });
+    }
+
+    function alerta(mensaje,tipo){
+        switch(tipo){
+            case 'success':
+                toastr.success(mensaje, '¡Exito!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                break;
+            case 'warning':
+                toastr.warning(mensaje, 'Advertencia', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                break;
+            case 'error':
+                toastr.error(mensaje, '¡Error!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                break;
+            default:
+                toastr.info(mensaje, 'Info', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });
+        }
+    }
+
+    function confirmar(mensaje,funcion,var1){
+        //event.preventDefault();
+        var1 = var1 || '';
+        swal({
+            title: mensaje,
+            /*text: mensaje,*/
+            //icon: 'info',
+            type: "warning",   
+            showCancelButton: true,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Confirmar",   
+            cancelButtonText: "Cancelar",
+        }).then((confirm) => {
+
+            if(confirm.hasOwnProperty('value')){
+                if(var1 != '') funcion(var1);
+                else funcion();
+            } 
         });
     }
     </script>
