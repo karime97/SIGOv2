@@ -18,7 +18,9 @@
     <!-- This page plugin CSS -->
     <link href="<?=base_url()?>public/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
-   <link href="<?=base_url()?>public/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>public/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -214,7 +216,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="cerrarSesion();">
+                                <a class="dropdown-item" style="cursor: pointer;" onclick="confirmar('¿Realmente desea cerrar sesión?',cerrarSesion);">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="p-l-30 p-10">
@@ -341,6 +343,8 @@
      <!--This page plugins -->
     <script src="<?=base_url()?>public/assets/extra-libs/DataTables/datatables.min.js"></script>
     <script src="<?=base_url()?>public/dist/js/pages/datatable/datatable-basic.init.js"></script>
+    <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
+    <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
     
     <script type="text/javascript">
 
@@ -364,20 +368,55 @@
             });
         }
 
-        function cerrarSesion(){
-            if(confirm('¿Desea cerrar sesión?')){
-                $.ajax({
-                    url: '<?=base_url()?>C_seguridad/cerrar_sesion',
-                    type: 'POST',
-                    async: true,
-                    success: function(htmlcode){
-                        window.location.href = '<?=base_url()?>';
-                    },
-                    error: function(XMLHttpRequest, errMsg, exception){
-                        console.log(errMsg,"error");
-                    }
-                });
+        function cerrarSesion(){            
+            $.ajax({
+                url: '<?=base_url()?>C_seguridad/cerrar_sesion',
+                type: 'POST',
+                async: true,
+                success: function(htmlcode){
+                    window.location.href = '<?=base_url()?>';
+                },
+                error: function(XMLHttpRequest, errMsg, exception){
+                    console.log(errMsg,"error");
+                }
+            });
+        }
+
+        function alerta(mensaje,tipo){
+            switch(tipo){
+                case 'success':
+                    toastr.success(mensaje, '¡Exito!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                    break;
+                case 'warning':
+                    toastr.warning(mensaje, 'Advertencia', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                    break;
+                case 'error':
+                    toastr.error(mensaje, '¡Error!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                    break;
+                default:
+                    toastr.info(mensaje, 'Info', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });
             }
+        }
+
+        function confirmar(mensaje,funcion,var1){
+            //event.preventDefault();
+            var1 = var1 || '';
+            swal({
+                title: mensaje,
+                /*text: mensaje,*/
+                //icon: 'info',
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Confirmar",   
+                cancelButtonText: "Cancelar",
+            }).then((confirm) => {
+
+                if(confirm.hasOwnProperty('value')){
+                    if(var1 != '') funcion(var1);
+                    else funcion();
+                } 
+            });
         }
     </script>
 </body>
