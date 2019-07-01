@@ -21,7 +21,7 @@
                                 <td><?= $value->iAnio ?></td>
                                 <td>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_financiamiento(<?= $value->iIdFinanciamiento ?>)"><i class="mdi mdi-border-color"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close" onclick="confirmar('¿Esta usted seguro?',EliminarFinanciamiento,<?= $value->iIdFinanciamiento ?>)"></i></button>
                                 </td>
                              </tr> 
                              <?php }?>
@@ -37,4 +37,52 @@
     $(document).ready(function() {
         $('#grid').DataTable();
     });
+</script>
+
+<script>
+    function confirmar(mensaje,funcion,var1){
+            //event.preventDefault();
+            var1 = var1 || '';
+            swal({
+                title: mensaje,
+                /*text: mensaje,*/
+                //icon: 'info',
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Confirmar",   
+                cancelButtonText: "Cancelar",
+            }).then((confirm) => {
+
+                if(confirm.hasOwnProperty('value')){
+                    if(var1 != '') funcion(var1);
+                    else funcion();
+                } 
+            });
+        }
+</script>
+
+<script>
+    function EliminarFinanciamiento(id){
+        event.preventDefault();
+
+        $.ajax({         
+            type: "POST",
+            url: "<?=base_url()?>C_financiamientos/delete", //Nombre del controlador
+            data: {'id' : id},
+
+            success: function(resp) {
+                 if(resp == true){
+                
+                $('#grid').dataTable()._fnAjaxUpdate();
+
+              } else {
+                alert(resp);
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              
+            }
+        });
+    }
 </script>

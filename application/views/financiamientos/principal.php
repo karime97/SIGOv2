@@ -44,7 +44,7 @@
 
     function modificar_financiamiento(id) {
         cargar('<?= base_url() ?>C_financiamientos/edit', '#contenedor','POST','id='+id);
-    }  
+    } 
 
     function regresar() {
         cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor');
