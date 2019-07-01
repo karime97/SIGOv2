@@ -15,7 +15,8 @@ class M_financiamientos extends CI_Model {
 	public function mostrar_financiamientos()
 	{              
         $this->db->select();
-	    $this->db->from('Financiamiento f');			
+		$this->db->from('Financiamiento f');
+		$this->db->where('iActivo', 1);			
 
 		$query =  $this->db->get();
         
@@ -30,14 +31,6 @@ class M_financiamientos extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	//Modifica las fuentes de financiamiento en la DB
-	public function modificar_financiamiento($id,$data){
-
-		$this->db->where('iIdFinanciamiento', $id);
-		return $this->db->update('Financiamiento', $data);
-		
-	}
-
 	//Muestra las fuentes de financiamiento con determinado id
 	public function preparar_update($id){
 
@@ -49,6 +42,23 @@ class M_financiamientos extends CI_Model {
         
         return $query;
 
+	}
+
+	//Modifica las fuentes de financiamiento en la DB
+	public function modificar_financiamiento($id,$data){
+
+		$this->db->where('iIdFinanciamiento', $id);
+		return $this->db->update('Financiamiento', $data);
+		
+	}
+
+	//Cambia de estatus activo a inactivo(Metoo de eliminacion)
+	public function eliminar_financiamiento($id){
+
+		$data = array('iActivo' => 0);
+
+		$this->db->where('iIdFinanciamiento', $id);
+		return $this->db->update('Financiamiento',$data);
 	}
 	
 }

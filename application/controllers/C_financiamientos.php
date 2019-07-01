@@ -92,5 +92,21 @@ class C_financiamientos extends CI_Controller {
             echo "Falla algo";
         }
     }
+
+    //Funcion para eliminar
+    public function delete(){
+
+        if(isset($_POST['id'])){
+
+            $id = $_POST['id'];
+
+            $resultado = $this->mf->eliminar_financiamiento($id);
+
+            echo $resultado;
+
+        }else{
+            echo "algo salio mal";
+        }
+    }
 }
 ?>

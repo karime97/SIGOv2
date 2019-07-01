@@ -3,25 +3,25 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 class="card-title">Nueva fuente de financiamiento</h4>
+                    <h4 class="card-title">Nueva dependencia</h4>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
                 </div>
             </div>
             <br><br>           
-            <form class="needs-validation was-validated" onsubmit="modificarFinanciamiento(this,event);">
+            <form class="needs-validation was-validated" onsubmit="guardarDependencia(this,event);">
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Clave</label>
-                        <input class="form-control" id="validationCustom04" name="clave" required="" type="text" placeholder="Ingresar clave" value="<?= $consulta->vClave ?>">
+                        <label for="validationCustom04">Nombre corto</label>
+                        <input class="form-control" id="validationCustom04" name="clave" required="" type="text" placeholder="Ingresar clave">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Año</label>
-                        <input class="form-control" id="validationCustom04" name="anio" required="" type="text" placeholder="Ingresar año" value="<?= $consulta->iAnio ?>">
+                        <label for="validationCustom04">Dependencia</label>
+                        <input class="form-control" id="validationCustom04" name="anio" required="" type="text" placeholder="Ingresar año">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -29,16 +29,11 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Fuente de financiamiento</label>
-                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento"><?= $consulta->vFinanciamiento ?></textarea>
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
+                        
                     </div>
 
                 </div>
-                <input type="hidden" value="<?= $consulta->iIdFinanciamiento ?>" name='id' />
-                <button class="btn btn-info" type="submit">Guardar cambios</button>
+                <button class="btn btn-info" type="submit">Guardar</button>
             </form>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -63,28 +58,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function modificarFinanciamiento(f,e){
-        e.preventDefault();
-
-        $.ajax({         
-            type: "POST",
-            url: "<?=base_url()?>C_financiamientos/update", //Nombre del controlador
-            data: $(f).serialize(),
-
-            success: function(resp) {
-                 if(resp == true){
-                
-                cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
-              } else {
-                alert(resp);
-              }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              
-            }
-        });
-    }
-</script>
-
