@@ -89,4 +89,26 @@ class C_ubps extends CI_Controller {
             echo "No funcionó";
         }
     }
+
+    public function eliminar(){
+        $key = $_POST['key'];
+        echo $this->mu->eliminarUBP($key);
+    }
+
+    public function gettable(){
+        $year = $keyword = null;
+        if(isset($_POST['keyword']) && !empty($_POST['keyword'])){
+            $keyword = $_POST['keyword'];
+        }
+        
+        if(isset($_POST['year']) && !empty($_POST['year'])){
+            $year = $_POST['year'];
+        }
+       
+        $data['consulta'] = $this->mu->mostrar_ubps($keyword, $year);
+        echo $_SESSION['sql'];
+        //print_r($data['consulta']);
+        $this->load->view('UBPs/vTabla', $data);
+    }
+
 }

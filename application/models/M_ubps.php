@@ -1,7 +1,6 @@
 <?php
 class M_ubps extends CI_Model {
 
-
 	function __construct(){
 		parent::__construct();
         $this->db = $this->load->database('default',TRUE);
@@ -9,11 +8,19 @@ class M_ubps extends CI_Model {
 
 	/* MOSTRAR DATOS */
 
-	public function mostrar_ubps(){
+	public function mostrar_ubps($keyword = null, $year = null){
         $this->db->select();
-	    $this->db->from('UBP');			
+		$this->db->from('UBP');	
+		$this->db->where('iActivo', 1);
 
+		if (!empty($keyword) && $keyword != null){
+			$this->db->where("(\"vClave\" ilike '%$keyword%' or \"vUBP\" ilike '%$keyword%')");
+		}
+		if (!empty($year) && $year != null){
+			$this->db->where('iAnio', $year);
+		}
 		$query =  $this->db->get();
+		$_SESSION['sql'] = $this->db->last_query();
         
         $resultado = $query->result();
         return $resultado;
@@ -81,4 +88,10 @@ class M_ubps extends CI_Model {
 	}
 
 	/* ELIMINAR DATOS */
+	public function eliminarUBP($id){
+		$this->db->where('iIdUbp', $id);
+		$data = array('iActivo' => 0);
+		$this->db->update('UBP', $data);
+		return $this->db->affected_rows();
+	}
 }

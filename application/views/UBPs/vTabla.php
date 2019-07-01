@@ -20,12 +20,11 @@
                                 <td><?= $value->vUBP ?></td>
                                 <td><?= $value->iAnio ?></td>
                                 <td>
-                                <button type="button" class="msg-warning btn btn-info">Advertencia con condicion</button>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUBP(<?= $value->iIdUbp ?>)"><i class="mdi mdi-border-color" ></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger "><i class="mdi mdi-close"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUBP(<?= $value->iIdUbp ?>));"><i class="mdi mdi-close"></i></button>
                                 </td>
-                             </tr> 
-                             <?php }?>
+                             </tr>
+                             <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -40,19 +39,59 @@ $(document).ready(function () {
         $('#grid').DataTable();
     });
 
-    swal({  <br /> 
-                    title: "¿Seguro que deseas continuar?",<br />   
-                    text: "No podrás deshacer este paso...",<br />   
-                    type: "warning",<br />   
-                    showCancelButton: true,<br />
-                    cancelButtonText: "Mmm... mejor no",<br />   
-                    confirmButtonColor: "#DD6B55",<br />   
-                    confirmButtonText: "¡Adelante!",<br />   
-                    closeOnConfirm: false },<br /><br /> 
+    function alerta(mensaje,tipo){
+            switch(tipo){
+                case 'success':
+                    toastr.success(mensaje, '¡Exito!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                    break;
+                case 'warning':
+                    toastr.warning(mensaje, 'Advertencia', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                    break;
+                case 'error':
+                    toastr.error(mensaje, '¡Error!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
+                    break;
+                default:
+                    toastr.info(mensaje, 'Info', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });
+            }
+        }
 
-                    function(){ <br />  
-                      swal("¡Hecho!",<br /> 
-                        "Acabas de vender tu alma al diablo.",<br /> 
-                        "success");<br /> 
-                  });
+    function confirmar(mensaje,funcion,var1){
+            //event.preventDefault();
+            var1 = var1 || '';
+            swal({
+                title: mensaje,
+                /*text: mensaje,*/
+                //icon: 'info',
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Confirmar",   
+                cancelButtonText: "Cancelar",
+            }).then((confirm) => {
+
+                if(confirm.hasOwnProperty('value')){
+                    if(var1 != '') funcion(var1);
+                    else funcion();
+                } 
+            });
+        }
+
+        function eliminarUBP(key){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "<?= base_url() ?>C_ubps/eliminar",
+                                    data: {'key' : key},
+                                    //contentType: 'json',
+                                    success: function(resp){
+                                        if(resp == true){
+                                            cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
+                                        }else{
+                                            alert(resp);
+                                        }
+                                    },
+                                    error: function(XMLHHttRequest, textStatus, errorThrown) {
+                                        
+                                    }
+                                });
+                            }
 </script>
