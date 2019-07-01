@@ -5,12 +5,12 @@ class C_unidadesmedida extends CI_Controller {
         parent::__construct();
         session_start();
         $this->load->helper('url');
-        $this->load->model('M_unidadmedida', 'mum');
+        $this->load->model('M_unidadesmedida', 'mum');
     }
 
     public function index(){
         $data['consulta'] = $this->mum->mostrar_um();
-    	$this->load->view('UnidadesDeMedidas/inicio_ubp', $data);
+    	$this->load->view('UnidadesDeMedidas/inicio_um', $data);
     }
 
     public function agregar(){

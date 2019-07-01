@@ -39,28 +39,7 @@
     });
 </script>
 
-<script>
-    function confirmar(mensaje,funcion,var1){
-            //event.preventDefault();
-            var1 = var1 || '';
-            swal({
-                title: mensaje,
-                /*text: mensaje,*/
-                //icon: 'info',
-                type: "warning",   
-                showCancelButton: true,   
-                confirmButtonColor: "#DD6B55",   
-                confirmButtonText: "Confirmar",   
-                cancelButtonText: "Cancelar",
-            }).then((confirm) => {
 
-                if(confirm.hasOwnProperty('value')){
-                    if(var1 != '') funcion(var1);
-                    else funcion();
-                } 
-            });
-        }
-</script>
 
 <script>
     function EliminarFinanciamiento(id){
