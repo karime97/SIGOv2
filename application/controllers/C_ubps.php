@@ -106,7 +106,7 @@ class C_ubps extends CI_Controller {
         }
        
         $data['consulta'] = $this->mu->mostrar_ubps($keyword, $year);
-        echo $_SESSION['sql'];
+        //echo $_SESSION['sql'];
         //print_r($data['consulta']);
         $this->load->view('UBPs/vTabla', $data);
     }

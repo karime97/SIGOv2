@@ -21,7 +21,7 @@
                                 <td><?= $value->iAnio ?></td>
                                 <td>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUBP(<?= $value->iIdUbp ?>)"><i class="mdi mdi-border-color" ></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUBP(<?= $value->iIdUbp ?>));"><i class="mdi mdi-close"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUBP, <?= $value->iIdUbp ?>);"><i class="mdi mdi-close"></i></button>
                                 </td>
                              </tr>
                              <?php } ?>
