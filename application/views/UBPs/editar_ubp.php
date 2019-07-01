@@ -78,8 +78,8 @@
 
                 <script>
                     function UBP(){
-        cargar('<?= base_url()?>C_ubps/agregar','#contenido_modulo');
-    }
+                        cargar('<?= base_url()?>C_ubps/agregar','#contenido_modulo');
+                    }
                             // Example starter JavaScript for disabling form submissions if there are invalid fields
                             (function() {
                                 'use strict';
