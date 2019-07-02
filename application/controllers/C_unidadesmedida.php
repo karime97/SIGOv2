@@ -13,12 +13,28 @@ class C_unidadesmedida extends CI_Controller {
     	$this->load->view('UnidadesDeMedidas/inicio_um', $data);
     }
 
-    public function agregar(){
+    public function cargar(){
         $this->load->view('UnidadesDeMedidas/agregar_um');      
     }
 
     public function regresar(){
         $data['consulta'] = $this->mum->mostrar_um();
     	$this->load->view('UnidadesDeMedidas/vTabla', $data);
+    }
+
+    public function insertar(){
+        
+        if(isset($_POST['NombUm'])){
+            $data = array(
+                'vUnidadMedida'=>$this->input->post('NombUm')
+            );
+            
+            $resultado = $this->mum->insertarUM($data);
+            echo $resultado;
+
+         
+        }else{
+            echo "Algo salió mal";
+        }
     }
 }

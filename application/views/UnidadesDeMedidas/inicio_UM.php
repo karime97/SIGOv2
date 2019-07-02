@@ -35,7 +35,7 @@
 
 <script>
      function capturarUM(){
-        cargar('<?= base_url()?>C_unidadesmedida/agregar','#contenido_modulo');
+        cargar('<?= base_url()?>C_unidadesmedida/cargar','#contenido_modulo');
     }
 
     function modificarUM(id){
