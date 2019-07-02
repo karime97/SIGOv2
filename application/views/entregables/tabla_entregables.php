@@ -6,9 +6,12 @@
                     <table class="table table-striped table-bordered display" style="width:100%" id="grid">
                         <thead>
                             <tr>
-                                <th>Clave</th>
-                                <th>Fuente de Financiamiento</th>
-                                <th>Año</th>
+                                <th>Entregable</th>
+                                <th>Unidad de medida</th>
+                                <th>Periodicidad</th>
+                                <th>¿Los beneficios son los mismos en cada periodo?</th>
+                                <th>Municipalizable</th>
+                                <th>¿Presenta alineación a compromiso?</th>
                                 <th width="150px"> </th>
                             </tr>
                         </thead>
@@ -16,7 +19,7 @@
                             <?php
                             foreach($consulta as $value){ ?>
                             <tr>
-                                <td><?= $value->vClave ?></td>
+                                <td><?= $value->vEntregable ?></td>
                                 <td><?= $value->vFinanciamiento ?></td>
                                 <td><?= $value->iAnio ?></td>
                                 <td>
@@ -37,29 +40,4 @@
     $(document).ready(function() {
         $('#grid').DataTable();
     });
-</script>
-
-<script>
-    function EliminarFinanciamiento(id){
-        event.preventDefault();
-
-        $.ajax({         
-            type: "POST",
-            url: "<?=base_url()?>C_financiamientos/delete", //Nombre del controlador
-            data: {'id' : id},
-
-            success: function(resp) {
-                 if(resp == true){
-                
-                 cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
-
-              } else {
-                alert(resp);
-              }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              
-            }
-        });
-    }
 </script>

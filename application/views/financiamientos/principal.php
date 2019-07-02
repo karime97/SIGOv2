@@ -1,7 +1,8 @@
 <br><br>
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Fuentes de financiamiento</h4>
+        <h1 class="card-title">Fuentes de financiamiento</h1>
+        <h5 class="card-subtitle"> Administración del catálogo de fuentes de financiamiento. </h5>
         <form method="get" action="">
             <div class="row">
             <div class="col-md-4 mb-3">

@@ -1,68 +1,71 @@
-<div id="contenido_modulo" class="container">
-<div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                        <div align="right">
-                                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
-                                </div>
-                            <form class="needs-validation was-validated" onsubmit="guardarUBP(this,event);">
-                                <div class="form-row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationCustom02">Nombre de la Unidad de Medida</label>
-                                        <input type="text" class="form-control" id="nombUBP" name="NombUm" placeholder="Nombre de la UBP" value="" required="">
-                                        <div class="valid-feedback">
-                                            
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
-                            </form>                            
-                        </div>
+<div id="contenido_modulo" class="">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4 class="card-title">Nueva unidad de medida</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
                     </div>
                 </div>
-                </div>
-
+                <br><br>
+                <form class="needs-validation was-validated" onsubmit="guardarUM(this,event);">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom04">Unidad de medida</label>
+                            <input class="form-control" id="validationCustom04" name="NombUm" required="" type="text" placeholder="Ingresar unidad de medida">
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-info" type="submit">Guardar</button>
+                </form>
                 <script>
-                    function UBP(){
-        cargar('<?= base_url()?>C_unidadesmedida/cargar','#contenido_modulo');
-    }
-                            // Example starter JavaScript for disabling form submissions if there are invalid fields
-                            (function() {
-                                'use strict';
-                                window.addEventListener('load', function() {
-                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                    var forms = document.getElementsByClassName('needs-validation');
-                                    // Loop over them and prevent submission
-                                    var validation = Array.prototype.filter.call(forms, function(form) {
-                                        form.addEventListener('submit', function(event) {
-                                            if (form.checkValidity() === false) {
-                                                event.preventDefault();
-                                                event.stopPropagation();
-                                            }
-                                            form.classList.add('was-validated');
-                                        }, false);
-                                    });
-                                }, false);
-                            })();
-
-                            function guardarUM(f, e){
-                                e.preventDefault();
-                                $.ajax({
-                                    type: "POST",
-                                    url: "<?= base_url() ?>C_unidadesmedida/insertar",
-                                    data: $(f).serialize(),
-
-                                    success: function(resp){
-                                        if(resp > 0){
-                                            cargar('<?= base_url()?>C_unidadesmedida/regresar','#contenido_modulo');
-                                        }else{
-                                            alert(resp);
-                                        }
-                                    },
-                                    error: function(XMLHHttRequest, textStatus, errorThrown) {
-                                        
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
                                     }
-                                });
-                            }
-                            </script>
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function guardarUM(f, e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_unidadesmedida/insertar",
+            data: $(f).serialize(),
+
+            success: function(resp) {
+                if (resp > 0) {
+                    cargar('<?= base_url() ?>C_unidadesmedida/regresar', '#contenido_modulo');
+                } else {
+                    alert(resp);
+                }
+            },
+            error: function(XMLHHttRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+</script>

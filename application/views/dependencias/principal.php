@@ -33,66 +33,9 @@
  <base href="<?= base_url() ?>public/">
 
  <div id="contenedor">
-     <div class="container-fluid">
-         <!-- ============================================================== -->
-         <!-- Start Page Content -->
-         <!-- ============================================================== -->
-         <div class="row el-element-overlay">
-
-             <?php
-
-                foreach ($consulta as $value) {
-                    echo '
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="row">
-                                    <div class="col-md-9">                                            
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-spin fa-cog"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0)">Editar</a>
-                                                <a class="dropdown-item" href="javascript:void(0)">Eliminar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                           
-                                <div class="el-card-avatar el-overlay-1">
-                                <img src="/assets/images/gallery/chair.jpg" alt="img" />
-                                </div>
-                                <div class="d-flex no-block align-items-center">
-                                    <div class="m-l-15">
-                                        <h5 class="m-b-0">Dependencia: </h5>
-                                        <h5 class="m-b-0">Titular: </h5>
-                                        <h5 class="m-b-0">Enlace: </h5>
-                                    </div>
-                                    <div class="m-l-15">
-                                        <h5 class="m-b-0">' . $value->vDependencia . '</h5>
-                                        <h5 class="m-b-0">ejemplo </h5>
-                                        <h5 class="m-b-0">ejemplo </h5>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>
-                    </div>';
-                } ?>
-
-         </div>
-         <!-- ============================================================== -->
-         <!-- End PAge Content -->
-         <!-- ============================================================== -->
-         <!-- ============================================================== -->
-         <!-- Right sidebar -->
-         <!-- ============================================================== -->
-         <!-- .right-sidebar -->
-         <!-- ============================================================== -->
-         <!-- End Right sidebar -->
-         <!-- ============================================================== -->
-     </div>
+     <?php
+    include_once('contenido_tabla.php');
+    ?>
  </div>
 
  <script>
