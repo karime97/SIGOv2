@@ -7,7 +7,7 @@
                         <h4 class="card-title">Modificar unidad de medida</h4>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
+                        <button class="btn btn-light" type="submit" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                     </div>
                 </div>
                 <br><br>
@@ -15,15 +15,27 @@
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom04">Unidad de medida</label>
-                            <input class="form-control" id="validationCustom04" name="NombUm" required="" type="text" placeholder="Ingresar unidad de medida">
+                            <input class="form-control" id="validationCustom04" name="NombUm" required="" type="text" placeholder="Ingresar unidad de medida" value="<?= $consulta->vUnidadMedida ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
                         </div>
                     </div>
+                    <center>
+                    <input type="hidden" name="id" value="<?= $consulta->iIdUnidadMedida ?>">
                     <button class="btn btn-info" type="submit">Guardar</button>
-                </form>
-                <script>
+                    </center>
+                </form>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+                    function UBP(){
+                        cargar('<?= base_url()?>C_unidadesmedida/cargar','#contenido_modulo');
+                    }
+
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
                     (function() {
                         'use strict';
@@ -42,8 +54,24 @@
                             });
                         }, false);
                     })();
+
+                    function guardarUM(f, e){
+                        e.preventDefault();
+                        $.ajax({
+                                    type: "POST",
+                                    url: "<?= base_url() ?>C_unidadesmedida/actualizar",
+                                    data: $(f).serialize(),
+
+                                    success: function(resp){
+                                        if(resp == true){
+                                            cargar('<?= base_url()?>C_unidadesmedida/regresar','#contenido_modulo');
+                                        }else{
+                                            alert(resp);
+                                        }
+                                    },
+                                    error: function(XMLHHttRequest, textStatus, errorThrown) {
+                                        
+                                    }
+                                });
+                            }
                 </script>
-            </div>
-        </div>
-    </div>
-</div>

@@ -39,6 +39,42 @@ class C_unidadesmedida extends CI_Controller {
     }
 
     public function edit(){
-        
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            
+            $data2['consulta'] = $this->mum->preparar_update($id);
+            $this->load->view('UnidadesDeMedidas/editar_um', $data2);
+        }
+    }
+
+    public function actualizar(){
+        if(isset($_POST['id']) && isset($_POST['NombUm'])){    
+            
+            $id = $_POST['id'];
+
+            $data = array(
+                'vUnidadMedida'=>$this->input->post('NombUm')
+            );
+
+            $resul = $this->mum->modificarUM($id, $data);
+            echo $resul;
+        }else {
+            echo "No funcionó";
+        }
+    }
+
+    public function eliminar(){
+        $key = $_POST['key'];
+        echo $this->mum->eliminarUM($key);
+    }
+
+    public function gettable(){
+        $keyword = null;
+        if(isset($_POST['keyword']) && !empty($_POST['keyword'])){
+            $keyword = $_POST['keyword'];
+        }
+       
+        $data['consulta'] = $this->mum->mostrar_um($keyword);
+        $this->load->view('UnidadesDeMedidas/vTabla', $data);
     }
 }

@@ -23,14 +23,14 @@ class M_unidadesmedida extends CI_Model {
         return $resultado;
     }
     
-    /* MODIFICAR DATOS */
+    /* AGREGAR DATOS */
 
 	public function insertarUM($data){
 		$this->db->insert('UnidadMedida', $data);
 		return $this->db->insert_id();
 	}
 
-	/* AGREGAR DATOS */
+	/* MODIFICAR DATOS */
 
 	public function preparar_update($id){
         $this->db->select();
@@ -42,14 +42,14 @@ class M_unidadesmedida extends CI_Model {
         return $query;
 	}	
 
-	public function modificarUBP($id, $data){
+	public function modificarUM($id, $data){
 		$this->db->where('iIdUnidadMedida', $id);	   
 
 		return $this->db->update('UnidadMedida', $data);
 	}
 
 	/* ELIMINAR DATOS */
-	public function eliminarUBP($id){
+	public function eliminarUM($id){
 		$this->db->where('iIdUnidadMedida', $id);
 		$data = array('iActivo' => 0);
 		$this->db->update('UnidadMedida', $data);
