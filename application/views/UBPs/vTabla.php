@@ -13,18 +13,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                            foreach($consulta as $value){ ?>
-                            <tr>
-                                <td><?= $value->vClave ?></td>
-                                <td><?= $value->vUBP ?></td>
-                                <td><?= $value->iAnio ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUBP(<?= $value->iIdUbp ?>)"><i class="mdi mdi-border-color" ></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUBP,<?= $value->iIdUbp ?>);"><i class="mdi mdi-close"></i></button>
-                                </td>
-                             </tr>
-                             <?php } ?>
+                            <?php
+                            foreach ($consulta as $value) { ?>
+                                <tr>
+                                    <td><?= $value->vClave ?></td>
+                                    <td><?= $value->vUBP ?></td>
+                                    <td><?= $value->iAnio ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUBP(<?= $value->iIdUbp ?>)"><i class="mdi mdi-border-color"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUBP,<?= $value->iIdUbp ?>);"><i class="mdi mdi-close"></i></button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -35,27 +35,30 @@
 <div id="holi"></div>
 
 <script>
-$(document).ready(function () {
+    $(document).ready(function() {
         $('#grid').DataTable();
+        //$('#grid').DataTable().ajax.reload(); 
     });
 
-        function eliminarUBP(key){
-                                $.ajax({
-                                    type: "POST",
-                                    url: "<?= base_url() ?>C_ubps/eliminar",
-                                    data: {'key' : key},
-                                    //contentType: 'json',
-                                    success: function(resp){
-                                        if(resp == true){
-                                            filter();
-                                            alerta('Eliminado exitosamente','success');
-                                        }else{
-                                            alerta('Error al eliminar','error');
-                                        }
-                                    },
-                                    error: function(XMLHHttRequest, textStatus, errorThrown) {
-                                        
-                                    }
-                                });
-                            }
+    function eliminarUBP(key) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_ubps/eliminar",
+            data: {
+                'key': key
+            },
+            //contentType: 'json',
+            success: function(resp) {
+                if (resp == true) {
+                    filter();
+                    alerta('Eliminado exitosamente', 'success');
+                } else {
+                    alerta('Error al eliminar', 'error');
+                }
+            },
+            error: function(XMLHHttRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
 </script>

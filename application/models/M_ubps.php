@@ -31,7 +31,7 @@ class M_ubps extends CI_Model {
 	public function mostrar_Tubps(){
 		$this->db->order_by('vTipoUbp', 'asc');
         $this->db->select();
-		$this->db->from('TipoUBP');	
+		$this->db->from('TipoUBP');
 		
 
 		$query =  $this->db->get();
@@ -77,7 +77,7 @@ class M_ubps extends CI_Model {
 		$this->db->from('UBP u');
 		$this->db->join('Dependencia d','u.iIdDependencia = d.iIdDependencia','JOIN');
 		$this->db->join('TipoUBP t','t.iIdTipoUbp = u.iIdTipoUbp','JOIN');
-		$this->db->join('ProgramaPresupuestario pp','pp.iIdProgramaPresupuestario = u.iIdProgramaPresupuestario','JOIN');
+		$this->db->join('ProgramaPresupuestario pp','pp.iIdProgramaPresupuestario = u.iIdProgramaPresupuestario','left outer');
 		$this->db->where('iIdUbp', $id);
 
 		$query =  $this->db->get()->row();
