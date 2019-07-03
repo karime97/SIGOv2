@@ -48,6 +48,6 @@
     }  
 
     function regresar() {
-        cargar('<?= base_url() ?>C_dependencias/return', '#contenedor');
+        cargar('<?= base_url() ?>C_dependencias/show', '#contenedor');
     }
 </script>

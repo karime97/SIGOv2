@@ -29,7 +29,7 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Fuente de financiamiento</label>
-                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento"></textarea>
+                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" maxlength="255"></textarea>
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
