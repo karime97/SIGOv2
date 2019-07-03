@@ -77,8 +77,10 @@
               if(resp > 0){
                 
                 cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+                alerta('Guardado exitosamente','success');
+
               } else {
-                alert(resp);
+                alerta('Error al guardar','error');
               }
 
             },

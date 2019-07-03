@@ -12,11 +12,18 @@ class M_financiamientos extends CI_Model {
 	}
 
 	//Muestra todas las fuentes de financiamiento
-	public function mostrar_financiamientos()
+	public function mostrar_financiamientos($fuente = null, $anio = null)
 	{              
         $this->db->select();
 		$this->db->from('Financiamiento f');
-		$this->db->where('iActivo', 1);			
+		$this->db->where('iActivo', 1);
+		
+		if (!empty($fuente) && $fuente != null){
+			$this->db->where("(\"vClave\" ilike '%$fuente%' or \"vFinanciamiento\" ilike '%$fuente%')");
+		}
+		if (!empty($anio) && $anio != null){
+			$this->db->where('iAnio', $anio);
+		}
 
 		$query =  $this->db->get();
         

@@ -52,9 +52,10 @@
                  if(resp == true){
                 
                  cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+                 alerta('Eliminado exitosamente','success');
 
               } else {
-                alert(resp);
+                alerta('Error al eliminar','success');
               }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -19,6 +19,7 @@ class M_ubps extends CI_Model {
 		if (!empty($year) && $year != null){
 			$this->db->where('iAnio', $year);
 		}
+		
 		$query =  $this->db->get();
 		$_SESSION['sql'] = $this->db->last_query();
         

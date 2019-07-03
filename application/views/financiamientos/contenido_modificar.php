@@ -75,11 +75,12 @@
 
             success: function(resp) {
                  if(resp == true){
-                
+                 
                 cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+                alerta('Modificado exitosamente','success');  
 
               } else {
-                alert(resp);
+                alerta('Error al modificar','error');
               }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -108,5 +108,25 @@ class C_financiamientos extends CI_Controller {
             echo "algo salio mal";
         }
     }
+
+    //Funcion de busquedas
+    public function search(){
+
+        $anio = $fuente = null;
+        if(isset($_POST['fuente']) && !empty($_POST['fuente'])){
+
+            $fuente = $_POST['fuente'];
+        }
+        
+        if(isset($_POST['anio']) && !empty($_POST['anio'])){
+
+            $anio = $_POST['anio'];
+        }
+       
+        $data['consulta'] = $this->mf->mostrar_financiamientos($fuente, $anio);
+        //echo $_SESSION['sql'];
+        //print_r($data['consulta']);
+        $this->load->view('financiamientos/contenido_tabla',$data);
+    }
 }
 ?>
