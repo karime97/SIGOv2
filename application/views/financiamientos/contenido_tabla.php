@@ -55,7 +55,7 @@
                  alerta('Eliminado exitosamente','success');
 
               } else {
-                alerta('Error al eliminar','success');
+                alerta('Error al eliminar','error');
               }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -48,8 +48,9 @@ $(document).ready(function () {
                                     success: function(resp){
                                         if(resp == true){
                                             cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
+                                            alerta('Eliminado exitosamente','success');
                                         }else{
-                                            alert(resp);
+                                            alerta('Error al eliminar','error');
                                         }
                                     },
                                     error: function(XMLHHttRequest, textStatus, errorThrown) {

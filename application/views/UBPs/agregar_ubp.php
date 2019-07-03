@@ -108,8 +108,9 @@
                                     success: function(resp){
                                         if(resp > 0){
                                             cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
+                                            alerta('Guardado exitosamente','success');
                                         }else{
-                                            alert(resp);
+                                            alerta('Error al guardar','error');
                                         }
                                     },
                                     error: function(XMLHHttRequest, textStatus, errorThrown) {

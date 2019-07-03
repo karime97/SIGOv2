@@ -21,7 +21,7 @@
                  <div class="col-sm-12 col-md-3" style="margin-top:35px;">
                      <div class="form-group">
                          <div class="button-group">
-                             <button type="submit" class="btn waves-effect waves-light btn-success">Buscar</button>
+                             <button type="submit" class="btn waves-effect waves-light btn-light">Buscar</button>
                              <button type="button" class="btn waves-effect waves-light btn-info" onclick="agregar_dependencia()">Agregar</button>
                          </div>
                      </div>
