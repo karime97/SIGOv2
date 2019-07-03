@@ -13,14 +13,14 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Clave</label>
-                        <input class="form-control" id="validationCustom04" name="clave" required="" type="text" placeholder="Ingresar clave">
+                        <input class="form-control" id="validationCustom04" name="clave" required="" type="text" placeholder="Ingresar clave" maxlength="5">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Año</label>
-                        <input class="form-control" id="validationCustom04" name="anio" required="" type="text" placeholder="Ingresar año">
+                        <input class="form-control" id="validationCustom04" name="anio" required="" type="text" placeholder="Ingresar año" onkeypress="solonumeros(event);" maxlength="4">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -90,4 +90,11 @@
             }
         });
     }
+
+    function solonumeros(e)
+                    {
+         var key = window.event ? e.which : e.keyCode;
+                        if(key < 48 || key > 57)
+                            e.preventDefault();
+                    }
 </script>

@@ -1,4 +1,4 @@
-<div id="contenido_modulo" class="container">
+<div id="contenido_modulo" class="">
 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
@@ -9,7 +9,7 @@
                                 <div class="form-row">                                    
                                     <div class="col-md-2">
                                         <label for="validationCustom01">Clave UBP</label>
-                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="<?= $consulta->vClave ?>" required="">
+                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="<?= $consulta->vClave ?>" required="" maxlength="5">
                                         <div class="valid-feedback">
                                             
                                         </div>
@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="validationCustomUsername">Año</label>
-                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="<?= $consulta->iAnio ?>" required="">
+                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="<?= $consulta->iAnio ?>" required="" onkeypress="solonumeros(event);" maxlength="4">
                                         <div class="valid-feedback">
                                             
                                         </div>
@@ -121,4 +121,11 @@
                                     }
                                 });
                             }
+
+                            function solonumeros(e)
+                    {
+         var key = window.event ? e.which : e.keyCode;
+                        if(key < 48 || key > 57)
+                            e.preventDefault();
+                    }
                             </script>

@@ -9,7 +9,7 @@
                                 <div class="form-row">                                    
                                     <div class="col-md-2">
                                         <label for="validationCustom01">Clave UBP</label>
-                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="" required="">
+                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="" required="" maxlength="5">
                                         <div class="valid-feedback">
                                             
                                         </div>
@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="validationCustomUsername">Año</label>
-                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="" required="">
+                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="" required="" onkeypress="solonumeros(event);" maxlength="4">
                                         <div class="valid-feedback">
                                             
                                         </div>
@@ -120,4 +120,11 @@
                                     }
                                 });
                             }
+
+                            function solonumeros(e)
+                    {
+         var key = window.event ? e.which : e.keyCode;
+                        if(key < 48 || key > 57)
+                            e.preventDefault();
+                    }
                             </script>
