@@ -29,6 +29,7 @@ class M_ubps extends CI_Model {
 
 	//Mostrar Tipo de UBP
 	public function mostrar_Tubps(){
+		$this->db->order_by('vTipoUbp', 'asc');
         $this->db->select();
 		$this->db->from('TipoUBP');	
 		
@@ -41,8 +42,9 @@ class M_ubps extends CI_Model {
 	
 	//Mostrar Dependencia
 	public function mostrar_dependencia(){
+		$this->db->order_by('vNombreCorto', 'asc');
         $this->db->select();
-		$this->db->from('Dependencia');	
+		$this->db->from('Dependencia');
 
 		$query =  $this->db->get();
         $resultado = $query->result();
@@ -51,6 +53,7 @@ class M_ubps extends CI_Model {
 
 	//Mostrar Programa Presupuestario
 	public function mostrar_PP(){
+		$this->db->order_by('vProgramaPresupuestario', 'asc');
         $this->db->select();
 		$this->db->from('ProgramaPresupuestario');	
 

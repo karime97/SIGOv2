@@ -45,10 +45,10 @@
                                         <label for="validationCustom04">Dependencia</label>
                                         <div class="form-group">
                                             <select class="custom-select" required="" name="Depen">
-                                                <option value="<?= $consulta->iIdDependencia ?>"><?= $consulta->vDependencia ?></option>
+                                                <option value="<?= $consulta->iIdDependencia ?>"><?= $consulta->vNombreCorto ?></option>
                                                 <?php
                                                     foreach ($Dep as $de) { ?>
-                                                        <option value="<?= $de->iIdDependencia ?>"><?= $de->vDependencia ?></option>
+                                                        <option value="<?= $de->iIdDependencia ?>"><?= $de->vNombreCorto ?></option>
                                                 <?php } ?>
                                             </select>
                                             <div class="valid-feedback"> </div>

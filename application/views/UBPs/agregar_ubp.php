@@ -48,7 +48,7 @@
                                                 <option value="">Seleccione...</option>
                                                 <?php
                                                     foreach ($Dep as $de) { ?>
-                                                        <option value="<?= $de->iIdDependencia ?>"><?= $de->vDependencia ?></option>
+                                                        <option value="<?= $de->iIdDependencia ?>"><?= $de->vNombreCorto ?></option>
                                                 <?php } ?>
                                             </select>
                                             <div class="valid-feedback"> </div>
