@@ -6,9 +6,8 @@
                     <table class="table table-striped table-bordered display" style="width:100%" id="grid">
                         <thead>
                             <tr>
-                                <th>Clave</th>
-                                <th>Fuente de Financiamiento</th>
-                                <th>Año</th>
+                                <th>Dependencia</th>
+                                <th>Nombre corto</th>
                                 <th width="150px"> </th>
                             </tr>
                         </thead>
@@ -16,12 +15,11 @@
                             <?php
                             foreach($consulta as $value){ ?>
                             <tr>
-                                <td><?= $value->vClave ?></td>
-                                <td><?= $value->vFinanciamiento ?></td>
-                                <td><?= $value->iAnio ?></td>
+                                <td><?= $value->vDependencia ?></td>
+                                <td><?= $value->vNombreCorto ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_financiamiento(<?= $value->iIdFinanciamiento ?>)"><i class="mdi mdi-border-color"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close" onclick="confirmar('¿Esta usted seguro?',EliminarFinanciamiento,<?= $value->iIdFinanciamiento ?>)"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_dependencia(<?= $value->iIdDependencia ?>)"><i class="mdi mdi-border-color"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close" onclick="confirmar('¿Esta usted seguro?',EliminarDependencia,<?= $value->iIdDependencia ?>)"></i></button>
                                 </td>
                              </tr> 
                              <?php }?>
@@ -40,18 +38,18 @@
 </script>
 
 <script>
-    function EliminarFinanciamiento(id){
+    function EliminarDependencia(id){
         event.preventDefault();
 
         $.ajax({         
             type: "POST",
-            url: "<?=base_url()?>C_financiamientos/delete", //Nombre del controlador
+            url: "<?=base_url()?>C_dependencias/delete", //Nombre del controlador
             data: {'id' : id},
 
             success: function(resp) {
                  if(resp == true){
                 
-                 cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+                 cargar('<?= base_url() ?>C_dependencias/return', '#contenedor'); //Opcion para redirigir a la tabla principal
 
               } else {
                 alert(resp);

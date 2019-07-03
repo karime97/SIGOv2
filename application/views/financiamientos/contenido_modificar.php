@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 class="card-title">Nueva fuente de financiamiento</h4>
+                    <h4 class="card-title">Modificar fuente de financiamiento</h4>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
@@ -77,6 +77,7 @@
                  if(resp == true){
                 
                 cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+
               } else {
                 alert(resp);
               }

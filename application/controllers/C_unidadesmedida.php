@@ -37,4 +37,8 @@ class C_unidadesmedida extends CI_Controller {
             echo "Algo salió mal";
         }
     }
+
+    public function edit(){
+        
+    }
 }

@@ -88,18 +88,3 @@
         });
     }
 </script>
-
-<script>
-    function notificacion(encabezado,mensaje,tipo){
-
-        if(tipo == 'success'){
-            return notify({
-                    type: toastType.success,
-                    iconClass: getOptions().iconClasses.tipo,
-                    message: message,
-                    optionsOverride: mensaje,
-                    title: encabezado
-                });
-        }
-    }
-</script>

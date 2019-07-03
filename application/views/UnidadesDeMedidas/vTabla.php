@@ -11,16 +11,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                            foreach($consulta as $value){ ?>
-                            <tr>
-                                <td><?= $value->vUnidadMedida ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUM(<?= $value->iIdUnidadMedida ?>)"><i class="mdi mdi-border-color" ></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUM,<?= $value->iIdUnidadMedida ?>);"><i class="mdi mdi-close"></i></button>
-                                </td>
-                             </tr>
-                             <?php } ?>
+                            <?php
+                            foreach ($consulta as $value) { ?>
+                                <tr>
+                                    <td><?= $value->vUnidadMedida ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-warning " onclick="modificarUM(<?= $value->iIdUnidadMedida ?>)"><i class="mdi mdi-border-color"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-danger " onclick="confirmar('¿Está seguro de eliminar?', eliminarUM,<?= $value->iIdUnidadMedida ?>);"><i class="mdi mdi-close"></i></button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -31,26 +31,29 @@
 <div id="holi"></div>
 
 <script>
-$(document).ready(function () {
+    $(document).ready(function() {
         $('#grid').DataTable();
     });
+</script>
+<script>
+    function eliminarUM(key) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_unidadesmedida/eliminar",
+            data: {
+                'key': key
+            },
+            //contentType: 'json',
+            success: function(resp) {
+                if (resp == true) {
+                    cargar('<?= base_url() ?>C_unidadesmedida/regresar', '#contenido_modulo');
+                } else {
+                    alert(resp);
+                }
+            },
+            error: function(XMLHHttRequest, textStatus, errorThrown) {
 
-        function eliminarUM(key){
-                                $.ajax({
-                                    type: "POST",
-                                    url: "<?= base_url() ?>C_unidadesmedida/eliminar",
-                                    data: {'key' : key},
-                                    //contentType: 'json',
-                                    success: function(resp){
-                                        if(resp == true){
-                                            cargar('<?= base_url()?>C_unidadesmedida/regresar','#contenido_modulo');
-                                        }else{
-                                            alert(resp);
-                                        }
-                                    },
-                                    error: function(XMLHHttRequest, textStatus, errorThrown) {
-                                        
-                                    }
-                                });
-                            }
+            }
+        });
+    }
 </script>

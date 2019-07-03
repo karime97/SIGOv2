@@ -1,4 +1,4 @@
-<div id="contenido_modulo" class="container">
+<div id="contenido_modulo" class="">
 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
