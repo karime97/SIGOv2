@@ -47,7 +47,7 @@ $(document).ready(function () {
                                     //contentType: 'json',
                                     success: function(resp){
                                         if(resp == true){
-                                            cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
+                                            filter();
                                             alerta('Eliminado exitosamente','success');
                                         }else{
                                             alerta('Error al eliminar','error');

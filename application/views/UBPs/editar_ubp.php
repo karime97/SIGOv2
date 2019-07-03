@@ -3,7 +3,7 @@
                     <div class="card">
                         <div class="card-body">
                         <div align="right">
-                                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                                 </div>
                             <form class="needs-validation was-validated" onsubmit="guardarUBP(this,event);">
                                 <div class="form-row">                                    
@@ -69,7 +69,9 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="id" value="<?= $consulta->iIdUbp ?>">
-                                <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                                <center>
+                                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                                </center>
                             </form>                            
                         </div>
                     </div>
@@ -108,8 +110,8 @@
 
                                     success: function(resp){
                                         if(resp == true){
-                                            cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
-                                            alerta('Modificado exitosamente','success');
+                                            filter();
+                                            alerta('Guardado exitosamente','success');
                                         }else{
                                             alerta('Error al guardar','error');
                                         }

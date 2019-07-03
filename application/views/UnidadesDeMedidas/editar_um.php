@@ -7,7 +7,7 @@
                         <h4 class="card-title">Modificar unidad de medida</h4>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-light" type="submit" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                        <button class="btn btn-light" type="submit" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                     </div>
                 </div>
                 <br><br>
@@ -64,9 +64,10 @@
 
                                     success: function(resp){
                                         if(resp == true){
-                                            cargar('<?= base_url()?>C_unidadesmedida/regresar','#contenido_modulo');
+                                            filter();
+                                            alerta('Guardado exitosamente','success');
                                         }else{
-                                            alert(resp);
+                                            alerta('Error al guardar','error');
                                         }
                                     },
                                     error: function(XMLHHttRequest, textStatus, errorThrown) {

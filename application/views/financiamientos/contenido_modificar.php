@@ -3,10 +3,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 class="card-title">Modificar fuente de financiamiento</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
+                    <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>           
@@ -76,7 +75,7 @@
             success: function(resp) {
                  if(resp == true){
                  
-                cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+                    buscarfinanciamiento();
                 alerta('Modificado exitosamente','success');  
 
               } else {

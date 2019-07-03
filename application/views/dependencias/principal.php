@@ -18,11 +18,11 @@
                          Looks good!
                      </div>
                  </div>
-                 <div class="col-sm-12 col-md-3" style="margin-top:35px;">
+                 <div class="col-sm-12 col-md-3">
                      <div class="form-group">
                          <div class="button-group">
-                             <button type="submit" class="btn waves-effect waves-light btn-light">Buscar</button>
-                             <button type="button" class="btn waves-effect waves-light btn-info" onclick="agregar_dependencia()">Agregar</button>
+                             <button type="submit" class="btn waves-effect waves-light btn-light" style="margin-top:35px" >Buscar</button>
+                             <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="agregar_dependencia()">Agregar</button>
                          </div>
                      </div>
                  </div>

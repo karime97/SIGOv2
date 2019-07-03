@@ -6,7 +6,7 @@
                     <h4 class="card-title">Nueva dependencia</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
+                    <button class="btn btn-light" type="submit" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>           
@@ -33,7 +33,9 @@
                     </div>
 
                 </div>
-                <button class="btn btn-info" type="submit">Guardar</button>
+                <center>
+                <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                </center>
             </form>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
