@@ -34,8 +34,7 @@
     $(document).ready(function() {
         $('#grid').DataTable();
     });
-</script>
-<script>
+    
     function eliminarUM(key) {
         $.ajax({
             type: "POST",

@@ -60,14 +60,14 @@ class M_ubps extends CI_Model {
         return $resultado;
 	}
 
-	/* MODIFICAR DATOS */
+	/* AGREGAR DATOS */
 
 	public function insertarUBP($data){
 		$this->db->insert('UBP', $data);
 		return $this->db->insert_id();
 	}
 
-	/* AGREGAR DATOS */
+	/* MODIFICAR DATOS */
 
 	public function preparar_update($id){
         $this->db->select();
