@@ -51,11 +51,11 @@
             success: function(resp) {
                  if(resp == true){
                 
-                 buscarfinanciamiento();
+                    buscarfinanciamiento();
                  alerta('Eliminado exitosamente','success');
 
               } else {
-                alerta('Error al eliminar','success');
+                alerta('Error al eliminar','error');
               }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

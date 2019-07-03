@@ -3,7 +3,7 @@
                     <div class="card">
                         <div class="card-body">
                         <div align="right">
-                                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                                 </div>
                             <form class="needs-validation was-validated" onsubmit="guardarUBP(this,event);">
                                 <div class="form-row">                                    
@@ -68,7 +68,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                                <center>
+                                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                                </center>
                             </form>                            
                         </div>
                     </div>
@@ -107,9 +109,10 @@
 
                                     success: function(resp){
                                         if(resp > 0){
-                                            cargar('<?= base_url()?>C_ubps/regresar','#contenido_modulo');
+                                            filter();
+                                            alerta('Guardado exitosamente','success');
                                         }else{
-                                            alert(resp);
+                                            alerta('Error al guardar','error');
                                         }
                                     },
                                     error: function(XMLHHttRequest, textStatus, errorThrown) {

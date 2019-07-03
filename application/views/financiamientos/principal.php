@@ -13,11 +13,11 @@
                 <label for="validationTooltip02">Fuentes</label>
                 <input class="form-control" id="fuente" type="text" placeholder="Ingresar fuentes">
             </div>
-            <div class="col-sm-12 col-md-3" style="margin-top:30px;">
+            <div class="col-sm-12 col-md-3">
                 <div class="form-group">
                     <div class="button-group">
-                        <button type="button" class="btn waves-effect waves-light btn-light" onclick="buscarfinanciamiento()">Buscar</button>
-                        <button type="button" class="btn waves-effect waves-light btn-info" onclick="agregar_financiamiento()">Agregar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-light" style="margin-top:35px" onclick="buscarfinanciamiento()">Buscar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="agregar_financiamiento()">Agregar</button>
                     </div>
                 </div>
             </div>

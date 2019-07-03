@@ -3,10 +3,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 class="card-title">Modificar fuente de financiamiento</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento()">Regresar</button>
+                    <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>           
@@ -38,7 +37,9 @@
 
                 </div>
                 <input type="hidden" value="<?= $consulta->iIdFinanciamiento ?>" name='id' />
-                <button class="btn btn-info" type="submit">Guardar cambios</button>
+                <center>
+                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                </center>
             </form>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -76,7 +77,7 @@
             success: function(resp) {
                  if(resp == true){
                  
-                buscarfinanciamiento();
+                    buscarfinanciamiento();
                 alerta('Modificado exitosamente','success');  
 
               } else {
