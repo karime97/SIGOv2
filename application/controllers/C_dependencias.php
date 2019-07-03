@@ -25,7 +25,7 @@ class C_dependencias extends CI_Controller {
     }
 
     //Muestra la pagina con la tabla de contenido
-    public function return(){
+    public function show(){
 
         $data['consulta'] = $this->md->mostrar_dependencias();
         $this->load->view('dependencias/contenido_tabla',$data);

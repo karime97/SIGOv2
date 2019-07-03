@@ -6,7 +6,7 @@
                     <h4 class="card-title">Nueva fuente de financiamiento</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="regresar()">Regresar</button>
+                    <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento()">Regresar</button>
                 </div>
             </div>
             <br><br>           
@@ -14,14 +14,14 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Clave</label>
-                        <input class="form-control" id="validationCustom04" name="clave" required="" type="text" placeholder="Ingresar clave">
+                        <input class="form-control" id="validationCustom04" name="clave" required="" type="text" placeholder="Ingresar clave" maxlength="5">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Año</label>
-                        <input class="form-control" id="validationCustom04" name="anio" required="" type="text" placeholder="Ingresar año">
+                        <input class="form-control" id="validationCustom04" name="anio" required="" type="text" placeholder="Ingresar año" onkeypress="solonumeros(event);" maxlength="4">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -30,7 +30,7 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Fuente de financiamiento</label>
-                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento"></textarea>
+                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" maxlength="255"></textarea>
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -76,7 +76,7 @@
             success: function(resp) {
               if(resp > 0){
                 
-                cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
+                buscarfinanciamiento();
                 alerta('Guardado exitosamente','success');
 
               } else {

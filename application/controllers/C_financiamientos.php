@@ -25,13 +25,6 @@ class C_financiamientos extends CI_Controller {
         $this->load->view('financiamientos/contenido_agregar');
     }
 
-    //Muestra la pagina con la tabla de contenido
-    public function return(){
-
-        $data['consulta'] = $this->mf->mostrar_financiamientos();
-        $this->load->view('financiamientos/contenido_tabla',$data);
-    }
-
     //Funcion para insertar
     public function insert(){
 
@@ -39,9 +32,9 @@ class C_financiamientos extends CI_Controller {
 
             $data = array();
 
-            $data['vClave'] = $_POST['clave'];
-            $data['vFinanciamiento'] = $_POST['financiamiento'];
-            $data['iAnio'] = $_POST['anio'];
+            $data['vClave'] = $this->input->post('clave');
+            $data['vFinanciamiento'] = $this->input->post('financiamiento');
+            $data['iAnio'] = $this->input->post('anio');
             $data['iActivo']= 1;
 
             $resultado = $this->mf->guardar_financiamiento($data);
@@ -77,10 +70,10 @@ class C_financiamientos extends CI_Controller {
 
             $data = array();
 
-            $id = $_POST['id'];
-            $data['vClave'] = $_POST['clave'];
-            $data['vFinanciamiento'] = $_POST['financiamiento'];
-            $data['iAnio'] = $_POST['anio'];
+            $id = $this->input->post('id');
+            $data['vClave'] = $this->input->post('clave');
+            $data['vFinanciamiento'] = $this->input->post('financiamiento');
+            $data['iAnio'] = $this->input->post('anio');
             $data['iActivo']= 1;
 
             $resultado = $this->mf->modificar_financiamiento($id,$data);
@@ -124,8 +117,6 @@ class C_financiamientos extends CI_Controller {
         }
        
         $data['consulta'] = $this->mf->mostrar_financiamientos($fuente, $anio);
-        //echo $_SESSION['sql'];
-        //print_r($data['consulta']);
         $this->load->view('financiamientos/contenido_tabla',$data);
     }
 }
