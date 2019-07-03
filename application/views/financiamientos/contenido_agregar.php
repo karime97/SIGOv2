@@ -36,7 +36,9 @@
                     </div>
 
                 </div>
-                <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                <center>
+                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                </center>
             </form>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields

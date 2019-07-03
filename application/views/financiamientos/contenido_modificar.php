@@ -37,7 +37,9 @@
 
                 </div>
                 <input type="hidden" value="<?= $consulta->iIdFinanciamiento ?>" name='id' />
-                <button class="btn btn-info" type="submit">Guardar cambios</button>
+                <center>
+                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                </center>
             </form>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
