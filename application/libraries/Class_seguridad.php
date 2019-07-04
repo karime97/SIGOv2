@@ -39,7 +39,7 @@ class Class_seguridad {
                         foreach ($submenu as $hijo)
                         {
                             if($modulo_inicial == '') $modulo_inicial = base_url().$hijo->vUrl;
-                            $str.= '<li class="sidebar-item"><a onclick="cargar(\''.base_url().$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> '.$hijo->vPermiso.' </span></a></li>';
+                            $str.= '<li class="sidebar-item"><a style="cursor:pointer;" onclick="cargar(\''.base_url().$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> '.$hijo->vPermiso.' </span></a></li>';
                         }
                
                         $str.= '</ul>';
@@ -49,7 +49,7 @@ class Class_seguridad {
                     {
                         if($modulo_inicial == '') $modulo_inicial = base_url().$padre->vUrl;
                         $str .= '<li class="sidebar-item">
-                                <a class="sidebar-link  waves-effect waves-dark" onclick="Cargar(\''.base_url().$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vClass.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
+                                <a class="sidebar-link waves-effect waves-dark" style="cursor:pointer;" onclick="cargar(\''.base_url().$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vClass.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
                             </li>';
                     }
                 }
