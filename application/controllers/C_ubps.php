@@ -2,10 +2,12 @@
 
 class C_ubps extends CI_Controller {
 	public function __construct(){
+
         parent::__construct();
         session_start();
         $this->load->helper('url');
         $this->load->model('M_ubps', 'mu');
+        $this->load->library('Class_options');
     }
 
     public function index(){
@@ -14,9 +16,10 @@ class C_ubps extends CI_Controller {
     }
 
     public function agregar(){
-        $data1['tUBP'] = $this->mu->mostrar_Tubps();
-        $data1['Dep'] = $this->mu->mostrar_dependencia();
-        $data1['PP'] = $this->mu->mostrar_PP();
+        $lib = new Class_options();
+        $data1['tipo_ubps'] = $lib->options_tabla('tipo_ubps');
+        $data1['dependencias'] = $lib->options_tabla('dependencias');
+        $data1['PP'] = $lib->options_tabla('programa_presupuestario');
         $this->load->view('UBPs/agregar_ubp', $data1);
         //echo '<pre>';
         //print_r($data1['tUBP']);
@@ -32,12 +35,15 @@ class C_ubps extends CI_Controller {
 
     public function edit(){
         if(isset($_POST['id'])){
+
+            $lib = new Class_options();
+            
             $id = $_POST['id'];
 
             $data2['consulta'] = $this->mu->preparar_update($id);
-            $data2['tUBP'] = $this->mu->mostrar_Tubps();
-            $data2['Dep'] = $this->mu->mostrar_dependencia();
-            $data2['PP'] = $this->mu->mostrar_PP();
+            $data2['tipo_ubps'] = $lib->options_tabla('tipo_ubps');
+            $data2['dependencias'] = $lib->options_tabla('dependencias');
+            $data2['PP'] = $lib->options_tabla('programa_presupuestario');
             $this->load->view('UBPs/editar_ubp', $data2);
         }
     }

@@ -345,6 +345,7 @@
     <script src="<?=base_url()?>public/dist/js/pages/datatable/datatable-basic.init.js"></script>
     <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
     <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="<?php base_url() ?>public/assets/extra-libs/jqbootstrapvalidation/validation.js"></script>
     
     <script type="text/javascript">
 
