@@ -7,7 +7,7 @@
                         <h4 class="card-title">Modificar unidad de medida</h4>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-light" type="submit" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                        <button class="btn btn-light" type="submit" onclick="filter2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                     </div>
                 </div>
                 <br><br>
@@ -22,57 +22,57 @@
                         </div>
                     </div>
                     <center>
-                    <input type="hidden" name="id" value="<?= $consulta->iIdUnidadMedida ?>">
-                    <button class="btn btn-info" type="submit">Guardar</button>
+                        <input type="hidden" name="id" value="<?= $consulta->iIdUnidadMedida ?>">
+                        <button class="btn btn-success" type="submit">Guardar</button>
                     </center>
-                </form>                
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-                    function UBP(){
-                        cargar('<?= base_url()?>C_unidadesmedida/cargar','#contenido_modulo');
+    function UBP() {
+        cargar('<?= base_url() ?>C_unidadesmedida/cargar', '#contenido_modulo');
+    }
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
                     }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
-                    // Example starter JavaScript for disabling form submissions if there are invalid fields
-                    (function() {
-                        'use strict';
-                        window.addEventListener('load', function() {
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.getElementsByClassName('needs-validation');
-                            // Loop over them and prevent submission
-                            var validation = Array.prototype.filter.call(forms, function(form) {
-                                form.addEventListener('submit', function(event) {
-                                    if (form.checkValidity() === false) {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                    }
-                                    form.classList.add('was-validated');
-                                }, false);
-                            });
-                        }, false);
-                    })();
+    function guardarUM(f, e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_unidadesmedida/actualizar",
+            data: $(f).serialize(),
 
-                    function guardarUM(f, e){
-                        e.preventDefault();
-                        $.ajax({
-                                    type: "POST",
-                                    url: "<?= base_url() ?>C_unidadesmedida/actualizar",
-                                    data: $(f).serialize(),
+            success: function(resp) {
+                if (resp == true) {
+                    filter2();
+                    alerta('Guardado exitosamente', 'success');
+                } else {
+                    alerta('Error al guardar', 'error');
+                }
+            },
+            error: function(XMLHHttRequest, textStatus, errorThrown) {
 
-                                    success: function(resp){
-                                        if(resp == true){
-                                            filter();
-                                            alerta('Guardado exitosamente','success');
-                                        }else{
-                                            alerta('Error al guardar','error');
-                                        }
-                                    },
-                                    error: function(XMLHHttRequest, textStatus, errorThrown) {
-                                        
-                                    }
-                                });
-                            }
-                </script>
+            }
+        });
+    }
+</script>

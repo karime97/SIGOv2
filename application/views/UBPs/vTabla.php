@@ -50,7 +50,7 @@
             //contentType: 'json',
             success: function(resp) {
                 if (resp == true) {
-                    filter();
+                    filter2();
                     alerta('Eliminado exitosamente', 'success');
                 } else {
                     alerta('Error al eliminar', 'error');

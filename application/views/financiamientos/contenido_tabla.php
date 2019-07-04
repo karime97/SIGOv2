@@ -14,17 +14,17 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach($consulta as $value){ ?>
-                            <tr>
-                                <td><?= $value->vClave ?></td>
-                                <td><?= $value->vFinanciamiento ?></td>
-                                <td><?= $value->iAnio ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_financiamiento(<?= $value->iIdFinanciamiento ?>)"><i class="mdi mdi-border-color"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close" onclick="confirmar('¿Esta usted seguro?',EliminarFinanciamiento,<?= $value->iIdFinanciamiento ?>)"></i></button>
-                                </td>
-                             </tr> 
-                             <?php }?>
+                            foreach ($consulta as $value) { ?>
+                                <tr>
+                                    <td><?= $value->vClave ?></td>
+                                    <td><?= $value->vFinanciamiento ?></td>
+                                    <td><?= $value->iAnio ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_financiamiento(<?= $value->iIdFinanciamiento ?>)"><i class="mdi mdi-border-color"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close" onclick="confirmar('¿Esta usted seguro?',EliminarFinanciamiento,<?= $value->iIdFinanciamiento ?>)"></i></button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -40,26 +40,28 @@
 </script>
 
 <script>
-    function EliminarFinanciamiento(id){
+    function EliminarFinanciamiento(id) {
         event.preventDefault();
 
-        $.ajax({         
+        $.ajax({
             type: "POST",
-            url: "<?=base_url()?>C_financiamientos/delete", //Nombre del controlador
-            data: {'id' : id},
+            url: "<?= base_url() ?>C_financiamientos/delete", //Nombre del controlador
+            data: {
+                'id': id
+            },
 
             success: function(resp) {
-                 if(resp == true){
-                
-                    buscarfinanciamiento();
-                 alerta('Eliminado exitosamente','success');
+                if (resp == true) {
 
-              } else {
-                alerta('Error al eliminar','error');
-              }
+                    buscarfinanciamiento2();
+                    alerta('Eliminado exitosamente', 'success');
+
+                } else {
+                    alerta('Error al eliminar', 'error');
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-              
+
             }
         });
     }

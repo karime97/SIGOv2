@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Año</label>
-                <input type="text" id="anio" class="form-control" placeholder="Ingresar año" onkeypress="solonumeros(event);" maxlength="4" >
+                <input type="text" id="anio" class="form-control" placeholder="Ingresar año" onkeypress="solonumeros(event);" maxlength="4">
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationTooltip02">Fuentes</label>
@@ -54,6 +54,29 @@
             //contentType: 'json',
             success: function(resp) {
                 $("#contenedor").html(resp);
+                $("#grid").dataTable().fnReloadAjax();
+            },
+            error: function(XMLHHttRequest, textStatus, errorThrown) {}
+        });
+    }
+
+    function buscarfinanciamiento2() {
+        var fuente = $("#fuente").val();
+        var anio = $("#anio").val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_financiamientos/search",
+            data: {
+                'fuente': fuente,
+                'anio': anio
+            },
+            //contentType: 'json',
+            success: function(resp) {
+                $("#contenedor").html(resp);
+                $('#grid').DataTable({
+                    stateSave: true,
+                });
             },
             error: function(XMLHHttRequest, textStatus, errorThrown) {}
         });

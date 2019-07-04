@@ -25,16 +25,14 @@
                             Este campo no puede estar vacio.
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Fuente de financiamiento</label>
-                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" maxlength="255"></textarea>
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
+                    <div class="col-md-3 mb-6">
+                    <label for="validationCustom04">Fuente de financiamiento</label>
+                    <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 520px; height: 128px;"></textarea>
+                    <div class="invalid-feedback">
+                        Este campo no puede estar vacio.
                     </div>
-
+                </div>
+                </div>
                 </div>
                 <center>
                     <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>

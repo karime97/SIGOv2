@@ -45,9 +45,10 @@
             //contentType: 'json',
             success: function(resp) {
                 if (resp == true) {
-                    cargar('<?= base_url() ?>C_unidadesmedida/regresar', '#contenido_modulo');
+                    filter2();
+                    alerta('Eliminado exitosamente', 'success');
                 } else {
-                    alert(resp);
+                    alerta('Error al eliminar', 'error');
                 }
             },
             error: function(XMLHHttRequest, textStatus, errorThrown) {

@@ -4,11 +4,11 @@
             <div class="row">
                 <div class="col-md-10">
                 </div>
-                <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                <div align="right">
+                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="buscarfinanciamiento2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
-            <br><br>           
+            <br><br>
             <form class="needs-validation was-validated" onsubmit="modificarFinanciamiento(this,event);">
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
@@ -25,17 +25,15 @@
                             Este campo no puede estar vacio.
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Fuente de financiamiento</label>
-                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento"><?= $consulta->vFinanciamiento ?></textarea>
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
+                    <div class="col-md-3 mb-6">
+                    <label for="validationCustom04">Fuente de financiamiento</label>
+                    <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 520px; height: 128px;"><?= $consulta->vFinanciamiento ?></textarea>
+                    <div class="invalid-feedback">
+                        Este campo no puede estar vacio.
                     </div>
-
                 </div>
+                </div>
+                <br>
                 <input type="hidden" value="<?= $consulta->iIdFinanciamiento ?>" name='id' />
                 <center>
                     <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
@@ -66,34 +64,33 @@
 </div>
 
 <script>
-    function modificarFinanciamiento(f,e){
+    function modificarFinanciamiento(f, e) {
         e.preventDefault();
 
-        $.ajax({         
+        $.ajax({
             type: "POST",
-            url: "<?=base_url()?>C_financiamientos/update", //Nombre del controlador
+            url: "<?= base_url() ?>C_financiamientos/update", //Nombre del controlador
             data: $(f).serialize(),
 
             success: function(resp) {
-                 if(resp == true){
-                 
-                    buscarfinanciamiento();
-                alerta('Modificado exitosamente','success');  
+                if (resp == true) {
 
-              } else {
-                alerta('Error al modificar','error');
-              }
+                    buscarfinanciamiento2();
+                    alerta('Modificado exitosamente', 'success');
+
+                } else {
+                    alerta('Error al modificar', 'error');
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-              
+
             }
         });
     }
 
-    function solonumeros(e)
-                    {
-         var key = window.event ? e.which : e.keyCode;
-                        if(key < 48 || key > 57)
-                            e.preventDefault();
-                    }
+    function solonumeros(e) {
+        var key = window.event ? e.which : e.keyCode;
+        if (key < 48 || key > 57)
+            e.preventDefault();
+    }
 </script>
