@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <div align="right">
-                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="filter2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
                 <form class="needs-validation was-validated" onsubmit="guardarUBP(this,event);">
                     <div class="form-row">
@@ -57,8 +57,9 @@
                         <div class="col-md-6">
                             <label>Programa presupuestario (PP)</label>
                             <div class="form-group">
-                                <select class="custom-select" required="" name="ProgP">
+                                <select class="custom-select" name="ProgP">
                                     <option value="<?= $consulta->iIdProgramaPresupuestario ?>"><?= $consulta->vProgramaPresupuestario ?></option>
+                                    <option value="0">Seleccione...</option>
                                     <?php
                                     foreach ($PP as $pre) { ?>
                                         <option value="<?= $pre->iIdProgramaPresupuestario ?>"><?= $pre->vProgramaPresupuestario ?></option>

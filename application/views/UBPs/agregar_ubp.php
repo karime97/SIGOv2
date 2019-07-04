@@ -57,8 +57,8 @@
                                     <div class="col-md-6">
                                         <label>Programa presupuestario (PP)</label>
                                         <div class="form-group">
-                                            <select class="custom-select" required="" name="ProgP">
-                                                <option value="">Seleccione...</option>
+                                            <select class="custom-select" name="ProgP">
+                                                <option value="0">Seleccione...</option>
                                                 <?php
                                                     foreach ($PP as $pre) { ?>
                                                         <option value="<?= $pre->iIdProgramaPresupuestario ?>"><?= $pre->vProgramaPresupuestario ?></option>
