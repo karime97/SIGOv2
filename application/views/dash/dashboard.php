@@ -17,6 +17,19 @@
         left: 35%;
         width: 30%;
     }
+
+    .desplazada2 {
+        position: relative;
+        top: -32%;
+        left: 43%;
+        width: 30%;
+    }
+    .desplazada3 {
+        position: relative;
+        top: 43%;
+        left: 47%;
+        font-size: 10px;
+    }
 </style>
 
 
@@ -27,7 +40,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Welcome to the SIGO's Dashboard</h4>
+                <h4 class="page-title">DESCA</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -51,23 +64,23 @@
 
 <!-- seccion tabla -->
 <section>
-    <div class="col-12">
+    <div class="col-12" style="background-color: #f2f4f5;">
         <div class="card">
-            <div class="table-responsive">
-                <table class="table">
+            <div class="table-responsive" style="background-color: #f2f4f5;">
+                <table class="table" style="background-color: #f2f4f5;">
                     <thead>
                         <tr>
-                           
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th style="padding: 1px;">
+                        <th style="padding: 1px;">
                                 <div class="col-md-12" style="background-color: #3cb279; color: white;">
                                     <br>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                           <label><a onclick="despliegue()" style="cursor:pointer;">YUCATÁN CON ECONOMÍA INCLUSIVA</a></label>
                                         </div>
                                         <div class="col-md-6">
 
@@ -138,28 +151,33 @@
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
-                                <div class="col-md-12" style="background-color: gray; color: white;">
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
-                                        </div>
-                                        <div class="col-md-6">
+                            <th style="padding: 1px; width: 20%;">
+                                <br>
+                                <br>
+                                <div class="col-md-12" style="background-color: #f2f4f5; height:100%">
 
-                                            <div id="basic-doughnut5" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
-                                        </div>
-                                        <div class="col-md-12">Avance: %</div>
+                                    <div id="basic-doughnut5" style="width: 100%; height:100%;"></div>
+                                    <div class="desplazada2">45%</div>
 
-                                        <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
-                                        <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
-                                    </div>
+                                </div>
+                                <div class="col-md-12" style="background-color: #f2f4f5;">
+                                    <center><label>AVANCE GENERAL</label></center>
                                 </div>
                             </th>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table" style="background-color: #f2f4f5;">
+                    <thead>
                         <tr>
-                        <th style="padding: 1px;">
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th style="padding: 1px;">
                                 <div class="col-md-12" style="background-color: #352689; color: white;">
                                     <br>
                                     <div class="row">
@@ -269,7 +287,6 @@
 <!-- seccion doble columna -->
 
 <section>
-
     <div class="col-md-12">
         <div class="row">
             <!--columna 1 -->
@@ -280,7 +297,7 @@
                     <div class="row">
                         <!-- doble columna -->
                         <!-- columna 1 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -297,7 +314,7 @@
                         </div>
                         <!-- end columna 1-->
                         <!-- columna 2 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -314,7 +331,7 @@
                         </div>
                         <!-- end columna 2-->
                         <!-- columna 3 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -331,7 +348,7 @@
                         </div>
                         <!-- end columna 3-->
                         <!-- columna 4 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -348,7 +365,7 @@
                         </div>
                         <!-- end columna 4-->
                         <!-- columna 5 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -365,7 +382,7 @@
                         </div>
                         <!-- end columna 5-->
                         <!-- columna 6 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white;  padding-bottom: 1rem; padding-top: 2rem; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -382,7 +399,7 @@
                         </div>
                         <!-- end columna 6-->
                         <!-- columna 7 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia as</h6>
@@ -399,7 +416,7 @@
                         </div>
                         <!-- end columna 7 -->
                         <!-- columna 8 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem;  border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem;  border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -416,7 +433,7 @@
                         </div>
                         <!-- end columna 8-->
                         <!-- columna 9 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
+                        <div class="col-md-6" style="background-color:white; padding-bottom: 0rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h6>Yucatán con economia inclusiva</h6>
@@ -433,18 +450,20 @@
                         </div>
                         <!-- end columna 9-->
                         <!-- columna 10 -->
-                        <div class="col-md-6" style="background-color:white; padding-top: 1rem;  border-bottom: 6px solid #f2f4f5;">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h6>Avance general</h6>
-                                </div>
+                        <div class="col-md-6" height="100%" style="padding: 0px;">
+                        <div class="desplazada3">45%</div>
+                            <div class="col-md-12" style="padding: 0;">
+                            <center> <div id="basic-doughnut11" style="width:100%; height: 75%;"></div></center>
+                                <center><a style="font-size: 10px;">AVANCE GENERAL</a></center>
                             </div>
                         </div>
+                       
                     </div>
                     <!-- end columna 10-->
                     <!-- end doble columna -->
 
                 </div>
+                
             </div>
             <!-- end columna 1 -->
 
@@ -1094,7 +1113,7 @@
         },
 
         // Add custom colors
-        color: ['#ffab4c', '#fafafa'],
+        color: ['#113868', '#597789'],
 
         series: [{
             name: '',
@@ -1317,6 +1336,52 @@
 
 
     basicdoughnutChart.setOption(option);
+</script>
+<script>
+    // based on prepared DOM, initialize echarts instance
+    var basicdoughnutChart = echarts.init(document.getElementById('basic-doughnut11'));
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+
+        // Add custom colors
+        color: ['#113868', '#597789'],
+
+        series: [{
+            name: '',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: true,
+
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                    value: 25,
+                    name: ''
+                },
+
+                {
+                    value: 75,
+                    name: ''
+                }
+            ]
+        }]
+    };
+
+
+    basicdoughnutChart.setOption(option);
+</script>
+
+
+<script>
+function despliegue(){
+    cargar('<?= base_url(); ?>index.php/C_dash/despliegue', '#contenido');
+}
 </script>
 
 <!-- #end Javascript -->
