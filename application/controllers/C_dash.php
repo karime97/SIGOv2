@@ -15,7 +15,9 @@ class C_dash extends CI_Controller {
     public function index()
     {
         $this->load->view('dash/dashboard');
-        //$this->load->view('dash/mapa');
+    }
 
+    public function despliegue(){
+        $this->load->view('dash/desp');
     }
 }
