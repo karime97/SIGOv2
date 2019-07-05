@@ -79,6 +79,19 @@ class M_catalogos extends CI_Model {
 		return $this->db->get();
 	}
 
+	//Mostrar UBP
+	public function ubps($where=''){
+		$this->db->order_by('vUBP', 'asc');
+        $this->db->select('iIdUbp AS id , vUBP AS valor');
+		$this->db->from('UBP');	
+
+		if($where != '') $this->db->where($where);
+
+		return $this->db->get();
+	}
+
+	//Mostrar financiamiento
+
 
 
 
