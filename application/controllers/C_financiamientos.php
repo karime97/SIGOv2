@@ -119,5 +119,6 @@ class C_financiamientos extends CI_Controller {
         $data['consulta'] = $this->mf->mostrar_financiamientos($fuente, $anio);
         $this->load->view('financiamientos/contenido_tabla',$data);
     }
+
 }
 ?>

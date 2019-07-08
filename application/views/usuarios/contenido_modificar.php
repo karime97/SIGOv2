@@ -3,19 +3,19 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
-                    <h4 class="card-title">Nuevo usuario</h4>
+                    <h4 class="card-title">Modificar usuario</h4>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-light" type="submit" onclick="buscarUsuario2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>
-            <form class="needs-validation was-validated" onsubmit="guardarUsuario(this,event);">
+            <form class="needs-validation was-validated" onsubmit="modificarUsuario(this,event);">
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label for="validationCustom04">Dependencia</label>
                         <select id="dependencia" name="dependencia" required class="form-control">
-                            <option value="">Seleccionar...</option>
+                            <option value="<?= $consulta->iIdDependencia ?>"><?= $consulta->vDependencia ?></option>
                             <?= $dependencias ?>
                         </select>
                         <div class="invalid-feedback">
@@ -25,7 +25,7 @@
                     <div class="col-md-3 mb-3">
                         <label>Rol<span class="text-danger">*</span></label>
                         <select name="rol" id="rol" required class="form-control">
-                            <option value="">Seleccionar...</option>
+                            <option value="<?= $consulta->iIdRol ?>"><?= $consulta->vRol ?></option>
                             <?= $roles ?>
                         </select>
                         <div class="invalid-feedback">
@@ -34,8 +34,8 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Formación academica<span class="text-danger">*</span></label>
-                        <select name="formacionacademica" id="formacionacademica" required class="form-control" >
-                            <option value="">Seleccionar...</option>
+                        <select name="formacionacademica" id="formacionacademica" required class="form-control">
+                            <option value="<?= $consulta->iIdFormacionAcademica ?>"><?= $consulta->vFormacionAcademica ?></option>
                             <?= $formacion_academica ?>
                         </select>
                         <div class="invalid-feedback">
@@ -44,8 +44,8 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Maximo nivel academico<span class="text-danger">*</span></label>
-                        <select name="maxnivelacademico" id="maxnivelacademico" required class="form-control" >
-                            <option value="">Seleccionar...</option>
+                        <select name="maxnivelacademico" id="maxnivelacademico" required class="form-control">
+                            <option value="<?= $consulta->iIdMaxNivelAcademico ?>"><?= $consulta->vNivelAcademico ?></option>
                             <?= $nivel_academico ?>
                         </select>
                         <div class="invalid-feedback">
@@ -57,14 +57,14 @@
                     <div class="col-md-3 mb-3">
                         <label>Nombre(s)<span class="text-danger">*</span></label>
 
-                        <input type="text" id="nombre" name="nombre" class="form-control" required="" placeholder="Ingresar nombre">
+                        <input type="text" id="nombre" name="nombre" class="form-control" required="" placeholder="Ingresar nombre" value="<?= $consulta->vNombre ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Apellido paterno<span class="text-danger">*</span></label>
-                        <input type="text" id="apepat" name="apepat" class="form-control" required="" placeholder="ingresar apellido">
+                        <input type="text" id="apepat" name="apepat" class="form-control" required="" placeholder="ingresar apellido" value="<?= $consulta->vPrimerApellido ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -72,14 +72,14 @@
                     <div class="col-md-3 mb-3">
                         <label>Apellido materno<span class="text-danger">*</span></label>
 
-                        <input type="text" id="apemat" name="apemat" class="form-control" required="" placeholder="ingresar apellido">
+                        <input type="text" id="apemat" name="apemat" class="form-control" required="" placeholder="ingresar apellido" value="<?= $consulta->vSegundoApellido ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Cargo<span class="text-danger">*</span></label>
-                        <input type="text" id="cargo" name="cargo" class="form-control" required="" placeholder="ingresar cargo">
+                        <input type="text" id="cargo" name="cargo" class="form-control" required="" placeholder="ingresar cargo" value="<?= $consulta->vCargo ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -88,28 +88,28 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label>Correo institucional<span class="text-danger">*</span></label>
-                        <input type="text" id="correoinst" name="correoinst" class="form-control" placeholder="usuario@ejemplo.com" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Ingresar un correo valido" required data-validation-required-message="Este campo es requerido">
+                        <input type="text" id="correoinst" name="correoinst" class="form-control" placeholder="usuario@ejemplo.com" value="<?= $consulta->vCorreo ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Correo personal<span class="text-danger">*</span></label>
-                        <input type="text" id="correopersonal" name="correopersonal" class="form-control" required="" placeholder="usuario@ejemplo.com">
+                        <input type="text" id="correopersonal" name="correopersonal" class="form-control" required="" placeholder="usuario@ejemplo.com" value="<?= $consulta->vCorreoPersonal ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Telefono<span class="text-danger">*</span></label>
-                        <input type="text" id="telefono" name="telefono" class="form-control phone-inputmask" id="phone-mask" placeholder="Ingresar número" required="">
+                        <input type="text" id="telefono" name="telefono" class="form-control phone-inputmask" id="phone-mask" placeholder="Ingresar número" required="" value="<?= $consulta->vTelefono ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Celular<span class="text-danger">*</span></label>
-                        <input type="text" id="celular" name="celular" class="form-control phone-inputmask" id="phone-mask" placeholder="Ingresar número" required="">
+                        <input type="text" id="celular" name="celular" class="form-control phone-inputmask" id="phone-mask" placeholder="Ingresar número" required="" value="<?= $consulta->vCelular ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -118,56 +118,45 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label>Nombre de usuario<span class="text-danger">*</span></label>
-                        <input type="text" id="nombreusuario" required="" name="nombreusuario" class="form-control" placeholder="nombre.apellido">
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>Contraseña<span class="text-danger">*</span></label>
-                        <input type="password" id="contrasenia" name="contrasenia" class="form-control" placeholder="ingresar contraseña" required="">
-                        <div class="invalid-feedback">
-                            Este campo no puede estar vacio.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>Confirmar contraseña<span class="text-danger">*</span></label>
-                        <input type="password" name="confirmarcontrasenia" required="" data-validation-match-match="contrasenia" class="form-control" placeholder="confirmar contraseña">
+                        <input type="text" id="nombreusuario" required="" name="nombreusuario" class="form-control" placeholder="nombre.apellido" value="<?= $consulta->vUsuario ?>">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Fecha de nacimiento<span class="text-danger">*</span></label>
-                        <input type="date" id="fechanac" name="fechanc" class="form-control" required >
-                    <div class="invalid-feedback">
-                        Este campo no puede estar vacio.
+                        <input type="date" id="fechanac" name="fechanc" class="form-control" required value="<?= $consulta->dFechaNacimiento ?>">
+                        <div class="invalid-feedback">
+                            Este campo no puede estar vacio.
+                        </div>
                     </div>
                 </div>
+                <br><br>
+                <input type="hidden" value="<?= $consulta->iIdUsuario ?>" name='id' />
                 <center>
-                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar cambios</button>
                     <button type="reset" class="btn waves-effect waves-light btn-inverse">Cancelar</button>
                 </center>
                 <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                    'use strict';
-                    window.addEventListener('load', function() {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
-                        // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function(form) {
-                            form.addEventListener('submit', function(event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
-            </script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('needs-validation');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+                </script>
             </form>
         </div>
     </div>
@@ -177,24 +166,20 @@
 <script src="<?php base_url() ?>public/dist/js/pages/forms/mask/mask.init.js"></script>
 
 <script>
-    function guardarUsuario(f, e) {
+    function modificarUsuario(f, e) {
         e.preventDefault();
 
         $.ajax({
             type: "POST",
-            url: "<?= base_url() ?>C_usuarios/insert", //Nombre del controlador
+            url: "<?= base_url() ?>C_usuarios/update", //Nombre del controlador
             data: $(f).serialize(),
 
             success: function(resp) {
+
                 if (resp == "correcto") {
 
-                    buscarUsuario2();
-                    alerta('Guardado exitosamente', 'success');
-
-                }
-                if (resp == "validar_pass") {
-
-                    alerta('La confirmación de su contraseña no coincide con la contraseña', 'warning');
+                    //buscarUsuario2();
+                    alerta('Modificado exitosamente', 'success');
 
                 }
                 if (resp == "validar_usuario") {
@@ -214,9 +199,8 @@
                 }
                 if(resp == "error") {
                     
-                    alerta('Error al guardar', 'error');
+                    alerta('Error al modificar', 'error');
                 }
-
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
 

@@ -21,10 +21,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            var_dump($consulta);
                             foreach($consulta as $value){ ?>
                             <tr>
-                                <td></td>
+                                <td><?= $value->vRol ?></td>
                                 <td><?= $value->vNombre." ".$value->vPrimerApellido." ".$value->vSegundoApellido ?></td>
                                 <td><?= $value->vUsuario ?></td>
                                 <td><?= $value->vCargo ?></td>
@@ -35,8 +34,10 @@
                                 <td><?= $value->vCelular ?></td>
                                 <td><?= $value->dFechaNacimiento ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" onclick="modificar_usuario(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-border-color"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger"><i class="mdi mdi-close" onclick="confirmar('¿Esta usted seguro?',EliminarUsuario,<?= $value->iIdUsuario ?>)"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" data-toggle="tooltip" data-placement="top" title="Editar" onclick="modificar_usuario(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-border-color"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="confirmar('¿Esta usted seguro?',EliminarUsuario,<?= $value->iIdUsuario ?>)"><i class="mdi mdi-close"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-info" data-toggle="tooltip" data-placement="top" title="Cambiar contraseña" onclick="modificar_password(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-key-variant"></i></button>
+                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-success" data-toggle="tooltip" data-placement="top" title="Editar permisos" onclick="modificar_password(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-account-key"></i></button>
                                 </td>
                              </tr> 
                              <?php }?>
@@ -47,3 +48,44 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('body').tooltip({
+            selector: 'a[rel="tooltip"], [data-toggle="tooltip"]'
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#grid').DataTable();
+    });
+</script>
+<script>
+    function EliminarUsuario(id) {
+        event.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_usuarios/delete", //Nombre del controlador
+            data: {
+                'id': id
+            },
+
+            success: function(resp) {
+                if (resp == true) {
+
+                    buscarUsuario2();
+                    alerta('Eliminado exitosamente', 'success');
+
+                } else {
+                    alerta('Error al eliminar', 'error');
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+</script>
