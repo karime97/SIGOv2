@@ -175,12 +175,30 @@
             data: $(f).serialize(),
 
             success: function(resp) {
-                if (resp == true) {
 
-                    buscarUsuario2();
+                if (resp == "correcto") {
+
+                    //buscarUsuario2();
                     alerta('Modificado exitosamente', 'success');
 
-                } else {
+                }
+                if (resp == "validar_usuario") {
+
+                    alerta('El nombre de usuario ya se encuentra registrado en el sistema', 'warning');
+
+                }
+                if (resp == "validar_correo_inst") {
+
+                    alerta('El correo institucional ya se encuentra registrado en el sistema', 'warning');
+
+                }
+                if (resp == "validar_correo_per") {
+
+                    alerta('El correo personal ya se encuentra registrado en el sistema', 'warning');
+
+                }
+                if(resp == "error") {
+                    
                     alerta('Error al modificar', 'error');
                 }
             },

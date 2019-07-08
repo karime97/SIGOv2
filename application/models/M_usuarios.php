@@ -79,12 +79,14 @@ class M_usuarios extends CI_Model {
     }
     
     //Valida si el usuario existe
-    public function validar_usuario($us){
+    public function validar_usuario($us,$id=''){
 
         $this->db->select();
 		$this->db->from('Usuario');
         $this->db->where('iActivo', 1);
         $this->db->where('vUsuario', $us);
+
+        if($id != '') $this->db->where('iIdUsuario !=',$id);
         
         $query =  $this->db->get();
 
@@ -116,6 +118,62 @@ class M_usuarios extends CI_Model {
         }else{
 
             return FALSE;
+        }
+    }
+
+    //Valida el correo institucional y el correo personal
+    public function validar_correos($correo_inst,$correo_per,$opcion,$id=''){
+
+        switch ($opcion) {
+            case $opcion == 1:
+
+                $this->db->select();
+                $this->db->from('Usuario');
+                $this->db->where('iActivo', 1);
+                $this->db->where('vCorreo', $correo_inst);
+                //$this->db->or_where('vCorreoPersonal', $correo_inst);
+
+                if($id != '') $this->db->where('iIdUsuario !=',$id);
+
+                $query =  $this->db->get();
+
+                if($query->num_rows() > 0){
+
+                    return FALSE;
+
+                }else{
+
+                    return TRUE;
+                }
+
+                break;
+
+            case $opcion == 2:
+
+                $this->db->select();
+                $this->db->from('Usuario');
+                $this->db->where('iActivo', 1);
+                //$this->db->where('vCorreo', $correo_per);
+                $this->db->where('vCorreoPersonal', $correo_per);
+
+                if($id != '') $this->db->where('iIdUsuario !=',$id);
+
+                $query =  $this->db->get();
+
+                if($query->num_rows() > 0){
+
+                    return FALSE;
+
+                }else{
+
+                    return TRUE;
+                }
+
+                break;
+            
+            default:
+                # code...
+                break;
         }
     }
 }

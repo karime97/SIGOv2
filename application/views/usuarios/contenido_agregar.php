@@ -192,9 +192,24 @@
                     alerta('Guardado exitosamente', 'success');
 
                 }
+                if (resp == "validar_pass") {
+
+                    alerta('La confirmación de su contraseña no coincide con la contraseña', 'warning');
+
+                }
                 if (resp == "validar_usuario") {
 
                     alerta('El nombre de usuario ya se encuentra registrado en el sistema', 'warning');
+
+                }
+                if (resp == "validar_correo_inst") {
+
+                    alerta('El correo institucional ya se encuentra registrado en el sistema', 'warning');
+
+                }
+                if (resp == "validar_correo_per") {
+
+                    alerta('El correo personal ya se encuentra registrado en el sistema', 'warning');
 
                 }
                 if(resp == "error") {

@@ -45,39 +45,60 @@ class C_usuarios extends CI_Controller {
         && isset($_POST['maxnivelacademico']) && isset($_POST['cargo']) && isset($_POST['celular']) 
         && isset($_POST['fechanc'])){
 
-            $data = array();
+            //Validacion de la contraseña y la confirmacion
+            if($_POST['contrasenia'] == $_POST['confirmarcontrasenia']){
 
-            $data['iIdDependencia'] = $this->input->post('dependencia');
-            $data['vNombre'] = $this->input->post('nombre');
-            $data['vCorreo'] = $this->input->post('correoinst');
-            $data['vUsuario'] = $this->input->post('nombreusuario');
-            $data['iIdRol'] = $this->input->post('rol');
-            $data['vPrimerApellido'] = $this->input->post('apepat');
-            $data['vCorreoPersonal'] = $this->input->post('correopersonal');
-            $data['vPassword'] = sha1($this->input->post('contrasenia'));
-            $data['iIdFormacionAcademica'] = $this->input->post('formacionacademica');
-            $data['vSegundoApellido'] = $this->input->post('apemat');
-            $data['vTelefono'] = $this->input->post('telefono');
-            //$data['iAnio'] = $this->input->post('confirmarcontrasenia');
-            $data['iIdMaxNivelAcademico'] = $this->input->post('maxnivelacademico');
-            $data['vCargo'] = $this->input->post('cargo');
-            $data['vCelular'] = $this->input->post('celular');
-            $data['dFechaNacimiento'] = $this->input->post('fechanc');
-            $data['dFechaRegistro'] = date("Y-m-d");
-            $data['iActivo']= 1;
+                $data = array();
 
-            $validarus = $this->validar_usuario($data['vUsuario']);
+                $data['iIdDependencia'] = $this->input->post('dependencia');
+                $data['vNombre'] = $this->input->post('nombre');
+                $data['vCorreo'] = $this->input->post('correoinst');
+                $data['vUsuario'] = $this->input->post('nombreusuario');
+                $data['iIdRol'] = $this->input->post('rol');
+                $data['vPrimerApellido'] = $this->input->post('apepat');
+                $data['vCorreoPersonal'] = $this->input->post('correopersonal');
+                $data['vPassword'] = sha1($this->input->post('contrasenia'));
+                $data['iIdFormacionAcademica'] = $this->input->post('formacionacademica');
+                $data['vSegundoApellido'] = $this->input->post('apemat');
+                $data['vTelefono'] = $this->input->post('telefono');
+                $data['iIdMaxNivelAcademico'] = $this->input->post('maxnivelacademico');
+                $data['vCargo'] = $this->input->post('cargo');
+                $data['vCelular'] = $this->input->post('celular');
+                $data['dFechaNacimiento'] = $this->input->post('fechanc');
+                $data['dFechaRegistro'] = date("Y-m-d");
+                $data['iActivo']= 1;
 
-            if($validarus == TRUE){
+                //valida que el nombre de usuario no se encuentre en la DB
+                $validarus = $this->mu->validar_usuario($data['vUsuario']);
 
-                $this->mu->guardar_usuario($data);
+                if($validarus == TRUE){
 
-                echo "correcto";
+                    //Valida que el correo institucional no se encuentren registrados en la DB
+                    $validarcorreo = $this->mu->validar_correos($data['vCorreo'], $data['vCorreoPersonal'], 1);
 
+                    if($validarcorreo == TRUE){
+
+                        //Valida que el correo personal no se encuentren registrados en la DB
+                        $validarcorreo = $this->mu->validar_correos($data['vCorreo'], $data['vCorreoPersonal'], 2);
+
+                        if($validarcorreo == TRUE){
+
+                            $this->mu->guardar_usuario($data);
+                            echo "correcto";
+
+                        }else{
+                            echo "validar_correo_per";
+                        }
+
+                    }else{
+                        echo "validar_correo_inst";
+                    }
+                }else{
+                    echo "validar_usuario";
+                }
             }else{
-                echo "validar_usuario";
-            }           
-            
+                echo "validar_pass";
+            }                      
         }else{
             //Mensaje en caso de que no reciba el POST
             echo "error";
@@ -153,9 +174,34 @@ class C_usuarios extends CI_Controller {
             $data['dFechaRegistro'] = date("Y-m-d");
             $data['iActivo']= 1;
 
-            $resultado = $this->mu->modificar_usuario($id,$data);
+                //valida que el nombre de usuario no se encuentre en la DB
+                $validarus = $this->mu->validar_usuario($data['vUsuario'], $id);
 
-            echo $resultado;
+                if($validarus == TRUE){
+
+                    //Valida que el correo institucional no se encuentren registrados en la DB
+                    $validarcorreo = $this->mu->validar_correos($data['vCorreo'], $data['vCorreoPersonal'], 1, $id);
+
+                    if($validarcorreo == TRUE){
+
+                        //Valida que el correo personal no se encuentren registrados en la DB
+                        $validarcorreo = $this->mu->validar_correos($data['vCorreo'], $data['vCorreoPersonal'], 2, $id);
+
+                        if($validarcorreo == TRUE){
+
+                            $this->mu->modificar_usuario($id,$data);
+                            echo "correcto";
+
+                        }else{
+                            echo "validar_correo_per";
+                        }
+
+                    }else{
+                        echo "validar_correo_inst";
+                    }
+                }else{
+                    echo "validar_usuario";
+                }
 
         }else{
             //Mensaje en caso de que no reciba el POST
@@ -229,15 +275,6 @@ class C_usuarios extends CI_Controller {
        
         $data['consulta'] = $this->mu->mostrar_usuarios($usuario, $rol);
         $this->load->view('usuarios/contenido_tabla',$data);
-    }
-
-    //Valida si el correo ingresado exite en la base de datos
-    public function validar_usuario($us){
-
-        $resultado = $this->mu->validar_usuario($us);
-
-        return $resultado;
-
     }
 
 }
