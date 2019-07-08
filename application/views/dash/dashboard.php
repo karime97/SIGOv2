@@ -80,7 +80,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-6">
-                                           <label><a onclick="despliegue()" style="cursor:pointer;">YUCATÁN CON ECONOMÍA INCLUSIVA</a></label>
+                                           <label><a onclick="despliegue(1)" style="cursor:pointer;">YUCATÁN CON ECONOMÍA INCLUSIVA</a></label>
                                         </div>
                                         <div class="col-md-6">
 
@@ -1379,8 +1379,8 @@
 
 
 <script>
-function despliegue(){
-    cargar('<?= base_url(); ?>index.php/C_dash/despliegue', '#contenido');
+function despliegue(id){
+    cargar('<?= base_url(); ?>index.php/C_dash/despliegue/?id='+id, '#contenido');
 }
 </script>
 
