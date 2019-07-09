@@ -30,7 +30,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">Home</a>
+                                <a style="cursor:pointer;" onclick="cargar('<?= base_url(); ?>index.php/C_dash/', '#contenido');">Regresar al Dashboard</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Despliegue</li>
                         </ol>
@@ -39,30 +39,7 @@
             </div>
             <div class="col-10 align-self-center">
                 <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="selectdependencia">Dependencia</label>
-                        <select class="form-control" id="selectdependencia">
-                            <option value="0">Selecciona</option>
-                            <?php
-                            foreach($dependencias as $key){
-                                ?>
-                                <option value="<?php echo $key['iIdDependencia'];?>"><?php echo $key['vNombreCorto'];?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                        <label for="selectEntidad">Entidad</label>
-                        <select class="form-control" id="selectEntidad">
-                            <option value="0">Selecciona</option>
-                            
-                        </select>
-                    </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -79,18 +56,15 @@
             <div class="row">
                 <!-- columna 1 -->
                 <div class="col-md-9" style="background-color: #f2f4f5;">
-                    <div class="table-responsive">
-                        <table class="table" style="background-color: white;">
-                            <tbody>
-                                <tr>
-
-                                    <th style="border: 6px solid #f2f4f5;">
-                                        <div class="col-md-12">
-                                            <div class="row">
+                <div class="col-md-12">
+                <div class="row">
+                        <?php
+                        foreach ($temas as $tema) {
+                            ?>
+                            <div class="col-md-4" style="border: 6px solid #f2f4f5; background-color:white;">                                            
+                            <div class="row">
                                                 <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
+                                                    <?php echo $tema['vTema'];?>
                                                 </div>
                                                 <div class="col-md-4" style="padding-top: 5%;">
                                                     <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
@@ -109,207 +83,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </th>
-
-                                    <th style="border: 6px solid #f2f4f5;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <th style="border: 6px solid #f2f4f5;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-
-                                    <th style="border: 6px solid #f2f4f5;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <th style="border: 6px solid #f2f4f5;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <th style="border: 6px solid #f2f4f5;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-
-                                    <th style="border: 6px solid #f2f4f5; border-bottom: 0;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <th style="border: 6px solid #f2f4f5; border-bottom: 0;">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    Desarrollo comercial y
-                                                    fortalecimiento de las empreas
-                                                    locales
-                                                </div>
-                                                <div class="col-md-4" style="padding-top: 5%;">
-                                                    <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                        <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-
-                                                    Avance: 28%
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="progress" style="background-color:gray;">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th style="border: 6px solid #f2f4f5; border-bottom: 0; background-color: #f2f4f5;">
-
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <?php
+                        }
+                        ?>
+                         </div>
+                            </div>
                 </div>
                 <!-- fin columna 1 -->
                 <!-- columna 2 -->
