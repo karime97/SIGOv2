@@ -8,14 +8,10 @@
                             <tr>
                                 <th>Rol</th>
                                 <th>Nombre completo</th>
-                                <th>Usuario</th>
-                                <th>Cargo</th>
+                                <th>Usuario</th>                               
                                 <th>Dependencia</th>
-                                <th>Correo institucional</th>
-                                <th>Correo personal</th>
-                                <th>Telefono</th>
-                                <th>Celular</th>
-                                <th>Fecha de nacimiento</th>
+                                <th>Correo institucional</th>                                
+                                <th>Telefono</th>                               
                                 <th width="150px"> </th>
                             </tr>
                         </thead>
@@ -25,14 +21,10 @@
                             <tr>
                                 <td><?= $value->vRol ?></td>
                                 <td><?= $value->vNombre." ".$value->vPrimerApellido." ".$value->vSegundoApellido ?></td>
-                                <td><?= $value->vUsuario ?></td>
-                                <td><?= $value->vCargo ?></td>
+                                <td><?= $value->vUsuario ?></td>                                
                                 <td><?= $value->vDependencia ?></td>
-                                <td><?= $value->vCorreo ?></td>
-                                <td><?= $value->vCorreoPersonal ?></td>
+                                <td><?= $value->vCorreo ?></td>                               
                                 <td><?= $value->vTelefono ?></td>
-                                <td><?= $value->vCelular ?></td>
-                                <td><?= $value->dFechaNacimiento ?></td>
                                 <td>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" data-toggle="tooltip" data-placement="top" title="Editar" onclick="modificar_usuario(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-border-color"></i></button>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="confirmar('¿Esta usted seguro?',EliminarUsuario,<?= $value->iIdUsuario ?>)"><i class="mdi mdi-close"></i></button>
