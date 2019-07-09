@@ -42,7 +42,8 @@ class C_seguridad extends CI_Controller {
                         $du = $qu->row();
                         
                         $_SESSION[PREFIJO.'_idusuario'] = $du->iIdUsuario;
-                        $_SESSION[PREFIJO.'_idrol'] = $du->iIdRol;
+						$_SESSION[PREFIJO.'_idrol'] = $du->iIdRol;
+						$_SESSION[PREFIJO.'_rol'] = $du->vRol;
                         $_SESSION[PREFIJO.'_nombre'] = $du->vNombre.' '.$du->vPrimerApellido.' '.$du->vSegundoApellido ;
                         $_SESSION[PREFIJO.'_usuario'] = $du->vUsuario;
                         

@@ -27,42 +27,6 @@ class M_ubps extends CI_Model {
         return $resultado;
 	}
 
-	//Mostrar Tipo de UBP
-	public function mostrar_Tubps(){
-		$this->db->order_by('vTipoUbp', 'asc');
-        $this->db->select();
-		$this->db->from('TipoUBP');
-		
-
-		$query =  $this->db->get();
-        
-        $resultado = $query->result();
-        return $resultado;
-	}
-	
-	//Mostrar Dependencia
-	public function mostrar_dependencia(){
-		$this->db->order_by('vNombreCorto', 'asc');
-        $this->db->select();
-		$this->db->from('Dependencia');
-
-		$query =  $this->db->get();
-        $resultado = $query->result();
-        return $resultado;
-	}
-
-	//Mostrar Programa Presupuestario
-	public function mostrar_PP(){
-		$this->db->order_by('vProgramaPresupuestario', 'asc');
-        $this->db->select();
-		$this->db->from('ProgramaPresupuestario');	
-
-		$query =  $this->db->get();
-        
-        $resultado = $query->result();
-        return $resultado;
-	}
-
 	/* AGREGAR DATOS */
 
 	public function insertarUBP($data){

@@ -6,7 +6,7 @@ class Class_options {
     {
         $CI =& get_instance();
         $CI->load->helper('url');
-        $CI->load->helper('Funciones_helper');        
+        //$CI->load->helper('funciones_helper');        
         $CI->load->model('M_catalogos'); 
     }
 
@@ -15,11 +15,12 @@ class Class_options {
         $model = new M_catalogos();
         $select = '';
 
-        $query = $model->{$tabla}($where);
+        $query = $model->{$tabla}($where);       
 
         if($query != false)
         {   
             $result = $query->result();
+           
             foreach ($result as $row)
             {
                 $selected = ($row->id == $seleccionado) ? 'selected':'';

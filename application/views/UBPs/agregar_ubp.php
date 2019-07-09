@@ -33,10 +33,7 @@
                                         <div class="form-group">
                                             <select class="custom-select" required="" id="Tubp" name="TipoUBP">
                                                 <option value="">Seleccione...</option>
-                                                <?php
-                                                    foreach ($tUBP as $value) { ?>
-                                                        <option value="<?= $value->iIdTipoUbp ?>"><?= $value->vTipoUbp ?></option>
-                                                <?php } ?>
+                                                <?= $tipo_ubps ?>
                                             </select>
                                             <div class="valid-feedback"> </div>
                                         </div>
@@ -46,10 +43,7 @@
                                         <div class="form-group">
                                             <select class="custom-select" required="" name="Depen">
                                                 <option value="">Seleccione...</option>
-                                                <?php
-                                                    foreach ($Dep as $de) { ?>
-                                                        <option value="<?= $de->iIdDependencia ?>"><?= $de->vNombreCorto ?></option>
-                                                <?php } ?>
+                                                <?= $dependencias ?>
                                             </select>
                                             <div class="valid-feedback"> </div>
                                         </div>
@@ -59,10 +53,7 @@
                                         <div class="form-group">
                                             <select class="custom-select" name="ProgP">
                                                 <option value="0">Seleccione...</option>
-                                                <?php
-                                                    foreach ($PP as $pre) { ?>
-                                                        <option value="<?= $pre->iIdProgramaPresupuestario ?>"><?= $pre->vProgramaPresupuestario ?></option>
-                                                <?php } ?>
+                                                <?= $PP ?>
                                             </select>
                                             <div class="valid-feedback"> </div>
                                         </div>

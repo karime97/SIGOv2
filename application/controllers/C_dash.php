@@ -7,15 +7,20 @@ class C_dash extends CI_Controller {
         parent::__construct();
         session_start();
         $this->load->helper('url');
-        //$this->load->model('');
-        //$this->load->library('Class_options');
+        $this->load->model('M_dash');
         //$this->load->model('M_seguridad','ms');
     }
 
     public function index()
     {
         $this->load->view('dash/dashboard');
-        //$this->load->view('dash/mapa');
+    }
 
+    public function despliegue(){
+        if($_REQUEST['id']){
+            $id = $_REQUEST['id'];
+            $datos['dependencias'] = $this->M_dash->dependencias($id);
+            $this->load->view('dash/desp', $datos);
+        }
     }
 }
