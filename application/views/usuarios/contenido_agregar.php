@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Formación academica<span class="text-danger">*</span></label>
-                        <select name="formacionacademica" id="formacionacademica" required class="form-control" >
+                        <select name="formacionacademica" id="formacionacademica" required class="form-control">
                             <option value="">Seleccionar...</option>
                             <?= $formacion_academica ?>
                         </select>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Maximo nivel academico<span class="text-danger">*</span></label>
-                        <select name="maxnivelacademico" id="maxnivelacademico" required class="form-control" >
+                        <select name="maxnivelacademico" id="maxnivelacademico" required class="form-control">
                             <option value="">Seleccionar...</option>
                             <?= $nivel_academico ?>
                         </select>
@@ -88,14 +88,14 @@
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
                         <label>Correo institucional<span class="text-danger">*</span></label>
-                        <input type="text" id="correoinst" name="correoinst" class="form-control" placeholder="usuario@ejemplo.com" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Ingresar un correo valido" required data-validation-required-message="Este campo es requerido">
+                        <input type="email" id="correoinst" name="correoinst" class="form-control" placeholder="usuario@ejemplo.com" required="">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Correo personal<span class="text-danger">*</span></label>
-                        <input type="text" id="correopersonal" name="correopersonal" class="form-control" required="" placeholder="usuario@ejemplo.com">
+                        <input type="email" id="correopersonal" name="correopersonal" class="form-control" required="" placeholder="usuario@ejemplo.com" required="">
                         <div class="invalid-feedback">
                             Este campo no puede estar vacio.
                         </div>
@@ -139,35 +139,35 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Fecha de nacimiento<span class="text-danger">*</span></label>
-                        <input type="date" id="fechanac" name="fechanc" class="form-control" required >
-                    <div class="invalid-feedback">
-                        Este campo no puede estar vacio.
+                        <input type="date" id="fechanac" name="fechanc" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Este campo no puede estar vacio.
+                        </div>
                     </div>
-                </div>
-                <center>
-                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
-                    <button type="reset" class="btn waves-effect waves-light btn-inverse">Cancelar</button>
-                </center>
-                <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                    'use strict';
-                    window.addEventListener('load', function() {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
-                        // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function(form) {
-                            form.addEventListener('submit', function(event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
+                    <center>
+                        <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                        <button type="reset" class="btn waves-effect waves-light btn-inverse">Cancelar</button>
+                    </center>
+                    <script>
+                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+                        (function() {
+                            'use strict';
+                            window.addEventListener('load', function() {
+                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                var forms = document.getElementsByClassName('needs-validation');
+                                // Loop over them and prevent submission
+                                var validation = Array.prototype.filter.call(forms, function(form) {
+                                    form.addEventListener('submit', function(event) {
+                                        if (form.checkValidity() === false) {
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                        }
+                                        form.classList.add('was-validated');
+                                    }, false);
+                                });
                             }, false);
-                        });
-                    }, false);
-                })();
-            </script>
+                        })();
+                    </script>
             </form>
         </div>
     </div>
@@ -212,8 +212,8 @@
                     alerta('El correo personal ya se encuentra registrado en el sistema', 'warning');
 
                 }
-                if(resp == "error") {
-                    
+                if (resp == "error") {
+
                     alerta('Error al guardar', 'error');
                 }
 

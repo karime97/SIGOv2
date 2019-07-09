@@ -46,6 +46,9 @@
     function modificar_password(id) {
         cargar('<?= base_url() ?>C_usuarios/editpassword', '#contenedor', 'POST', 'id=' + id);
     }
+    function asignar_permisos(id){
+        cargar('<?= base_url() ?>C_usuarios/editpermisos', '#contenedor', 'POST', 'id=' + id);
+    }
 
     function buscarUsuario() {
         var rol = $("#b_rol").val();
