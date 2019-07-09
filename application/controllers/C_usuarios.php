@@ -123,10 +123,11 @@ class C_usuarios extends CI_Controller {
             $this->load->view('usuarios/contenido_modificar',$data);
 
         }else{
-            echo "No recibe la variable";
+            echo "error";
         }       
     }
 
+    //Muestra la vista para editar la contraseña
     public function editpassword(){
 
         if(isset($_POST['id'])){
@@ -138,9 +139,25 @@ class C_usuarios extends CI_Controller {
             $this->load->view('usuarios/modificar_password',$data);
 
         }else{
-            echo "No recibe la variable";
+            echo "error";
         }  
 
+    }
+
+    //Muestra la vistapara editar los permisos de determinado usuario
+    public function editpermisos(){
+
+        if(isset($_POST['id'])){
+
+            $id = $_POST['id'];
+
+            //$data['consulta'] = $this->mu->preparar_update($id); 
+
+            $this->load->view('usuarios/asignar_permisos');
+
+        }else{
+            echo "error";
+        }  
     }
 
     //Funcion para modificar
@@ -205,7 +222,7 @@ class C_usuarios extends CI_Controller {
 
         }else{
             //Mensaje en caso de que no reciba el POST
-            echo "Falla algo";
+            echo "error";
         }
     }
 
@@ -231,15 +248,17 @@ class C_usuarios extends CI_Controller {
 
                     echo "correcto";
 
+                }else{
+                    echo "error_passnew";
                 }
 
             }else{
-                echo "contraseña incorrecta";
+                echo "error_pass";
             }
 
         }else{
             //Mensaje en caso de que no reciba el POST
-            echo "Falla algo";
+            echo "error";
         }
     }
 

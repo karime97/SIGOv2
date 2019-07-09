@@ -85,6 +85,14 @@
                     alerta('Modificado exitosamente', 'success');
 
                 }
+                if (resp == "error_pass") {
+
+                    alerta('Verifique la contraseña antigua', 'warning');
+
+                }
+                if(resp == "error_passnew"){
+                    alerta('La confirmación de la contraseña no coincide con la nueva contraseña', 'warning');
+                }
                 if (resp == "error") {
                     alerta('Error al modificar', 'error');
                 }

@@ -178,7 +178,7 @@
 
                 if (resp == "correcto") {
 
-                    //buscarUsuario2();
+                    buscarUsuario2();
                     alerta('Modificado exitosamente', 'success');
 
                 }
