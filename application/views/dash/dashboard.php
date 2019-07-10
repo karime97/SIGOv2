@@ -13,7 +13,7 @@
 <style>
     .desplazada {
         position: relative;
-        top: -80%;
+        top: -68%;
         left: 35%;
         width: 30%;
     }
@@ -65,6 +65,21 @@
 <!-- seccion tabla -->
 <section>
     <div class="col-12" style="background-color: #f2f4f5;">
+    
+    <div class="col-md-12">
+    <div class="row">
+    <div class="col-md-3">
+    <label>Año</label>
+    <input type="text" class="text form-control">
+    </div>
+    <div class="col-md-1" style="padding-top: 2.5%;">
+    <button class="btn btn-dark"><i class="fa fa-search"></i></button>
+    <br><br>
+    </div>
+    </div>
+    
+    </div>
+    
         <div class="card">
             <div class="table-responsive" style="background-color: #f2f4f5;">
                 <table class="table" style="background-color: #f2f4f5;">
@@ -75,15 +90,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                        <th style="padding: 1px;">
+                        <th style="padding: 1px; width: 20%;">
                                 <div class="col-md-12" style="background-color: #3cb279; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                           <label><a onclick="despliegue(1)" style="cursor:pointer;">YUCATÁN CON ECONOMÍA INCLUSIVA</a></label>
+                                    <?php
+                                            foreach($ejes1 as $key1){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key1['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key1['vEje'];?><br><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut1" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -91,18 +108,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                    <?php
+                                    }
+                                    ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px;  width: 20%">
                                 <div class="col-md-12" style="background-color: #122143; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes2 as $key2){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key2['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key2['vEje'];?><br><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut2" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -110,18 +132,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                    <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px;  width: 20%">
                                 <div class="col-md-12" style="background-color: #4e4ea7 ; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes3 as $key3){
+                                        ?>
+                                        <div class="col-md-7" style="width:100%;">
+                                           <label><a onclick="despliegue(<?php echo $key3['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key3['vEje'];?><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut3" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -129,18 +156,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                        <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px;  width: 20%">
                                 <div class="col-md-12" style="background-color: #76c248 ; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                         <?php
+                                            foreach($ejes4 as $key4){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key4['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key4['vEje'];?> <br><br><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut4" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -148,10 +180,13 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                        <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px; width: 20%;">
+                            <th style="padding: 1px; width: 20%">
                                 <br>
                                 <br>
                                 <div class="col-md-12" style="background-color: #f2f4f5; height:100%">
@@ -168,7 +203,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" style="background-color: #f2f4f5;">
                 <table class="table" style="background-color: #f2f4f5;">
                     <thead>
                         <tr>
@@ -177,15 +212,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px; width:20%;">
                                 <div class="col-md-12" style="background-color: #352689; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes5 as $key5){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key5['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key5['vEje'];?></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut6" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -193,18 +230,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                        <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px; width:20%;">
                                 <div class="col-md-12" style="background-color: #3cb0cf; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes6 as $key6){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key6['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key6['vEje'];?> <br><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut7" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -212,18 +254,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                        <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px; width:20%;">
                                 <div class="col-md-12" style="background-color: #020407; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes7 as $key7){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key7['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key7['vEje'];?> <br><br><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut8" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -231,18 +278,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                        <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px; width:20%;">
                                 <div class="col-md-12" style="background-color: #407575; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes8 as $key8){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key8['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key8['vEje'];?> <br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut9" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -250,18 +302,23 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
+                                        <?php
+                                            }
+                                            ?>
                                     </div>
                                 </div>
                             </th>
-                            <th style="padding: 1px;">
+                            <th style="padding: 1px; width:20%;">
                                 <div class="col-md-12" style="background-color: #2462b3; color: white;">
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>YUCATÁN CON ECONOMÍA INCLUSIVA</label>
+                                    <?php
+                                            foreach($ejes9 as $key9){
+                                        ?>
+                                        <div class="col-md-7">
+                                           <label><a onclick="despliegue(<?php echo $key9['iIdEje'];?>)" style="cursor:pointer;"><?php echo $key9['vEje'];?> <br><br><br></a></label>
                                         </div>
-                                        <div class="col-md-6">
-
+                                        <div class="col-md-5">
                                             <div id="basic-doughnut10" style="width: 100%; height:100%;"></div>
                                             <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
                                         </div>
@@ -269,7 +326,10 @@
 
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Presupuesto <br>$xxx,xxx</div>
                                         <div class="col-md-6" style="border: 1px solid #FFF;">Ejercido <br>$xxx,xxx</div>
-                                    </div>
+                                        <?php
+                                            }
+                                            ?>
+                                   </div>
                                 </div>
                             </th>
                         </tr>
@@ -297,22 +357,76 @@
                     <div class="row">
                         <!-- doble columna -->
                         <!-- columna 1 -->
-                        <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
+                        <?php
+                        foreach($ejes as $key){
+                            ?>
+                            <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h6>Yucatán con economia inclusiva</h6>
+                                    <h6><?php echo $key['vEje'];?></h6>
                                 </div>
                                 <div class="col-md-4">
                                     <p>24|45%</p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="progress" style="background-color:gray;">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
+                                    <?php
+                                    if($key['iIdEje'] == 1){
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 2) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #122143"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 3) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #4e4ea7"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 4) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #76c248"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 5) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #352689"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 6) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb0cf"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 7) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 60%; height: 6px; background-color: #020407"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 8) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #407575"></div>
+                                        <?php
+                                    }elseif ($key['iIdEje'] == 9) {
+                                        # code...
+                                        ?>
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #2462b3"></div>
+                                        <?php
+                                    }
+                                    ?>    
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            <?php
+                        }
+                        ?>
                         <!-- end columna 1-->
+                        <?php
+                        /*
                         <!-- columna 2 -->
                         <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-bottom: 6px solid #f2f4f5;">
                             <div class="row">
@@ -449,6 +563,8 @@
                             </div>
                         </div>
                         <!-- end columna 9-->
+                        */
+                        ?>
                         <!-- columna 10 -->
                         <div class="col-md-6" height="100%" style="padding: 0px;">
                         <div class="desplazada3">45%</div>
