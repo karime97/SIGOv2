@@ -1,4 +1,5 @@
 <div id="contenido_modulo" class="">
+<<<<<<< HEAD
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -66,6 +67,72 @@
                                 </select>
                                 <div class="valid-feedback"> </div>
                             </div>
+=======
+<div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                        <div align="right">
+                                    <button type="button" class="btn waves-effect waves-light btn-light" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                                </div>
+                            <form class="needs-validation was-validated" onsubmit="guardarUBP(this,event);">
+                                <div class="form-row">                                    
+                                    <div class="col-md-2">
+                                        <label for="validationCustom01">Clave UBP</label>
+                                        <input type="text" class="form-control" id="claveUBP" name="Cubp" placeholder="Clave UBP" value="" required="" maxlength="5">
+                                        <div class="valid-feedback">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom02">Nombre de la UBP</label>
+                                        <input type="text" class="form-control" id="nombUBP" name="NombUbp" placeholder="Nombre de la UBP" value="" required="">
+                                        <div class="valid-feedback">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="validationCustomUsername">Año</label>
+                                        <input type="text" class="form-control" id="anio" name="annio" placeholder="Año" value="" required="" onkeypress="solonumeros(event);" maxlength="4">
+                                        <div class="valid-feedback">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="validationCustom03">Tipo UBP</label>
+                                        <div class="form-group">
+                                            <select class="custom-select" required="" id="Tubp" name="TipoUBP">
+                                                <option value="">Seleccione...</option>
+                                                <?= $tipo_ubps ?>
+                                            </select>
+                                            <div class="valid-feedback"> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="validationCustom04">Dependencia</label>
+                                        <div class="form-group">
+                                            <select class="custom-select" required="" name="Depen">
+                                                <option value="">Seleccione...</option>
+                                                <?= $dependencias ?>
+                                            </select>
+                                            <div class="valid-feedback"> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Programa presupuestario (PP)</label>
+                                        <div class="form-group">
+                                            <select class="custom-select" name="ProgP">
+                                                <option value="0">Seleccione...</option>
+                                                <?= $PP ?>
+                                            </select>
+                                            <div class="valid-feedback"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <center>
+                                    <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
+                                </center>
+                            </form>                            
+>>>>>>> b48abaac63726aa7ea406bf61c1fd1a97e052c1e
                         </div>
                     </div>
                     <center>

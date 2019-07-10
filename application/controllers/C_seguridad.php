@@ -34,6 +34,7 @@ class C_seguridad extends CI_Controller {
             {
                 $ms = new M_seguridad();
                 $qu = $ms->consulta_existe_usuario($where);
+                //echo $_SESSION['consulta'];
                 
                 if($qu != false)
                 {
@@ -42,7 +43,9 @@ class C_seguridad extends CI_Controller {
                         $du = $qu->row();
                         
                         $_SESSION[PREFIJO.'_idusuario'] = $du->iIdUsuario;
-                        $_SESSION[PREFIJO.'_idrol'] = $du->iIdRol;
+						$_SESSION[PREFIJO.'_idrol'] = $du->iIdRol;
+						$_SESSION[PREFIJO.'_iddependencia'] = $du->iIdDependencia;
+						$_SESSION[PREFIJO.'_rol'] = $du->vRol;
                         $_SESSION[PREFIJO.'_nombre'] = $du->vNombre.' '.$du->vPrimerApellido.' '.$du->vSegundoApellido ;
                         $_SESSION[PREFIJO.'_usuario'] = $du->vUsuario;
                         

@@ -3,8 +3,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
+                    <h4 class="card-title">Modificar fuente de financiamiento</h4>
                 </div>
-                <div align="right">
+                <div class="col-md-2">
                     <button type="button" class="btn waves-effect waves-light btn-light" onclick="buscarfinanciamiento2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>

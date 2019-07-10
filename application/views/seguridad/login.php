@@ -40,12 +40,12 @@
         <!-- ============================================================== -->
         <!-- Login box.scss -->
         <!-- ============================================================== -->
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(<?=base_url()?>public/assets/images/big/auth-bg.jpg) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(<?=base_url()?>public/img/auth-bg.jpg) no-repeat center center;">
             <div class="auth-box">
                 <div id="loginform">
                     <div class="logo">
-                        <span class="db"><img src="<?=base_url()?>public/assets/images/logo-icon.png" alt="logo" /></span>
-                        <h5 class="font-medium m-b-20">Sign In to Admin</h5>
+                        <span class="db"><img src="<?=base_url()?>public/img/logo_sigo.png" alt="logo" class="responsive" width="200px"/></span>
+                        <h5 class="font-medium m-b-20">Inciar sesión</h5>
                     </div>
                     <!-- Form -->
                     <div class="row">
