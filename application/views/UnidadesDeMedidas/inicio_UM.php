@@ -66,14 +66,12 @@
 
         function filter2() {
             var keyword = $("#clave").val();
-            var year = $("#anio").val();
 
             $.ajax({
                 type: "POST",
                 url: "<?= base_url() ?>C_unidadesmedida/gettable",
                 data: {
-                    'keyword': keyword,
-                    'year': year
+                    'keyword': keyword
                 },
                 //contentType: 'json',
                 success: function(resp) {
