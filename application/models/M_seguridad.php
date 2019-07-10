@@ -66,7 +66,7 @@ class M_seguridad extends CI_Model {
 
 	public function consulta_existe_usuario($where='')
 	{
-		$this->db->select('u.iIdUsuario, u.vUsuario, u.vNombre, u.vPrimerApellido, u.vSegundoApellido, u.vCorreo');
+		$this->db->select('u.iIdUsuario, u.vUsuario, u.vNombre, u.vPrimerApellido, u.vSegundoApellido, u.vCorreo, u.iIdDependencia');
 		$this->db->select('r.iIdRol, r.vRol');
 		$this->db->from('Usuario u');
 		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
