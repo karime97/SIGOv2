@@ -2,14 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_dash extends CI_Controller {
-	public function __construct()
+
+    public function __construct()
     {
         parent::__construct();
-        session_start();
+        if(!isset($_SESSION)) 
+        { 
+            session_start(); 
+        }
         $this->load->helper('url');
         $this->load->model('M_dash');
+        $this->load->library('session');
         //$this->load->model('M_seguridad','ms');
     }
+
+    
 
     public function index()
     {   
@@ -28,10 +35,24 @@ class C_dash extends CI_Controller {
 
     public function despliegue(){
         if($_REQUEST['id']){
+            if($_REQUEST['an']){
+                $id = $_REQUEST['id'];
+                $an = $_REQUEST['an'];
+                $this->session->set_userdata('anio', $an);
+                $datos['dependencias'] = $this->M_dash->dependencias($id);
+                $datos['temas'] = $this->M_dash->temas($id);
+                $datos['actividades'] = $this->M_dash->actividades($id,$an);
+                $this->load->view('dash/desp', $datos);
+            }
+        }
+    }
+    
+    public function desplieguetabla(){
+        if($_REQUEST['id']){
+            $an = $this->session->userdata('anio');
             $id = $_REQUEST['id'];
-            $datos['dependencias'] = $this->M_dash->dependencias($id);
-            $datos['temas'] = $this->M_dash->temas($id);
-            $this->load->view('dash/desp', $datos);
+            $datos['actividades2'] = $this->M_dash->actividades2($id, $an);
+            $this->load->view('dash/tablaactividades', $datos);
         }
     }
 }

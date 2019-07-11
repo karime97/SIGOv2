@@ -60,7 +60,6 @@
 
 <!-- end Titulo -->
 <br>
-<br>
 
 <!-- seccion tabla -->
 <section>
@@ -70,10 +69,10 @@
     <div class="row">
     <div class="col-md-3">
     <label>Año</label>
-    <input type="text" class="text form-control">
+    <input type="text" id="año" class="text form-control">
     </div>
     <div class="col-md-1" style="padding-top: 2.5%;">
-    <button class="btn btn-dark"><i class="fa fa-search"></i></button>
+    <button onclick="recuperar()" class="btn btn-dark"><i class="mdi mdi-search-web"></i></button>
     <br><br>
     </div>
     </div>
@@ -1495,8 +1494,14 @@
 
 
 <script>
+var año = "";
+
+function recuperar(){
+    año = document.getElementById("año").value;
+}
+
 function despliegue(id){
-    cargar('<?= base_url(); ?>index.php/C_dash/despliegue/?id='+id, '#contenido');
+    cargar('<?= base_url(); ?>index.php/C_dash/despliegue/?id='+id+'&an='+año, '#contenido');
 }
 </script>
 
