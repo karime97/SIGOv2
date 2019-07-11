@@ -6,7 +6,7 @@
                     <div class="col-md-10">
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-light" type="submit" onclick="filter()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                        <button class="btn btn-light" type="submit" onclick="filter2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                     </div>
                 </div>
                 <br><br>
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <center>
-                    <button class="btn btn-info" type="submit">Guardar</button>
+                    <button class="btn btn-success" type="submit">Guardar</button>
                     </center>
                 </form>
                 <script>
