@@ -5,11 +5,7 @@ class C_dash extends CI_Controller {
 
     public function __construct()
     {
-        parent::__construct();
-        if(!isset($_SESSION)) 
-        { 
-            session_start(); 
-        }
+        parent::__construct();                
         $this->load->helper('url');
         $this->load->model('M_dash');
         $this->load->library('session');
