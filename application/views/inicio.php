@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <!--<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">-->
     <title>SIGO</title>
     <!-- Custom CSS -->
     <link href="<?=base_url()?>public/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     <!-- This page plugin CSS -->
     <link href="<?=base_url()?>public/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?=base_url()?>public/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>public/dist/css/style.css" rel="stylesheet">
     <link href="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
     <link href="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,7 +29,7 @@
 <![endif]-->
 </head>
 
-<body class="h100">
+<body class="" style="height: 100% !important;">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -42,7 +42,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper">
+    <div id="main-wrapper" style="height: 100% !important;">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -61,9 +61,9 @@
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="<?=base_url()?>public/img/elementos_web_sigo/logo_sigo.png" width="150px" alt="logo" class="dark-logo" />
+                                <img src="<?=base_url()?>public/img/logo_sigo.png" width="150px" alt="logo" class="dark-logo" />
                                 <!-- Light Logo text -->
-                                <img src="<?=base_url()?>public/img/elementos_web_sigo/logo_sigo.png" width="150px" class="light-logo" alt="logo" />
+                                <img src="<?=base_url()?>public/img/logo_sigo.png" width="150px" class="light-logo" alt="logo" />
                             </span>
                         </a>
                     </div>
@@ -235,50 +235,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper h-100" id="contenido">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title">Dashboard</h4>
-                    </div>
-                    <div class="col-7 align-self-center">
-                        <div class="d-flex align-items-center justify-content-end">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-            
+        <div class="page-wrapper" id="contenido" style="height: 100% !important; min-height: 100% !important">
             
         </div>
         <!-- ============================================================== -->
@@ -325,19 +282,26 @@
     <script src="<?=base_url()?>public/assets/extra-libs/c3/d3.min.js"></script>
     <script src="<?=base_url()?>public/assets/extra-libs/c3/c3.min.js"></script>
      <!--This page plugins -->
-    <script src="<?=base_url()?>public/assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script src="<?=base_url()?>public/assets/extra-libs/DataTables/datatables.min.js?v=0.1"></script>
     <script src="<?=base_url()?>public/dist/js/pages/datatable/datatable-basic.init.js"></script>
     <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
     <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
     
     <script type="text/javascript">
+        var moduloInicial = '<?=$modulo_inicial?>';
+        $(document).ready(function (){
+            if(moduloInicial != ''){
+                cargar(moduloInicial,"#contenido");    
+            }
+        });
+
 
         function cargar(pagina,obj,metodo,variables) {
             var loading = '<div id="page-loader" class="fade in"><span class="spinner"></span></div>';
 
             if(typeof(metodo) == "undefined" || metodo == ""){ metodo = "POST";}
             if(typeof(variables) == "undefined" || variables == ""){ variables = "";}
-            $(obj).html(loading);
+            //$(obj).html(loading);
             $.ajax({
                 url: pagina,
                 type: metodo,

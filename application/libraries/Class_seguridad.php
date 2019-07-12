@@ -32,14 +32,14 @@ class Class_seguridad {
                     {
                         $submenu = $submenu->result();
 
-                        $str.= '<li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-av-timer"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>';
+                        $str.= '<li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="'.$padre->vClass.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>';
                         $str.= '<ul aria-expanded="false" class="collapse  first-level">';
 
                         
                         foreach ($submenu as $hijo)
                         {
-                            if($modulo_inicial == '') $modulo_inicial = base_url().$hijo->vUrl;
-                            $str.= '<li class="sidebar-item"><a style="cursor:pointer;" onclick="cargar(\''.base_url().$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> '.$hijo->vPermiso.' </span></a></li>';
+                            if($modulo_inicial == '' && $hijo->iInicial > 0) $modulo_inicial = base_url().$hijo->vUrl;
+                            $str.= '<li class="sidebar-item"><a style="cursor:pointer;" onclick="cargar(\''.base_url().$hijo->vUrl.'\',\'#contenido\');" class="sidebar-link"><i class="'.$hijo->vClass.'"></i><span class="hide-menu"> '.$hijo->vPermiso.' </span></a></li>';
                         }
                
                         $str.= '</ul>';
@@ -47,7 +47,7 @@ class Class_seguridad {
                     }
                     else
                     {
-                        if($modulo_inicial == '') $modulo_inicial = base_url().$padre->vUrl;
+                        if($modulo_inicial == '' && $padre->iInicial > 0) $modulo_inicial = base_url().$padre->vUrl;
                         $str .= '<li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark" style="cursor:pointer;" onclick="cargar(\''.base_url().$padre->vUrl.'\',\'#contenido\');" aria-expanded="false"><i class="'.$padre->vClass.'"></i><span class="hide-menu">'.$padre->vPermiso.'</span></a>
                             </li>';
@@ -66,21 +66,19 @@ class Class_seguridad {
         return $resp;
     }
     
-    function verifica_permiso($permiso, $id_usuario=0, $id_rol=0)
+    function tipo_acceso($permiso, $id_usuario=0)
     {
         $acceso = -1;
-        $ms = new Model_seguridad();
-        $qp = $ms->verificar_permiso($permiso,$id_usuario,$id_rol);
+        $ms = new M_seguridad();
+        $qp = $ms->tipo_acceso($permiso,$id_usuario);
         if($qp != false)
         {
-            foreach ($qp as $d)
+            if($qp->num_rows() == 1)
             {
-              $permisousuario = $d->permiso_usuario;
-              $permisorol = $d->permiso_rol;
+                $registro = $qp->row();
+                if($registro->acceso_usuario > $acceso) $acceso = $registro->acceso_usuario;
+                if($acceso == -1) $acceso = $registro->acceso_rol;
             }
-
-            if($permisousuario > $permisorol) $acceso = $permisousuario;
-            else $acceso = $permisorol;
         }
 
         return $acceso;

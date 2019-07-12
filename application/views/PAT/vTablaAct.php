@@ -17,30 +17,30 @@
         background-color: #90E4CC;
     }
 
-    .boton_InfTex{
+    .boton_InfTex {
         background-color: #7E70E9;
         color: #fff;
     }
 
-    .boton_InfTex:hover{
+    .boton_InfTex:hover {
         background-color: #A69DED;
     }
 
-    .boton_edit{
+    .boton_edit {
         background-color: #ffb300;
         color: #fff;
     }
 
-    .boton_edit:hover{
+    .boton_edit:hover {
         background-color: #ffe54c;
     }
 
-    .boton_eliminar{
+    .boton_eliminar {
         background-color: #f44336;
         color: #fff;
     }
 
-    .boton_eliminar:hover{
+    .boton_eliminar:hover {
         background-color: #ff7961;
     }
 </style>
@@ -59,18 +59,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td align="center">
-                                    <button type="button" class="btn btn-circle waves-effect waves-light boton_edit" onclick="modificarAct()"><i class="mdi mdi-border-color"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick=""><i class="mdi mdi-close"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light boton" onclick=""><i class="icon-badge"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light boton_desc" onclick=""><i class="mdi mdi-download"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light boton_InfTex" onclick=""><i class="icon-book-open"></i></button>
-                                </td>
-                            </tr>
+                            <?php
+                            foreach ($actividad as $value) { ?>
+                                <tr>
+                                    <td></td>
+                                    <td><?= $value->vActividad ?></td>
+                                    <td><?= $value->iAnio ?></td>
+                                    <td align="center">
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_edit" onclick="modificarAct()"><i class="mdi mdi-border-color"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick=""><i class="mdi mdi-close"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton" onclick=""><i class="icon-badge"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_desc" onclick=""><i class="mdi mdi-download"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_InfTex" onclick=""><i class="icon-book-open"></i></button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
