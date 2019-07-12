@@ -28,7 +28,7 @@ class M_dash extends CI_Model {
 	public function ejes1(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 1');
 		$query = $this->db->get();
@@ -36,7 +36,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -44,7 +45,7 @@ class M_dash extends CI_Model {
 	public function ejes2(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 2');
 		$query = $this->db->get();
@@ -52,7 +53,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -60,7 +62,7 @@ class M_dash extends CI_Model {
 	public function ejes3(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 3');
 		$query = $this->db->get();
@@ -68,7 +70,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -76,7 +79,7 @@ class M_dash extends CI_Model {
 	public function ejes4(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 4');
 		$query = $this->db->get();
@@ -84,7 +87,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -92,7 +96,7 @@ class M_dash extends CI_Model {
 	public function ejes5(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 5');
 		$query = $this->db->get();
@@ -100,7 +104,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -108,7 +113,7 @@ class M_dash extends CI_Model {
 	public function ejes6(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 6');
 		$query = $this->db->get();
@@ -116,7 +121,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -124,7 +130,7 @@ class M_dash extends CI_Model {
 	public function ejes7(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 7');
 		$query = $this->db->get();
@@ -132,7 +138,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -140,7 +147,7 @@ class M_dash extends CI_Model {
 	public function ejes8(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 8');
 		$query = $this->db->get();
@@ -148,7 +155,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -156,7 +164,7 @@ class M_dash extends CI_Model {
 	public function ejes9(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje = 9');
 		$query = $this->db->get();
@@ -164,7 +172,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -173,7 +182,7 @@ class M_dash extends CI_Model {
 	public function ejes(){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdEje, vEje');
+		$this->db->select('iIdEje, vEje, vIcono');
 		$this->db->from('PED2019Eje');
 		$this->db->where('iIdEje >= 1 and iIdEje <= 9');
 	
@@ -182,7 +191,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdEje'                       => $row->iIdEje,
-           'vEje'                   => $row->vEje
+		   'vEje'                   => $row->vEje,
+		   'vIcono'  => $row->vIcono
          ];
      }
      return $datos;
@@ -191,7 +201,7 @@ class M_dash extends CI_Model {
 	public function temas($id){
 		$datos = '';
 		$datos = array();
-		$this->db->select('iIdTema, vTema');
+		$this->db->select('iIdTema, vTema, PED2019Tema.vIcono');
 		$this->db->from('PED2019Tema');
 		$this->db->join('PED2019Eje', 'PED2019Tema.iIdEje = PED2019Eje.iIdEje');
 		$this->db->where('PED2019Eje.iIdEje', $id);
@@ -201,7 +211,8 @@ class M_dash extends CI_Model {
      foreach ($query->result() as $row) {
         $datos[] = [
            'iIdTema'                       => $row->iIdTema,
-           'vTema'                   => $row->vTema
+		   'vTema'                   => $row->vTema,
+		   'vIcono' => $row->vIcono
          ];
      }
      return $datos;
