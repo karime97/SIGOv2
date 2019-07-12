@@ -69,7 +69,7 @@
     <div class="row">
     <div class="col-md-3">
     <label>Año</label>
-    <input type="text" id="año" class="text form-control">
+    <input type="text" id="año" min="1" max="9999" onkeypress='return validaNumericos(event)' class="text form-control">
     </div>
     <div class="col-md-1" style="padding-top: 2.5%;">
     <button onclick="recuperar()" class="btn btn-dark"><i class="mdi mdi-search-web"></i></button>
@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut1" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key1['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut2" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key2['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -149,7 +149,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut3" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key3['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -173,7 +173,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut4" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key4['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -223,7 +223,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut6" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key5['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -247,7 +247,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut7" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key6['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -271,7 +271,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut8" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key7['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -295,7 +295,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut9" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key8['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -319,7 +319,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div id="basic-doughnut10" style="width: 100%; height:100%;"></div>
-                                            <div class="desplazada"><img src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/economia-inclusiva.png" style="width: 100%;"></div>
+                                            <div class="desplazada"><img src="<?= base_url(); ?><?php echo $key9['vIcono'];?>" style="width: 100%;"></div>
                                         </div>
                                         <div class="col-md-12">Avance: %</div>
 
@@ -1501,8 +1501,36 @@ function recuperar(){
 }
 
 function despliegue(id){
-    cargar('<?= base_url(); ?>index.php/C_dash/despliegue/?id='+id+'&an='+año, '#contenido');
+    año = document.getElementById("año").value;
+    if (año.length == 0 || /^\s+$/.test(año)) {
+        Swal.fire(
+        'Debe digitar un año para poder continuar',
+        '',
+        'warning'
+        )
+        }else{
+            cargar('<?= base_url(); ?>index.php/C_dash/despliegue/?id='+id+'&an='+año, '#contenido');
+        }
+    
 }
+
+function validaNumericos(event) {
+    if(event.charCode >= 48 && event.charCode <= 57){
+      return true;
+     }
+     Swal.fire(
+        'Lo sentimos',
+        'Unicamente se permiten números en este apartado',
+        'error'
+        )
+     return false;        
+}
+
+var input=  document.getElementById('año');
+input.addEventListener('input',function(){
+  if (this.value.length > 4) 
+     this.value = this.value.slice(0,4); 
+})
 </script>
 
 <!-- #end Javascript -->

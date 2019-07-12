@@ -102,7 +102,7 @@
                                         </div>
                                         <div class="col-md-4" style="padding-top: 5%;">
                                             <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
+                                                <img class="thumbnails" src="<?= base_url(); ?><?php echo $tema['vIcono']; ?>" width="100%">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -163,7 +163,7 @@
             <div class="col-md-12" style="background-color: red;">
                 <div class="row">
                     <div class="col-md-2" style="padding-top: 1rem;">
-                        <img class="thumbnail" src="<?= base_url(); ?>public\img\elementos_web_sigo\ods/ods-1.png" width="70%">
+                        <img class="thumbnail" src="<?= base_url(); ?>public\img\icons\ods/ods-1.png" width="70%">
                     </div>
                     <div class="col-md-6" style="color: white; font-size: 120%; padding: 2rem;">ID Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et erat dictum nisl cursus commodo. Maecenas vulputate nulla dolor, viverra auctor augue gravida nec. Nulla non neque tellus</div>
                     <div class="col-md-1">
@@ -399,7 +399,6 @@
 
     function actividades() {
     var id = document.getElementById("seldep").value;
-    alert(id);
     cargar('<?= base_url(); ?>index.php/C_dash/desplieguetabla/?id='+id, '#tablaactividades');
   }
 </script>
