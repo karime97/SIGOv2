@@ -63,6 +63,7 @@ class C_seguridad extends CI_Controller {
 
 		$inicio = $seg->generar_menu($_SESSION[PREFIJO.'_idusuario']);
 		$datos['menu_navegacion'] = $inicio['menu'];
+		$datos['modulo_inicial'] = $inicio['modulo_inicial'];
 		$this->load->view('inicio',$datos);
 	}
 

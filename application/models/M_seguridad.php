@@ -83,17 +83,31 @@ class M_seguridad extends CI_Model {
 	public function consultar_menu_sistema($idusuario=0, $idpadre=0)
 	{	
 		$sql = "SELECT * 
-				FROM ((SELECT p.\"iIdPermiso\", p.\"vPermiso\", p.\"vClass\", up.\"iTipoAcceso\", p.\"vUrl\", p.\"iOrden\"
+				FROM ((SELECT p.\"iIdPermiso\", p.\"vPermiso\", p.\"vClass\", up.\"iTipoAcceso\", p.\"vUrl\", p.\"iOrden\", p.\"iInicial\"
 						FROM \"Permiso\" p
 						INNER JOIN \"UsuarioPermiso\" up ON up.\"iIdPermiso\" = p.\"iIdPermiso\" AND up.\"iIdUsuario\" = '$idusuario' AND p.\"iIdPermisoPadre\" = '$idpadre' AND p.\"iTipo\" = 1)
 				UNION
-					(SELECT p.\"iIdPermiso\", p.\"vPermiso\", p.\"vClass\", rp.\"iTipoAcceso\", p.\"vUrl\", p.\"iOrden\"
+					(SELECT p.\"iIdPermiso\", p.\"vPermiso\", p.\"vClass\", rp.\"iTipoAcceso\", p.\"vUrl\", p.\"iOrden\", p.\"iInicial\"
 						FROM \"Permiso\" p
 						INNER JOIN \"RolPermiso\" rp ON rp.\"iIdPermiso\" = p.\"iIdPermiso\"
 						INNER JOIN \"Usuario\" u ON u.\"iIdRol\" = rp.\"iIdRol\"
 					WHERE u.\"iIdUsuario\" = '$idusuario' AND p.\"iIdPermisoPadre\" = '$idpadre' AND p.\"iTipo\" = 1)) t
 				ORDER BY t.\"iOrden\" ASC";
 		return $this->db->query($sql);
+	}
+
+	public function tipo_acceso($idPermiso,$idUsuario)
+	{
+		$this->db->select('COALESCE(up."iTipoAcceso",-1) acceso_usuario, COALESCE(rp."iTipoAcceso",-1) acceso_rol',false);
+
+		$this->db->from('Usuario u');
+		$this->db->join('UsuarioPermiso up','up.iIdUsuario = u.iIdUsuario AND up.iIdPermiso = '.$idPermiso,'LEFT OUTER');
+		$this->db->join('RolPermiso rp','rp.iIdRol = u.iIdRol AND rp.iIdPermiso = '.$idPermiso,'LEFT OUTER');
+		$this->db->where('u.iIdUsuario',$idUsuario);
+
+		$query = $this->db->get();
+		$_SESSION['sql'] = $this->db->last_query();
+		return $query;
 	}
 
 	public function buscar_usuarios($where ='',$palabra='')

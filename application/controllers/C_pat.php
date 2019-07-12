@@ -1,15 +1,21 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
+<<<<<<< Updated upstream:application/controllers/C_pat.php
 class C_pat extends CI_Controller
 {
     public function __construct()
+=======
+class C_compromisos extends CI_Controller {
+	public function __construct()
+>>>>>>> Stashed changes:application/controllers/C_Compromisos.php
     {
-        parent::__construct();
+    	parent::__construct();
         session_start();
         $this->load->helper('url');
-        $this->load->model('M_pat', 'pat');
-    }
+    	$this->load->library('Class_seguridad');
 
+<<<<<<< Updated upstream
     public function index()
     {
         $data['actividad'] = $this->pat->mostrar_act();
@@ -86,4 +92,20 @@ class C_pat extends CI_Controller
     {
         
     }
+=======
+    }
+
+    public function index()
+    {
+    	$seg = new Class_seguridad();
+    	$tipo_acceso = $seg->tipo_acceso(25,$_SESSION[PREFIJO.'_idusuario']);
+    	if($tipo_acceso > 0)
+    	{
+    		$this->load->view('compromisos/index');
+    	}
+    	else echo '<p>Acceso denegado.</p>';
+    }
+
+>>>>>>> Stashed changes
 }
+?>
