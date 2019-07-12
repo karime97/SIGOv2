@@ -10,7 +10,7 @@ class C_pat extends CI_Controller
     	parent::__construct();
         session_start();
         $this->load->helper('url');
-    	$this->load->model('M_pat');
+    	$this->load->model('M_pat','pat');
     }
 
     public function index()
@@ -45,13 +45,13 @@ class C_pat extends CI_Controller
         $this->load->view('PAT/editar_actividad', $data2);
     }
 
-    public function dPoliPub(){
-        $eje = 0;
+    public function dPoliPub($eje){
+        //$eje = 0;
 
-        if (!empty($_POST['eje']) && $_POST['eje'] != '0') {
+        /*if (!empty($_POST['eje']) && $_POST['eje'] != '0') {
             $eje = $_POST['eje'];
         }
-        echo $eje;
+        echo $eje;*/
         $PolPub = $this->pat->mostrarPpublica($eje);
         $opc = '<option value="0">Seleccione...</option>';        
         foreach ($PolPub as $value) {

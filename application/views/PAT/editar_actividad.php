@@ -42,7 +42,7 @@
                                 <select class="custom-select" required="" name="eje" id="eje" onchange="cargarPpublica()">
                                     <option value="0">Seleccione...</option>
                                     <?php foreach ($eje as $value) { ?>
-                                        <option value="<?php $value->iIdEje ?>"><?= $value->vEje ?></option>
+                                        <option value="<?php echo $value->iIdEje ?>"><?= $value->vEje ?></option>
                                     <?php } ?>
                                 </select>
                                 <div class="valid-feedback"> </div>
