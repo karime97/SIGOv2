@@ -335,6 +335,6 @@
 
     function cargarPpublica() {
         var value = $("#eje").val();
-        $("#polipub").load('C_Compromisos/dPoliPub/' + value);
+        $("#polipub").load('C_pat/dPoliPub/' + value);
     }
 </script>

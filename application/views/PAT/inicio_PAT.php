@@ -88,7 +88,7 @@
         }
 
         function capturarAct() {
-            cargar('<?= base_url() ?>C_compromisos/cargar', '#contenido_modulo');
+            cargar('<?= base_url() ?>C_pat/cargar', '#contenido_modulo');
         }
 
         function filter() {
@@ -97,7 +97,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "<?= base_url() ?>C_compromisos/gettable",
+                url: "<?= base_url() ?>C_pat/gettable",
                 data: {
                     'keyword': keyword,
                     'year': year
@@ -117,7 +117,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "<?= base_url() ?>C_compromisos/gettable",
+                url: "<?= base_url() ?>C_pat/gettable",
                 data: {
                     'keyword': keyword,
                     'year': year
@@ -141,14 +141,14 @@
         }
 
         function modificarAct() {
-            cargar('<?= base_url() ?>C_compromisos/edit', '#contenido_modulo');
+            cargar('<?= base_url() ?>C_pat/edit', '#contenido_modulo');
         }
 
         function guardarAct(f, e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: "<?= base_url() ?>C_compromisos/insertarAct",
+                url: "<?= base_url() ?>C_pat/insertarAct",
                 data: $(f).serialize(),
 
                 success: function(resp) {
