@@ -98,7 +98,7 @@ class M_seguridad extends CI_Model {
 
 	public function buscar_usuarios($where ='',$palabra='')
 	{
-		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, r.vRol, r.iIdRol, u.iEstatus');
+		$this->db->select('u.iIdUsuario, u.vNombre, u.vApellidoPaterno, u.vApellidoMaterno, u.vCorreo, r.vRol, r.iIdRol, u.iEstatus, iIdDependencia');
 		$this->db->from('Usuario u');
 		$this->db->join('Rol r','r.iIdRol = u.iIdRol','INNER');
 		$this->db->where('u.iEstatus >',0);

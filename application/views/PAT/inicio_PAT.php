@@ -12,6 +12,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Nombre de la actividad</label>
                                     <input type="text" id="clave" class="form-control" placeholder="">
+
                                 </div>
                             </div>
                             <!--/span-->
@@ -59,7 +60,7 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom04">Año</label>
-                                <input class="form-control" id="validationCustom04" name="annio" required="" type="text" placeholder="" onkeypress="solonumeros(event);" maxlength="4">
+                                <input class="form-control" id="validationCustom05" name="annio" required="" type="text" placeholder="" onkeypress="solonumeros(event);" maxlength="4">
                                 <div class="invalid-feedback">
                                     Este campo no puede estar vacio.
                                 </div>
@@ -154,14 +155,13 @@
                     if (resp > 0) {
                         filter();
                         alerta('Guardado exitosamente', 'success');
+                        $("#validationCustom04").val(null);
+                        $("#validationCustom05").val(null);
                     } else {
                         alerta('Error al guardar', 'error');
                     }
-                    alert(resp);
                 },
-                error: function(XMLHHttRequest, textStatus, errorThrown) {
-
-                }
+                error: function(XMLHHttRequest, textStatus, errorThrown) {}
             });
         }
     </script>
