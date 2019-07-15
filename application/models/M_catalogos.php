@@ -91,28 +91,7 @@ class M_catalogos extends CI_Model {
 	}
 
 	//Mostrar financiamiento
-	public function financiamiento($where=''){
-		$this->db->order_by('vFinanciamiento', 'asc');
-        $this->db->select('iIdFinanciamiento AS id , vFinanciamiento AS valor');
-		$this->db->from('Financiamiento');	
 
-		if($where != '') $this->db->where($where);
-
-		return $this->db->get();
-	}
-
-	//Mostrar eje
-	public function eje($where=''){
-		$this->db->order_by('iIdEje', 'asc');
-        $this->db->select('iIdEje AS id , vEje AS valor');
-		$this->db->from('PED2019Eje');	
-
-		if($where != '') $this->db->where($where);
-
-		return $this->db->get();
-	}
-
-	//
 
 
 
