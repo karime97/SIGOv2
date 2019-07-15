@@ -12,7 +12,7 @@
                                 <th>Dependencia</th>
                                 <th>Correo institucional</th>                                
                                 <th>Telefono</th>                               
-                                <th width="150px"> </th>
+                                <th width="160px"> </th>
                             </tr>
                         </thead>
                         <tbody>
