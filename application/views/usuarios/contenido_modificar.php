@@ -13,9 +13,8 @@
             <form class="needs-validation was-validated" onsubmit="modificarUsuario(this,event);">
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Dependencia</label>
+                        <label for="validationCustom04">Dependencia<span class="text-danger">*</span></label>
                         <select id="dependencia" name="dependencia" required class="form-control">
-                            <option value="<?= $consulta->iIdDependencia ?>"><?= $consulta->vDependencia ?></option>
                             <?= $dependencias ?>
                         </select>
                         <div class="invalid-feedback">
@@ -25,7 +24,6 @@
                     <div class="col-md-3 mb-3">
                         <label>Rol<span class="text-danger">*</span></label>
                         <select name="rol" id="rol" required class="form-control">
-                            <option value="<?= $consulta->iIdRol ?>"><?= $consulta->vRol ?></option>
                             <?= $roles ?>
                         </select>
                         <div class="invalid-feedback">
@@ -35,7 +33,6 @@
                     <div class="col-md-3 mb-3">
                         <label>Formación academica<span class="text-danger">*</span></label>
                         <select name="formacionacademica" id="formacionacademica" required class="form-control">
-                            <option value="<?= $consulta->iIdFormacionAcademica ?>"><?= $consulta->vFormacionAcademica ?></option>
                             <?= $formacion_academica ?>
                         </select>
                         <div class="invalid-feedback">
