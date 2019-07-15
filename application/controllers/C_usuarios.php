@@ -417,7 +417,7 @@ class C_usuarios extends CI_Controller {
                         </div>
                     </div>
                 </div>
-                <input type="text" name="val['.$padre->iIdPermiso.']" id="val'.$padre->iIdPermiso.'" value="'.$default.'">
+                <input type="hidden" name="val['.$padre->iIdPermiso.']" id="val'.$padre->iIdPermiso.'" value="'.$default.'">
                 <div class="dropdown-divider"></div>';
 
             if(count($submenu) > 0){
@@ -516,7 +516,7 @@ class C_usuarios extends CI_Controller {
                         </div>
                     </div>
                 </div>
-                <input type="text" name="val['.$hijo->iIdPermiso.']" id="val'.$hijo->iIdPermiso.'" value="'.$default.'">
+                <input type="hidden" name="val['.$hijo->iIdPermiso.']" id="val'.$hijo->iIdPermiso.'" value="'.$default.'">
                 <div class="dropdown-divider"></div>';
                 }
 
@@ -636,14 +636,14 @@ class C_usuarios extends CI_Controller {
                         </div>
                     </div>
                 </div>
-                <input type="text" name="val['.$funciones->iIdPermiso.']" id="val'.$funciones->iIdPermiso.'" value="'.$default.'">
+                <input type="hidden" name="val['.$funciones->iIdPermiso.']" id="val'.$funciones->iIdPermiso.'" value="'.$default.'">
                 <div class="dropdown-divider"></div>';
         }
 
         $str.='<input type="hidden" name="id_usuario" value="'.$idusuario.'">
                 <center>
                     <button id="guardarpermisos" class="btn waves-effect waves-light btn-success" type="submit" disabled="true">Guardar</button>
-                    <button type="reset" class="btn waves-effect waves-light btn-inverse">Cancelar</button>
+                    <button type="reset" class="btn waves-effect waves-light btn-inverse" onclick="buscarUsuario2()">Cancelar</button>
                 </center>';
 
         return $str;
@@ -682,6 +682,7 @@ class C_usuarios extends CI_Controller {
             }
 
         }
+        echo "correcto";
     }
 
     //Elimina los permisos especiales de un usuario

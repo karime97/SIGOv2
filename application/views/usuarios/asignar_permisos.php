@@ -35,12 +35,12 @@
             data: $(f).serialize(),
 
             success: function(resp) {
-              if(resp > 0){
+              if(resp == "correcto"){
                 
-                buscarfinanciamiento();
                 alerta('Guardado exitosamente','success');
 
-              } else {
+              }if(resp == "error"){
+
                 alerta('Error al guardar','error');
               }
 
