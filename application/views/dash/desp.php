@@ -101,7 +101,7 @@
                                             <?php echo $tema['vTema']; ?>
                                         </div>
                                         <div class="col-md-4" style="padding-top: 5%;">
-                                            <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
+                                            <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 5%; padding-left: 10%; padding-right: 10%;">
                                                 <img class="thumbnails" src="<?= base_url(); ?><?php echo $tema['vIcono']; ?>" width="100%">
                                             </div>
                                         </div>
@@ -196,6 +196,7 @@
                         </thead>
                         <tbody>
                             <?php
+                            $c = 0;
                             foreach ($actividades as $act) {
                                 ?>
                                 <tr>
@@ -210,11 +211,11 @@
                                                 <a style="cursor:pointer;"><?php echo $act['vActividad']; ?></a>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <div id="basic-doughnut2" style="width: 100%; height:100%;"></div>
+                                                    <div id="basic-doughnu<?php echo $act['iIdActividad']; ?>" style="width: 100%; height:100%;"></div>
                                                 </div>
                                                 <div class="col-md-1">
                                                     <div style="position: relative; top: 45%; left: -90%; font-size: 70%; color: #11386b">45%</div>
-                                                    <div style="position: relative; top: 60%; left: -103%; font-size: 70%; color: #11386b;">AVANCE GENERAL</div>
+                                                    
                                                 </div>
                                                 <div class="col-md-2"></div>
                                             </div>
@@ -222,8 +223,10 @@
                                     </td>
                                 </tr>
                             <?php
+                            $c++;
                             }
                             ?>
+                           <input type="text" name="c" id="c" value="<?php echo $c; ?>">
                         </tbody>
                     </table>
                 </div>
@@ -401,4 +404,53 @@
     var id = document.getElementById("seldep").value;
     cargar('<?= base_url(); ?>index.php/C_dash/desplieguetabla/?id='+id, '#tablaactividades');
   }
+
+  function ultimaultimaesperanza(){
+//alert("we");
+var c = document.getElementById("c").value;
+//alert(c);
+var co = 2;
+//alert(co);
+var bc = [];
+for(var i = 0; i < c; i++){
+    var ci = i + 1;
+bc[i] = echarts.init(document.getElementById('basic-doughnu'+ci));
+option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+
+        // Add custom colors
+        color: ['#d0282a', '#c0cac8'],
+
+        series: [{
+            name: '',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: true,
+
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                    value: 25,
+                    name: ''
+                },
+
+                {
+                    value: 75,
+                    name: ''
+                }
+            ]
+        }]
+    };
+
+
+    bc[i].setOption(option);
+}
+  }
+  ultimaultimaesperanza();
 </script>

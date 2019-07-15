@@ -69,7 +69,7 @@
     <div class="row">
     <div class="col-md-3">
     <label>Año</label>
-    <input type="text" id="año" min="1" max="9999" onkeypress='return validaNumericos(event)' class="text form-control">
+    <input type="text" value="<?php echo date('Y'); ?>" id="año" min="1" max="9999" onkeypress='return validaNumericos(event)' class="text form-control">
     </div>
     <div class="col-md-1" style="padding-top: 2.5%;">
     <button onclick="recuperar()" class="btn btn-dark"><i class="mdi mdi-search-web"></i></button>
