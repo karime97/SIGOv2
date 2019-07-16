@@ -44,6 +44,7 @@
             success: function(resp) {
               if(resp == "correcto"){
                 
+                buscarUsuario2();
                 alerta('Guardado exitosamente','success');
 
               }if(resp == "error"){
@@ -104,7 +105,8 @@ function changecheck(idcheck,id){
 
             success: function(resp) {
                 if (resp == true) {
-
+                    
+                    buscarUsuario2();
                     alerta('Restauración exitosa', 'success');
 
                 } else {
