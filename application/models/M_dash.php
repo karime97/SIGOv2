@@ -221,19 +221,21 @@ class M_dash extends CI_Model {
 	public function actividades($id,$anio){
 		$datos = '';
 		$datos = array();
-		$this->db->select('Actividad.iIdActividad , Actividad.vActividad');
+		$this->db->select('Actividad.iIdActividad , Actividad.vActividad, DetalleActividad.nAvance');
 		$this->db->from('Actividad');
 		$this->db->join('DetalleActividad', 'DetalleActividad.iIdActividad = Actividad.iIdActividad');
 		$this->db->join('Dependencia', 'Dependencia.iIdDependencia = Actividad.iIdDependencia');
 		$this->db->join('DependenciaEje', 'Dependencia.iIdDependencia = DependenciaEje.iIdDependencia');
 		$this->db->join('PED2019Eje', 'PED2019Eje.iIdEje = DependenciaEje.iIdEje');
 		$this->db->where('PED2019Eje.iIdEje = '.$id.' and DetalleActividad.iAnio = '.$anio.' and DetalleActividad.iActivo = 1');
+		$this->db->order_by('"Actividad"."iIdActividad"', 'ASC');
 		$query = $this->db->get();
 
 		foreach ($query->result() as $row) {
 			$datos[] = [
 				'iIdActividad'                       => $row->iIdActividad,
-				'vActividad'                   => $row->vActividad
+				'vActividad'                   => $row->vActividad,
+				'nAvance' => $row->nAvance
 			];
 		}
 		return $datos;
@@ -242,17 +244,19 @@ class M_dash extends CI_Model {
 	public function actividades2($id,$anio){
 		$datos = '';
 		$datos = array();
-		$this->db->select('Actividad.iIdActividad , Actividad.vActividad');
+		$this->db->select('Actividad.iIdActividad , Actividad.vActividad, DetalleActividad.nAvance');
 		$this->db->from('Actividad');
 		$this->db->join('DetalleActividad', 'DetalleActividad.iIdActividad = Actividad.iIdActividad');
 		$this->db->join('Dependencia', 'Dependencia.iIdDependencia = Actividad.iIdDependencia');
 		$this->db->where('Dependencia.iIdDependencia = '.$id.' and DetalleActividad.iAnio = '.$anio.' and DetalleActividad.iActivo = 1');
+		$this->db->order_by("Actividad.iIdActividad", "asc");
 		$query = $this->db->get();
 
 		foreach ($query->result() as $row) {
 			$datos[] = [
 				'iIdActividad'                       => $row->iIdActividad,
-				'vActividad'                   => $row->vActividad
+				'vActividad'                   => $row->vActividad,
+				'nAvance' => $row->nAvance
 			];
 		}
 		return $datos;
