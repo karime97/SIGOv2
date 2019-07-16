@@ -16,7 +16,7 @@
                         
                     </div>
                     <div class="col-md-2">
-                        <button id="btnreestablecer" disabled="true" type="button" class="btn waves-effect waves-light btn-light" onclick="reestablecer('¿Esta usted seguro(a)?','<?= $mensaje ?>',ReestablecerPermisos,<?= $id_us ?>)"><i class="mdi mdi-restart"></i></button>
+                        <button data-toggle="tooltip" data-placement="top" title="Reestablecer" id="btnreestablecer" disabled="true" type="button" class="btn waves-effect waves-light btn-light" onclick="reestablecer('¿Esta usted seguro(a)?','<?= $mensaje ?>',ReestablecerPermisos,<?= $id_us ?>)"><i class="mdi mdi-restart"></i></button>
                     </div>
                 </div>
                 <?= $menu ?>
@@ -24,7 +24,11 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});	
+</script>
 <script>
    $(document).ready(function() {
         if($('#validacionbtn').val() == 1){

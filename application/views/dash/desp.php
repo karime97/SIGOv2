@@ -1,5 +1,6 @@
 <!-- echarts -->
 <script src="<?= base_url(); ?>public/assets/libs/echarts/dist/echarts-en.min.js"></script>
+
 <!-- #end echarts -->
 <!-- seccion titulo-->
 
@@ -93,6 +94,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <?php
+                            
                             foreach ($temas as $tema) {
                                 ?>
                                 <div class="col-md-4" style="border: 6px solid #f2f4f5; background-color:white;">
@@ -178,7 +180,14 @@
             </div>
         </div>
 </section>
+<?php
+$array = array();
+foreach ($actividades as $act2) {
+    echo $act2['nAvance'];
+    array_push($array, $act2['nAvance']);
+}
 
+?>
 <!-- end contenido -->
 <!-- end plan anual de trabajo -->
 
@@ -196,8 +205,10 @@
                         </thead>
                         <tbody>
                             <?php
+                            
                             $c = 0;
                             foreach ($actividades as $act) {
+                                
                                 ?>
                                 <tr>
                                     <td>
@@ -214,8 +225,7 @@
                                                     <div id="basic-doughnu<?php echo $act['iIdActividad']; ?>" style="width: 100%; height:100%;"></div>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <div style="position: relative; top: 45%; left: -90%; font-size: 70%; color: #11386b">45%</div>
-                                                    
+                                                    <div style="position: relative; top: 45%; left: -90%; font-size: 70%; color: #11386b"><?php echo $act['nAvance']; ?></div>
                                                 </div>
                                                 <div class="col-md-2"></div>
                                             </div>
@@ -225,6 +235,7 @@
                             <?php
                             $c++;
                             }
+                            print_r($array);
                             ?>
                            <input type="text" name="c" id="c" value="<?php echo $c; ?>">
                         </tbody>
@@ -405,6 +416,17 @@
     cargar('<?= base_url(); ?>index.php/C_dash/desplieguetabla/?id='+id, '#tablaactividades');
   }
 
+  
+ 
+  var arrayJS=<?php echo json_encode($array);?>;
+  console.log(arrayJS.length);
+  for(var i=0;i<arrayJS.length;i++){
+
+   
+    console.log(arrayJS[i]);
+
+}
+
   function ultimaultimaesperanza(){
 //alert("we");
 var c = document.getElementById("c").value;
@@ -412,7 +434,10 @@ var c = document.getElementById("c").value;
 var co = 2;
 //alert(co);
 var bc = [];
-for(var i = 0; i < c; i++){
+
+
+for(var i = 0; i < arrayJS.length; i++){
+    
     var ci = i + 1;
 bc[i] = echarts.init(document.getElementById('basic-doughnu'+ci));
 option = {
@@ -436,12 +461,12 @@ option = {
                 }
             },
             data: [{
-                    value: 25,
+                    value: arrayJS[i],
                     name: ''
                 },
 
                 {
-                    value: 75,
+                    value: 100,
                     name: ''
                 }
             ]
@@ -450,7 +475,13 @@ option = {
 
 
     bc[i].setOption(option);
+
 }
+  }
+
+  function alertar(ava){
+      var ava = ava;
+      alert(ava); 
   }
   ultimaultimaesperanza();
 </script>
