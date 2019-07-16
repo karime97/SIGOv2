@@ -671,9 +671,6 @@ class C_usuarios extends CI_Controller {
 
             $this->mu->eliminar_permisosusuario($id_us);
 
-        }else{
-
-            echo "no hay datos";
         }
 
         foreach($var as $valor => $value){
