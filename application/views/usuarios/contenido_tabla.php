@@ -46,6 +46,7 @@
 		$('[data-toggle="tooltip"]').tooltip();
 	});	
 </script>
+
 <script>
     $(document).ready(function() {
         $('#grid').DataTable();
