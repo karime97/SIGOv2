@@ -16,7 +16,7 @@
                         
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn waves-effect waves-light btn-light" onclick="reestablecer('¿Esta usted seguro(a)?','<?= $mensaje ?>',ReestablecerPermisos,<?= $id_us ?>)"><i class="mdi mdi-restart"></i></button>
+                        <button id="btnreestablecer" disabled="true" type="button" class="btn waves-effect waves-light btn-light" onclick="reestablecer('¿Esta usted seguro(a)?','<?= $mensaje ?>',ReestablecerPermisos,<?= $id_us ?>)"><i class="mdi mdi-restart"></i></button>
                     </div>
                 </div>
                 <?= $menu ?>
@@ -25,6 +25,13 @@
     </div>
 </div>
 
+<script>
+   $(document).ready(function() {
+        if($('#validacionbtn').val() == 1){
+            $("#btnreestablecer").removeAttr('disabled');
+        }
+    });
+</script>
 <script>
     function guardarPermisos(f,e){
         e.preventDefault();
@@ -61,7 +68,6 @@ function changecheck(idcheck,id){
     });
 }  
 </script>
-
 <script>
     function reestablecer(titulo,mensaje,funcion,var1){
             //event.preventDefault();

@@ -646,6 +646,17 @@ class C_usuarios extends CI_Controller {
                     <button type="reset" class="btn waves-effect waves-light btn-inverse" onclick="buscarUsuario2()">Cancelar</button>
                 </center>';
 
+                if($this->mu->validar_permisos($idusuario) == TRUE){
+
+                    $validacion = 1;
+
+                }else{
+
+                    $validacion = 0;
+                }
+
+                $str.= '<input type="hidden" id="validacionbtn" name="" value="'.$validacion.'">';
+
         return $str;
 
     }
