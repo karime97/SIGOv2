@@ -7,7 +7,8 @@ class C_seguridad extends CI_Controller {
         parent::__construct();
         session_start();
         $this->load->helper('url');
-        //$this->load->library('Class_options');
+		//$this->load->library('Class_options');
+		$this->load->library('Class_mail');
         $this->load->model('M_seguridad','ms');
     }
 
@@ -640,6 +641,27 @@ class C_seguridad extends CI_Controller {
 
 			if($mail->enviar_correo_gmail($correo,$asunto,$mensaje)) echo '0';		    			
 			else echo 'No se ha podido enviar el correo';	
+		}
+	}
+
+	//Funcion de prueba para validar el envio de correos
+	public function enviar_correo(){
+
+		if(isset($_POST['correo'])){
+
+			$correo = $_POST['correo'];
+			$asunto = 'Recuperación de la contraseña';
+			$mensaje = '<p>Ingrese al link para confirmar su cuenta de correo</p>';
+
+			$mail = new Class_mail();
+
+			 if($mail->enviar_correo_gmail($correo,$asunto,$mensaje) == true){
+				 echo "funciona";
+			 }else{
+				 echo "no funciona";
+			 }
+
+            
 		}
 	}
 }
