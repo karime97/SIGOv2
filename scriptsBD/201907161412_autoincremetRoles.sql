@@ -1,0 +1,6 @@
+--Roles
+CREATE SEQUENCE id_rol_seq;
+ALTER TABLE "Rol" ALTER COLUMN "iIdRol" SET DEFAULT nextval('id_rol_seq');
+ALTER TABLE "Rol" ALTER COLUMN "iIdRol" SET NOT NULL;
+ALTER SEQUENCE id_rol_seq OWNED BY "Rol"."iIdRol";
+ALTER SEQUENCE id_rol_seq RESTART WITH 5;

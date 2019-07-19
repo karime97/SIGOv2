@@ -218,6 +218,27 @@ class M_dash extends CI_Model {
      return $datos;
 	}
 
+	public function totaltemas($id){
+		$datos = '';
+		$datos = array();
+		$this->db->select('COALESCE(round("sum"("nAvance") / "count"("nAvance"),2) ,0) as prom');
+		$this->db->from('"DetalleActividad"');
+		$this->db->join('"Actividad"', '"Actividad"."iIdActividad" = "DetalleActividad"."iIdActividad"');
+		$this->db->join('"ActividadLineaAccion"', '"ActividadLineaAccion"."iIdActividad" =  "Actividad"."iIdActividad"');
+		$this->db->join('"PED2019LineaAccion"', '"PED2019LineaAccion"."iIdLineaAccion" = "ActividadLineaAccion"."iIdLineaAccion"');
+		$this->db->join('"PED2019Estrategia"', '"PED2019Estrategia"."iIdEstrategia" = "PED2019LineaAccion"."iIdEstrategia"');
+		$this->db->join('"PED2019Objetivo"', '"PED2019Objetivo"."iIdObjetivo" = "PED2019Estrategia"."iIdObjetivo"');
+		$this->db->join('"PED2019Tema"', '"PED2019Tema"."iIdTema" = "PED2019Objetivo"."iIdTema"');
+		$this->db->where('"PED2019Tema"."iIdTema"',$id);
+	
+		return $this->db->get()->row()->prom;
+
+    /* foreach ($query->result() as $row) {
+		$datos = $row->prom;
+     }
+     return $datos;*/
+	}
+
 	public function actividades($id,$anio){
 		$datos = '';
 		$datos = array();
@@ -249,7 +270,7 @@ class M_dash extends CI_Model {
 		$this->db->join('DetalleActividad', 'DetalleActividad.iIdActividad = Actividad.iIdActividad');
 		$this->db->join('Dependencia', 'Dependencia.iIdDependencia = Actividad.iIdDependencia');
 		$this->db->where('Dependencia.iIdDependencia = '.$id.' and DetalleActividad.iAnio = '.$anio.' and DetalleActividad.iActivo = 1');
-		$this->db->order_by("Actividad.iIdActividad", "asc");
+		$this->db->order_by('"Actividad"."iIdActividad"', 'ASC');
 		$query = $this->db->get();
 
 		foreach ($query->result() as $row) {
