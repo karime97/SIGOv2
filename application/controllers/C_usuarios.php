@@ -22,7 +22,7 @@ class C_usuarios extends CI_Controller {
     	$this->load->view('usuarios/principal',$data);
     }
 
-     //Muestra la pagina para agregar usuarios
+    //Muestra la pagina para agregar usuarios
     public function create(){
 
         $lib = new Class_options();
@@ -393,7 +393,13 @@ class C_usuarios extends CI_Controller {
                         }
                         $default = 0;
                     }
-                }
+                }else{
+
+                    $opc_0='';
+                    $opc_1='';
+                    $opc_2='';
+                    $default = 0;
+                }  
             }
             
             $str.='<div class="col-md-6">
@@ -484,7 +490,13 @@ class C_usuarios extends CI_Controller {
                                 }
                                 $default = 0;
                             }
-                        }                   
+                        }else{
+
+                            $opc_0='';
+                            $opc_1='';
+                            $opc_2='';
+                            $default = 0;
+                        }                    
                     }
 
 
@@ -612,7 +624,13 @@ class C_usuarios extends CI_Controller {
                         }
                         $default = 0;
                     }
-                }
+                }else{
+
+                    $opc_0='';
+                    $opc_1='';
+                    $opc_2='';
+                    $default = 0;
+                }  
             }
             
             $str.='<div class="col-md-6">

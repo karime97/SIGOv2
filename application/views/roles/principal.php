@@ -1,8 +1,8 @@
 <br><br>
 <div class="card">
     <div class="card-body">
-        <h1 class="card-title">Usuarios</h1>
-        <h5 class="card-subtitle"> Administración del catálogo usuarios. </h5>
+        <h1 class="card-title">Roles</h1>
+        <h5 class="card-subtitle"> Administración del catálogo roles. </h5>
         <br><br>
         <div class="row">
             <div class="col-md-4 mb-3">
@@ -12,15 +12,11 @@
                     <?= $roles ?>
                 </select>
             </div>
-            <div class="col-md-4 mb-3">
-                <label for="validationTooltip02">Usuario</label>
-                <input class="form-control" id="b_usuario" name="b_usuario" type="text" placeholder="Ingresar usuario">
-            </div>
             <div class="col-sm-12 col-md-3">
                 <div class="form-group">
                     <div class="button-group">
-                        <button type="button" class="btn waves-effect waves-light btn-light" style="margin-top:35px" onclick="buscarUsuario()">Buscar</button>
-                        <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="agregar_usuario()">Agregar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-light" style="margin-top:35px" onclick="buscarRol()">Buscar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="agregar_rol()">Agregar</button>
                     </div>
                 </div>
             </div>
@@ -35,31 +31,26 @@
 </div>
 
 <script>
-    function agregar_usuario() {
-        cargar('<?= base_url() ?>C_usuarios/create', '#contenedor');
+    function agregar_rol() {
+        cargar('<?= base_url() ?>C_roles/create', '#contenedor');
     }
 
-    function modificar_usuario(id) {
-        cargar('<?= base_url() ?>C_usuarios/edit', '#contenedor', 'POST', 'id=' + id);
+    function modificar_rol(id) {
+        cargar('<?= base_url() ?>C_roles/edit', '#contenedor', 'POST', 'id=' + id);
     }
 
-    function modificar_password(id) {
-        cargar('<?= base_url() ?>C_usuarios/editpassword', '#contenedor', 'POST', 'id=' + id);
-    }
     function asignar_permisos(id){
-        cargar('<?= base_url() ?>C_usuarios/editpermisos', '#contenedor', 'POST', 'id=' + id);
+        cargar('<?= base_url() ?>C_roles/editpermisos', '#contenedor', 'POST', 'id=' + id);
     }
 
-    function buscarUsuario() {
+    function buscarRol() {
         var rol = $("#b_rol").val();
-        var usuario = $("#b_usuario").val();
 
         $.ajax({
             type: "POST",
-            url: "<?= base_url() ?>C_usuarios/search",
+            url: "<?= base_url() ?>C_roles/search",
             data: {
                 'rol': rol,
-                'usuario': usuario
             },
             //contentType: 'json',
             success: function(resp) {
@@ -70,21 +61,19 @@
         });
     }
 
-        function buscarUsuario2() {
-        var rol = $("#brol").val();
-        var usuario = $("#busuario").val();
+    function regresar() {
+        var rol = $("#b_rol").val();
 
         $.ajax({
             type: "POST",
-            url: "<?= base_url() ?>C_usuarios/search",
+            url: "<?= base_url() ?>C_roles/search",
             data: {
                 'rol': rol,
-                'usuario': usuario
             },
             //contentType: 'json',
             success: function(resp) {
                 $("#contenedor").html(resp);
-                 $('#grid').DataTable({
+                $('#grid').DataTable({
                     stateSave: true,
                 });
             },
