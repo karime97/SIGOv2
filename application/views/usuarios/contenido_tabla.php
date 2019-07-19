@@ -27,7 +27,10 @@
                                 <td><?= $value->vTelefono ?></td>
                                 <td>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-warning" data-toggle="tooltip" data-placement="top" title="Editar" onclick="modificar_usuario(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-border-color"></i></button>
-                                    <button type="button" class="btn btn-circle waves-effect waves-light btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="confirmar('¿Esta usted seguro?',EliminarUsuario,<?= $value->iIdUsuario ?>)"><i class="mdi mdi-close"></i></button>
+                                    <?php
+                                    if($value->iIdUsuario != $_SESSION[PREFIJO.'_idusuario']){ ?>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="confirmar('¿Esta usted seguro?',EliminarUsuario,<?= $value->iIdUsuario ?>)"><i class="mdi mdi-close"></i></button>
+                                    <?php } ?>                    
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-info" data-toggle="tooltip" data-placement="top" title="Cambiar contraseña" onclick="modificar_password(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-key-variant"></i></button>
                                     <button type="button" class="btn btn-circle waves-effect waves-light btn-success" data-toggle="tooltip" data-placement="top" title="Editar permisos" onclick="asignar_permisos(<?= $value->iIdUsuario ?>)"><i class="mdi mdi-account-key"></i></button>
                                 </td>
