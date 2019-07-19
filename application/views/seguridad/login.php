@@ -179,7 +179,7 @@
                     data: $(form).serialize(),
                     success: function(resp) {
                         if (resp == 'correcto') {
-                            window.location.href = '<?= base_url() ?>';
+                            alerta(resp, 'success');
                         } else {
                             alerta(resp, 'error');
                         }
