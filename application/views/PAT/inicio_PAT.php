@@ -140,8 +140,8 @@
                 e.preventDefault();
         }
 
-        function modificarAct() {
-            cargar('<?= base_url() ?>C_pat/edit', '#contenido_modulo');
+        function modificarAct(id) {
+            cargar('<?= base_url() ?>C_pat/edit', '#contenido_modulo', 'POST', 'id=' + id);
         }
 
         function guardarAct(f, e) {

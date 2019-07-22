@@ -91,7 +91,15 @@ class M_catalogos extends CI_Model {
 	}
 
 	//Mostrar financiamiento
+	public function financiamientos($where=''){
+		$this->db->order_by('vFinanciamiento', 'asc');
+        $this->db->select('iIdFinanciamiento AS id , vFinanciamiento AS valor');
+		$this->db->from('Financiamiento');	
 
+		if($where != '') $this->db->where($where);
+
+		return $this->db->get();
+	}
 
 
 
