@@ -250,7 +250,7 @@ class M_usuarios extends CI_Model {
 
         if($this->db->affected_rows() > 0){
 
-            return true; // to the controller
+            return true;
         }
 
     }

@@ -209,6 +209,65 @@ class M_seguridad extends CI_Model {
 
 		return $this->db->get();
 	}
+
+	//Verifica si existe el correo personal o instutucional en la DB
+	public function validar_correo_existente($correo){
+
+		$this->db->select();
+		$this->db->from('Usuario');
+		$this->db->where('vCorreo',$correo);
+		$this->db->or_where('vCorreoPersonal',$correo);
+		$this->db->where('iActivo',1);
+
+		$query =  $this->db->get();
+
+		if($query->num_rows() > 0){
+
+			$resultado = $query->row();
+            return $resultado;
+
+		}else{
+
+			return FALSE;
+		}		
+	}
+
+	//Actualiza la tabla de usuarios guardando el token
+	public function guardar_token_usuario($id_us,$token){
+
+		$data = array('vToken' => $token);
+
+		$this->db->where('iIdUsuario', $id_us);
+		$this->db->update('Usuario', $data);
+
+		if($this->db->affected_rows() > 0){
+
+            return TRUE;
+        }else{
+			return FALSE;
+		}
+	}
+
+	//Verifica que el usuario no tenga algun token
+	public function validar_token_usuario($idusuario,$token)
+	{
+		$this->db->select();
+		$this->db->from('Usuario u');
+		$this->db->where('u.iActivo',1);
+		$this->db->where('u.iIdUsuario',$idusuario);
+		$this->db->where('u.vToken',$token);
+		$respuesta = FALSE;
+
+		$query =  $this->db->get();
+
+		if($query->num_rows() == 1){
+
+			$respuesta = TRUE;
+		}
+
+		return $respuesta;
+	}
+
 	
 }
 

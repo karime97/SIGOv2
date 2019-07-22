@@ -603,12 +603,6 @@ class C_seguridad extends CI_Controller {
 		}
 	}
 
-	public function generar_token()
-	{
-		$var = rand(100000, 999999);
-		return md5($var);
-	}
-
 	public function usuario_registrado()
 	{
 		$this->load->view('usuario_registrado');
@@ -644,24 +638,134 @@ class C_seguridad extends CI_Controller {
 		}
 	}
 
+	//Funcion para generar el token del usuario
+	public function generar_token()
+	{
+		$var = rand(100000, 999999);
+		return SHA1($var);
+	}
+
+	//Funcion que prepara el contenido del email
+	public function preparar_email($destinatario,$id_us,$token){
+
+		// Destinatario
+		$para  = $destinatario;
+
+		//link para recuperar contrasenia
+		$link = base_url().'C_seguridad/restore/'.$id_us.'/'.$token;
+
+		// título
+		$título = 'Recuperación de contraseña';
+
+		// mensaje
+		$mensaje = '
+		<html>
+		<head>
+		<title>Recuperar contraseña</title>
+		</head>
+		<body>
+		<p>Para poder recuperar su contraseña debe ingresar en el siguinete link.</p>
+		<br>
+		<p>'.$link.'</p>
+		</body>
+		</html>
+		';
+
+		// Para enviar un correo HTML, debe establecerse la cabecera Content-type
+		$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+		$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+		// Cabeceras adicionales
+		$cabeceras .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
+		$cabeceras .= 'From: Recordatorio <cumples@example.com>' . "\r\n";
+		$cabeceras .= 'Cc: birthdayarchive@example.com' . "\r\n";
+		$cabeceras .= 'Bcc: birthdaycheck@example.com' . "\r\n";
+
+		// Enviarlo
+		$success = mail($para, $título, $mensaje, $cabeceras);
+		
+		if (!$success) {
+			$errorMessage = error_get_last()['message'];
+			echo $errorMessage;
+		}else{
+			echo $link;
+		}
+	}
+
+	//Funcion para guardarle el token al usuario
+	public function guardar_token($id_us,$token){
+
+		if($this->ms->guardar_token_usuario($id_us,$token) == TRUE){
+
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+
+	//funcion para mostrar la vista del cambio de contraseña
+	public function restore(){
+
+		$data['idusuario'] = $this->uri->segment(3);
+		$data['token'] = $this->uri->segment(4);
+
+		$this->load->view('seguridad/cambiar_contrasenia',$data);
+	}
+
 	//Funcion de prueba para validar el envio de correos
 	public function enviar_correo(){
 
-		if(isset($_POST['correo'])){
+		if( isset($_POST['correo']) && !empty($_POST['correo']) ){
 
-			$correo = $_POST['correo'];
-			$asunto = 'Recuperación de la contraseña';
-			$mensaje = '<p>Ingrese al link para confirmar su cuenta de correo</p>';
+			$correo = $this->input->post('correo');			
 
-			$mail = new Class_mail();
+			if($this->ms->validar_correo_existente($correo)){
+				//echo "existe el correo";
+				$variable = $this->ms->validar_correo_existente($correo);
+				$id_us = $variable->iIdUsuario;
 
-			 if($mail->enviar_correo_gmail($correo,$asunto,$mensaje) == true){
-				 echo "funciona";
-			 }else{
-				 echo "no funciona";
-			 }
+				$token = $this->generar_token();
 
-            
+				if($this->guardar_token($id_us,$token) == TRUE){
+
+					$this->preparar_email($correo,$id_us,$token);
+					//$this->mostrar_cambio_password($id_us,$token);
+
+				}else{
+					echo "error al guardar token";
+				}
+
+			}else{
+				echo "no existe el correo en la DB";
+			}
 		}
+	}
+
+	//funcion para restaurar la contraseña
+	public function reestore_password(){
+
+		if(isset($_POST['new_pass']) && isset($_POST['rep_pass'])){
+
+			$idusuario = $this->input->post('idusuario');
+			$token = $this->input->post('token');
+            $pass_new = SHA1(trim($this->input->post('new_pass')));
+            $pass_conf = SHA1(trim($this->input->post('rep_pass')));
+
+			echo $idusuario.'</br>';
+			echo $token.'</br>';
+			echo $pass_new.'</br>';
+			echo $pass_conf;
+
+			if($this->ms->validar_token_usuario($idusuario,$token)){
+				echo 'TRUE';
+			}else{
+				echo 'FALSE';
+			}
+
+        }else{
+            //Mensaje en caso de que no reciba el POST
+            echo "error";
+        }
+
 	}
 }
