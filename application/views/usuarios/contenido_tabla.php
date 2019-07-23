@@ -69,7 +69,7 @@
             success: function(resp) {
                 if (resp == true) {
 
-                    buscarUsuario2();
+                    regresar();
                     alerta('Eliminado exitosamente', 'success');
 
                 } else {

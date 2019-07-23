@@ -11,7 +11,7 @@ class M_catalogos extends CI_Model {
 	//Mostrar Dependencias
 	public function dependencias($where=''){
 		$this->db->order_by('vNombreCorto', 'asc');
-        $this->db->select('iIdDependencia AS id , vNombreCorto AS valor');
+        $this->db->select('iIdDependencia AS id , vDependencia AS valor');
 		$this->db->from('Dependencia');
 
 		if($where != '') $this->db->where($where);

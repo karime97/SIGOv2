@@ -70,7 +70,7 @@
         });
     }
 
-        function buscarUsuario2() {
+        function regresar() {
         var rol = $("#brol").val();
         var usuario = $("#busuario").val();
 

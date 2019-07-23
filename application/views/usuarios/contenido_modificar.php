@@ -6,7 +6,7 @@
                     <h4 class="card-title">Modificar usuario</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="buscarUsuario2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                    <button class="btn btn-light" type="submit" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>
@@ -132,7 +132,7 @@
                 <input type="hidden" value="<?= $consulta->iIdUsuario ?>" name='id' />
                 <center>
                     <button class="btn waves-effect waves-light btn-success" type="submit">Guardar cambios</button>
-                    <button type="reset" class="btn waves-effect waves-light btn-inverse">Cancelar</button>
+                    <button type="reset" class="btn waves-effect waves-light btn-inverse" onclick="regresar()">Cancelar</button>
                 </center>
                 <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -175,7 +175,7 @@
 
                 if (resp == "correcto") {
 
-                    buscarUsuario2();
+                    regresar();
                     alerta('Modificado exitosamente', 'success');
 
                 }
