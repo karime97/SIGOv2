@@ -729,15 +729,17 @@ class C_seguridad extends CI_Controller {
 				if($this->guardar_token($id_us,$token) == TRUE){
 
 					$this->preparar_email($correo,$id_us,$token);
-					//$this->mostrar_cambio_password($id_us,$token);
+					echo "correcto";
 
 				}else{
-					echo "error al guardar token";
+					echo "error_token";
 				}
 
 			}else{
-				echo "no existe el correo en la DB";
+				echo "error_email";
 			}
+		}else{
+			echo "error";
 		}
 	}
 
@@ -751,15 +753,30 @@ class C_seguridad extends CI_Controller {
             $pass_new = SHA1(trim($this->input->post('new_pass')));
             $pass_conf = SHA1(trim($this->input->post('rep_pass')));
 
-			echo $idusuario.'</br>';
-			echo $token.'</br>';
-			echo $pass_new.'</br>';
-			echo $pass_conf;
-
 			if($this->ms->validar_token_usuario($idusuario,$token)){
-				echo 'TRUE';
+				
+				if($pass_new == $pass_conf){
+
+					$data = array();
+
+					$data['vPassword'] = sha1($pass_new);
+
+					if($this->ms->modificar_usuario($idusuario,$data)){
+
+						$data2['vToken'] = null;
+
+						if($this->ms->modificar_usuario($idusuario,$data2)){
+
+							echo "correcto";
+						}
+					}
+
+				}else{
+					echo "error_passnew";
+				}
+
 			}else{
-				echo 'FALSE';
+				echo 'error_token';
 			}
 
         }else{
