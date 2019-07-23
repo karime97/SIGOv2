@@ -64,15 +64,24 @@
     }
 </script>
 
-
 <script>
-function changecheck(idcheck,id){
+function changecheck(idcheck,id,idpermisopadre){
     $("#"+idcheck).on('click change', function(e) {
         $("#val"+id).val(1);
         $("#guardarpermisos").removeAttr('disabled');
+
+        if(idpermisopadre != 0){
+
+            if($("#rbt1"+idpermisopadre).is(':checked') || $("#rbt2"+idpermisopadre).is(':checked') || $("#rbt3"+idpermisopadre).is(':checked')){               
+
+            }else{
+                $("#rbt2"+idpermisopadre).prop("checked", true);
+            }
+        }
     });
 }  
 </script>
+
 <script>
     function reestablecer(titulo,mensaje,funcion,var1){
             //event.preventDefault();
