@@ -195,19 +195,19 @@ class C_roles extends CI_Controller {
             $str.='<div class="col-md-6">
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="0" onclick="changecheck(id,'.$padre->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="0" onclick="changecheck(id,'.$padre->iIdPermiso.','.$padre->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt1'.$padre->iIdPermiso.'">Denegado</label>
                             </div>
                         </div>
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="1" onclick="changecheck(id,'.$padre->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="1" onclick="changecheck(id,'.$padre->iIdPermiso.','.$padre->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt2'.$padre->iIdPermiso.'">Lectura</label>
                             </div>
                         </div>
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="2" onclick="changecheck(id,'.$padre->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="2" onclick="changecheck(id,'.$padre->iIdPermiso.','.$padre->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt3'.$padre->iIdPermiso.'">Lectura y escritura</label>
                             </div>
                         </div>
@@ -268,19 +268,19 @@ class C_roles extends CI_Controller {
                     <div class="col-md-6">
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="0" onclick="changecheck(id,'.$hijo->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="0" onclick="changecheck(id,'.$hijo->iIdPermiso.','.$hijo->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt1'.$hijo->iIdPermiso.'">Denegado</label>
                             </div>
                         </div>
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="1" onclick="changecheck(id,'.$hijo->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="1" onclick="changecheck(id,'.$hijo->iIdPermiso.','.$hijo->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt2'.$hijo->iIdPermiso.'">Lectura</label>
                             </div>
                         </div>
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="2" onclick="changecheck(id,'.$hijo->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="2" onclick="changecheck(id,'.$hijo->iIdPermiso.','.$hijo->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt3'.$hijo->iIdPermiso.'">Lectura y escritura</label>
                             </div>
                         </div>
@@ -361,19 +361,19 @@ class C_roles extends CI_Controller {
             $str.='<div class="col-md-6">
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="0" onclick="changecheck(id,'.$funciones->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="0" onclick="changecheck(id,'.$funciones->iIdPermiso.','.$funciones->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt1'.$funciones->iIdPermiso.'">Denegado</label>
                             </div>
                         </div>
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="1" onclick="changecheck(id,'.$funciones->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="1" onclick="changecheck(id,'.$funciones->iIdPermiso.','.$funciones->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt2'.$funciones->iIdPermiso.'">Lectura</label>
                             </div>
                         </div>
                         <div class="form-check form-check-inline">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="2" onclick="changecheck(id,'.$funciones->iIdPermiso.')">
+                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="2" onclick="changecheck(id,'.$funciones->iIdPermiso.','.$funciones->iIdPermisoPadre.')">
                                 <label class="custom-control-label" for="rbt3'.$funciones->iIdPermiso.'">Lectura y escritura</label>
                             </div>
                         </div>
