@@ -37,7 +37,7 @@ class M_usuarios extends CI_Model {
 
     }
     
-    //Guarda las fuentes de financiamiento en la DB
+    //Guarda los usuarios en la DB
 	public function guardar_usuario($data){
 
 		$this->db->insert($this->table, $data);

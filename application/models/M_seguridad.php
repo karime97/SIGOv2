@@ -238,6 +238,7 @@ class M_seguridad extends CI_Model {
 		$data = array('vToken' => $token);
 
 		$this->db->where('iIdUsuario', $id_us);
+		$this->db->where('iActivo',1);
 		$this->db->update('Usuario', $data);
 
 		if($this->db->affected_rows() > 0){
@@ -266,6 +267,13 @@ class M_seguridad extends CI_Model {
 		}
 
 		return $respuesta;
+	}
+
+	//Cambia la contraseña de un usuario en la DB
+	public function modificar_usuario($id,$data){
+
+		$this->db->where('iIdUsuario', $id);
+		return $this->db->update('Usuario', $data);
 	}
 
 	

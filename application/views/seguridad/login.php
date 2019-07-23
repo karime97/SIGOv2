@@ -179,9 +179,20 @@
                     data: $(form).serialize(),
                     success: function(resp) {
                         if (resp == 'correcto') {
-                            alerta(resp, 'success');
-                        } else {
-                            alerta(resp, 'error');
+
+                            alerta('Se le a enviado un email con las instrucciones para recuperar su contraseña', 'success');
+                        }
+                        if(resp == 'error_token') {
+
+                            alerta('El correo ingresado no se encuentra registrado en el sistema, favor de verificar.', 'warning');
+                        }
+                        if(resp == 'error_email') {
+
+                            alerta('El correo ingresado no se encuentra registrado en el sistema, favor de verificar.', 'warning');
+                        }
+                        if(resp == 'error') {
+
+                            alerta('Se a producido un error, intentar más tarde', 'error');
                         }
 
                     },

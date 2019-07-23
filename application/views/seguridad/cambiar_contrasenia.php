@@ -93,7 +93,25 @@
     <!-- ============================================================== -->
     <script>
         $(".preloader").fadeOut(); 
-	</script>
+    </script>
+    
+    <script>
+        function alerta(mensaje,tipo){
+            switch(tipo){
+                case 'success':
+                    toastr.success(mensaje, '¡Exito!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });    
+                    break;
+                case 'warning':
+                    toastr.warning(mensaje, 'Advertencia', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });    
+                    break;
+                case 'error':
+                    toastr.error(mensaje, '¡Error!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });    
+                    break;
+                default:
+                    toastr.info(mensaje, 'Info', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });
+            }
+        }
+    </script>
 
 	<script>
     function restaurarPassword(f, e) {
@@ -107,14 +125,17 @@
 				success: function(resp) {
 					if (resp == "correcto") {
 
-						//buscarUsuario2();
-						alerta('Modificado exitosamente', 'success');
+                        window.location.href = '<?=base_url()?>';
+                        alerta('Restauración exitosa', 'success');
 					}
 					if(resp == "error_passnew"){
 						alerta('La confirmación de la contraseña no coincide con la nueva contraseña', 'warning');
 					}
+                    if(resp == "error_token"){
+						alerta('Se a producido un error, intente nuevamente', 'error');
+					}
 					if (resp == "error") {
-						alerta('Error al modificar', 'error');
+						alerta('Se a producido un error, intente nuevamente', 'error');
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
