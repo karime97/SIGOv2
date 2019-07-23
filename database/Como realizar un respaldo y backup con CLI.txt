@@ -1,0 +1,13 @@
+Respaldos de base de datos
+
+Abrir la consola de comandos como administrador
+
+Ir a la ruta de instalación del Postgres
+ej.
+C:\Program Files\PostgreSQL\10\bin
+
+Para realizar un respaldo
+pg_dump -U user_name name_of_database > name_of_backup_file.sql
+
+Para restaurar la base de datos
+psql -U user_name restored_database < database.sql
