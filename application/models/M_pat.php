@@ -173,8 +173,8 @@ class M_pat extends CI_Model
 		return $this->db->update('DetalleActividad', $data);
 	}
 
-	public function modificarAct($id, $data){
-		$this->db->where('iIdActividad', $id);
+	public function modificarAct($idActividad, $data){
+		$this->db->where('iIdActividad', $idActividad);
 
 		return $this->db->update('Actividad', $data);
 	}

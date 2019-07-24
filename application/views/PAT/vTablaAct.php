@@ -68,7 +68,7 @@
                                     <td align="center">
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_edit" onclick="modificarAct(<?= $value->iIdDetalleActividad ?>)"><i class="mdi mdi-border-color"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick=""><i class="mdi mdi-close"></i></button>
-                                        <button type="button" class="btn btn-circle waves-effect waves-light boton" onclick=""><i class="icon-badge"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton" onclick="Entregables(<?= $value->iIdDetalleActividad ?>)"><i class="icon-badge"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_desc" onclick=""><i class="mdi mdi-download"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_InfTex" onclick=""><i class="icon-book-open"></i></button>
                                     </td>

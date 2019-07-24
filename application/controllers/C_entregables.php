@@ -18,6 +18,3 @@ class C_entregables extends CI_Controller
     	$this->load->view('entregables/principal',$data);
     }
 }
-
-
-?>

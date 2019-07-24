@@ -91,6 +91,10 @@
             cargar('<?= base_url() ?>C_pat/cargar', '#contenido_modulo');
         }
 
+        function Entregables(id) {
+            cargar('<?= base_url() ?>C_entregables/index', '#contenido_modulo', 'POST', 'id=' + id);
+        }
+
         function filter() {
             var keyword = $("#clave").val();
             var year = $("#anio").val();
