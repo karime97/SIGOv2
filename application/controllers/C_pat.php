@@ -185,8 +185,6 @@ class C_pat extends CI_Controller
             );
 
             $idAct = $this->pat->modificarAct($data, $idActividad);
-            var_dump($data);
-            echo $idActividad;
 
             if ($idAct > 0) {
                 $data1 = array(
@@ -196,6 +194,8 @@ class C_pat extends CI_Controller
                     'dFin' => $this->input->post('fFIN')
                 );
                 $idDetAct = $this->pat->modificarDetaAct($data1, $id);
+                var_dump($data1);
+                var_dump($idAct);
             }
 
             if ($idAct > 0) {
