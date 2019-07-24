@@ -25,7 +25,7 @@
                         <div class="col-md-10 mb-10">
                             <label for="validationCustom04">Nombre de la actividad</label>
                             <input class="form-control" id="validationCustom04" name="NombAct" required="" type="text" placeholder="" value="<?= $consulta->vActividad ?>">
-                            <input id="id" name="id" type="hidden" value="<?= $consulta->iIdDetalleActividad ?>">
+                            <input id="idAct" name="idAct" type="hidden" value="<?= $consulta->iIdActividad ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -33,6 +33,7 @@
                         <div class="col-md-2 mb-2">
                             <label for="validationCustom04">Año</label>
                             <input class="form-control" id="validationCustom04" name="annio" required="" type="text" placeholder="" onkeypress="solonumeros(event);" maxlength="4" value="<?= $consulta->iAnio ?>">
+                            <input id="id" name="id" type="hidden" value="<?= $consulta->iIdDetalleActividad ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>

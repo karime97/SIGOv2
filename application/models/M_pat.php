@@ -167,16 +167,19 @@ class M_pat extends CI_Model
         return $query;
 	}
 
-	public function modificarDetaAct($id, $data){
+	public function modificarDetaAct($data1, $id){
 		$this->db->where('iIdDetalleActividad', $id);
 
-		return $this->db->update('DetalleActividad', $data);
+		return $this->db->update('DetalleActividad', $data1);
 	}
 
-	public function modificarAct($id, $data){
-		$this->db->where('iIdActividad', $id);
+	public function modificarAct($data, $idActividad){
+		$this->db->where('iIdActividad', $idActividad);
 
-		return $this->db->update('Actividad', $data);
+		$query  = $this->db->update('Actividad', $data);
+		$_SESSION['sql'] = $this->db->last_query();
+
+		return $query;
 	}
 
 	/* Consulta linea de accion (join) */

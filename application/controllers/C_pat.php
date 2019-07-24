@@ -172,9 +172,10 @@ class C_pat extends CI_Controller
 
     public function guardarAct()
     {
-        if (isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion'])) {
+        if (isset($_POST['id']) && isset($_POST['idAct']) && isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion'])) {
 
             $id = $_POST['id'];
+            $idActividad = $_POST['idAct'];
             
             $data = array(
                 'vActividad' => $this->input->post('NombAct'),
@@ -183,7 +184,7 @@ class C_pat extends CI_Controller
                 'iIdDependencia' => (int) $_SESSION[PREFIJO . '_iddependencia']
             );
 
-            $idAct = $this->pat->modificarAct($data);
+            $idAct = $this->pat->modificarAct($data, $idActividad);
 
             if ($idAct > 0) {
                 $data1 = array(
@@ -192,7 +193,9 @@ class C_pat extends CI_Controller
                     'dInicio' => $this->input->post('fINICIO'),
                     'dFin' => $this->input->post('fFIN')
                 );
-                $idDetAct = $this->pat->modificarDetaAct($data1);
+                $idDetAct = $this->pat->modificarDetaAct($data1, $id);
+                var_dump($data1);
+                var_dump($idAct);
             }
 
             if ($idAct > 0) {

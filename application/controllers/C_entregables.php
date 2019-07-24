@@ -22,6 +22,3 @@ class C_entregables extends CI_Controller
         }
     }
 }
-
-
-?>

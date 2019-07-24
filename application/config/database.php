@@ -74,10 +74,15 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
+	/*'dsn'	=> '',
+	'hostname' => '192.168.24.226',
+	'username' => 'sisparticipacion',
+	'password' => 'S15t3m@P4rt1c1p4c10n',
+	'database' => 'ConsultaCiudadana',*/
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'postgres',
-	'password' => 'Admin',
+	'password' => 'Sasha1997',
 	'database' => 'SIGO',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
