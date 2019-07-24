@@ -54,7 +54,7 @@
                             <tr>
                                 <th width="100px">Avance</th>
                                 <th>Nombre</th>
-                                <th>Dependencia</th>
+                                <th>Año</th>
                                 <th width="150px">Acciones</th>
                             </tr>
                         </thead>
@@ -66,7 +66,7 @@
                                     <td><?= $value->vActividad ?></td>
                                     <td><?= $value->iAnio ?></td>
                                     <td align="center">
-                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_edit" onclick="modificarAct()"><i class="mdi mdi-border-color"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_edit" onclick="modificarAct(<?= $value->iIdDetalleActividad ?>)"><i class="mdi mdi-border-color"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick=""><i class="mdi mdi-close"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton" onclick="abrirEntregables(<?= $value->iIdDetalleActividad ?>)"><i class="icon-badge"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_desc" onclick=""><i class="mdi mdi-download"></i></button>
