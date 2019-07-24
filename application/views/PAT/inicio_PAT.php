@@ -91,7 +91,7 @@
             cargar('<?= base_url() ?>C_pat/cargar', '#contenido_modulo');
         }
 
-        function Entregables(id) {
+        function abrirEntregables(id) {
             cargar('<?= base_url() ?>C_entregables/index', '#contenido_modulo', 'POST', 'id=' + id);
         }
 
