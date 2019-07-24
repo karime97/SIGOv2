@@ -37,7 +37,7 @@ class M_usuarios extends CI_Model {
 
     }
     
-    //Guarda las fuentes de financiamiento en la DB
+    //Guarda los usuarios en la DB
 	public function guardar_usuario($data){
 
 		$this->db->insert($this->table, $data);
@@ -175,6 +175,103 @@ class M_usuarios extends CI_Model {
                 # code...
                 break;
         }
+    }
+
+    //Obtiene los catalogos y subcatalogos del sistema
+    public function consultar_menu_sistema($idpadre=0,$tipo)
+	{	
+        $this->db->select();
+        $this->db->from('Permiso');
+        $this->db->where('iActivo', 1);
+        $this->db->where('iTipo', $tipo);
+        $this->db->where('iIdPermisoPadre', $idpadre);
+        $this->db->order_by( 'iOrden', 'ASC' ); 
+        $query =  $this->db->get();
+        
+        $resultado = $query->result();
+        return $resultado;      
+    }
+    
+    //Obtiene los permisos otorgados para cada uno de los usuarios
+    public function mostrar_permisos_usuario($idusuario,$idpermiso){
+
+        $this->db->select('p."iIdPermiso", p."vPermiso", p."vClass", up."iTipoAcceso", p."vUrl", p."iOrden');
+        $this->db->from('Permiso p');
+        $this->db->join('UsuarioPermiso up','up.iIdPermiso = p.iIdPermiso','INNER');
+        $this->db->join('Usuario u','up.iIdUsuario = u.iIdUsuario','INNER');
+        $this->db->where('u.iIdUsuario',$idusuario);
+        $this->db->where('p.iIdPermiso',$idpermiso);
+
+        $query =  $this->db->get();
+
+        $resultado = $query->result();
+        return $resultado;
+
+    }
+
+    //Obtiene los permisos generados dependiendo el rol
+    public function mostrar_permisos_rol($idusuario,$idpermiso,$permisopadre,$tipo){
+
+        $this->db->select();
+        $this->db->from('Permiso p');
+        $this->db->join('RolPermiso rp','rp.iIdPermiso = p.iIdPermiso','INNER');
+        $this->db->join('Usuario u','u.iIdRol = rp.iIdRol','INNER');
+        $this->db->where('u.iIdUsuario',$idusuario);
+        $this->db->where('p.iIdPermiso',$idpermiso);
+        $this->db->where('p.iIdPermisoPadre',$permisopadre);
+        $this->db->where('p.iTipo',$tipo);
+        
+        $query =  $this->db->get();
+
+        $resultado = $query->result();
+        return $resultado;
+
+    }
+
+    //Elimina los permisos especiales de determinado usuario
+    public function eliminar_permisosusuario($id){
+       
+        $this-> db-> where ( 'iIdUsuario' ,  $id );
+        if($this-> db-> delete ( 'UsuarioPermiso')){
+
+            return TRUE;
+
+        }else{
+
+            return FALSE;
+        }
+        
+    }
+
+    //Agrega permisos especiales a determinado usuario
+    public function agregar_permisos($data){
+
+        $this->db->insert('UsuarioPermiso', $data);
+
+        if($this->db->affected_rows() > 0){
+
+            return true;
+        }
+
+    }
+
+    //Valida si el usuario tiene permisos especiales
+    public function validar_permisos($id_us){
+
+        $this->db->select();
+        $this->db->from('UsuarioPermiso');
+        $this->db->where('iIdUsuario',$id_us);
+
+        $query =  $this->db->get();
+
+        if($query->num_rows() > 0){
+
+            return TRUE;
+        }else{
+            
+            return FALSE;
+        }
+
     }
 }
 

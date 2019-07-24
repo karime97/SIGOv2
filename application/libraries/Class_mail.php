@@ -54,6 +54,7 @@ class Class_mail extends PHPMailer{
 		$this->msgHTML($mensaje);
 
 		if(!$this->send()) {
+
 			return false;
 			
 		} else {

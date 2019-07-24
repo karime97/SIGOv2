@@ -9,18 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url()?>public/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>public/assets/images/favicon.png">
     <title>SIGO</title>
     <!-- Custom CSS -->
-    <link href="<?=base_url()?>public/dist/css/style.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
-    <link href="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <link href="<?= base_url() ?>public/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>public/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>public/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,11 +34,11 @@
         <!-- ============================================================== -->
         <!-- Login box.scss -->
         <!-- ============================================================== -->
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(<?=base_url()?>public/img/auth-bg.jpg) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(<?= base_url() ?>public/img/auth-bg.jpg) no-repeat center center;">
             <div class="auth-box">
                 <div id="loginform">
                     <div class="logo">
-                        <span class="db"><img src="<?=base_url()?>public/img/logo_sigo.png" alt="logo" class="responsive" width="200px"/></span>
+                        <span class="db"><img src="<?= base_url() ?>public/img/logo_sigo.png" alt="logo" class="responsive" width="200px" /></span>
                         <h5 class="font-medium m-b-20">Inciar sesión</h5>
                     </div>
                     <!-- Form -->
@@ -59,7 +53,7 @@
                                     <div class="invalid-feedback">
                                         Este campo es requerido
                                     </div>
-                                    
+
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -69,7 +63,7 @@
                                     <div class="invalid-feedback">
                                         Este campo es requerido
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12">
@@ -89,17 +83,24 @@
                 </div>
                 <div id="recoverform">
                     <div class="logo">
-                        <span class="db"><img src="<?=base_url()?>public/assets/images/logo-icon.png" alt="logo" /></span>
+                        <div class="row">
+                            <div class="col-10">
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-block btn-light" type="submit" name="action" id="to-loginform"><i class="mdi mdi-close" alt=""></i></button>
+                            </div>
+                        </div>
+                        <span class="db"><img src="<?= base_url() ?>public/assets/images/logo-icon.png" alt="logo" /></span>
                         <h5 class="font-medium m-b-20">Recuperar password</h5>
                         <span>Ingrese su correo para enviarle instrucciones de como recuperar su password</span>
                     </div>
                     <div class="row m-t-20">
                         <!-- Form -->
-                        <form class="col-12" action="index.html">
+                        <form class="col-12" onsubmit="recuperarPassword(this,event);">
                             <!-- email -->
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <input class="form-control form-control-lg" type="text" required="required" placeholder="Usuario">
+                                    <input class="form-control form-control-lg" name="correo" type="text" required="required" placeholder="Usuario">
                                 </div>
                             </div>
                             <!-- pwd -->
@@ -113,106 +114,148 @@
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper scss in scafholding.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper scss in scafholding.scss -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right Sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Right Sidebar -->
-        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- All Required js -->
     <!-- ============================================================== -->
-    <script src="<?=base_url()?>public/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="<?=base_url()?>public/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="<?=base_url()?>public/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
-    <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/toastr/build/toastr.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->
     <script>
-    $('[data-toggle="tooltip"]').tooltip();
-    $(".preloader").fadeOut();
-    // ============================================================== 
-    // Login and Recover Password 
-    // ============================================================== 
-    $('#to-recover').on("click", function() {
-        $("#loginform").slideUp();
-        $("#recoverform").fadeIn();
-    });
-
-    function iniciarSesion(form,event){        
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (form.checkValidity() === true) {
-            $.ajax({         
-                type: "POST",
-                url: "<?=base_url()?>C_seguridad/iniciar_sesion",
-                data: $(form).serialize(),
-                success: function(resp) {
-                  if(resp == 'correcto'){
-                    window.location.href = '<?=base_url()?>';
-                  } else {
-                    alerta(resp,'error');
-                  }
-
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  alerta(resp,'error');
-                }
-            });          
-        }
-        form.classList.add('was-validated');
-    }
-
-    function alerta(mensaje,tipo){
-        switch(tipo){
-            case 'success':
-                toastr.success(mensaje, '¡Exito!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
-                break;
-            case 'warning':
-                toastr.warning(mensaje, 'Advertencia', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
-                break;
-            case 'error':
-                toastr.error(mensaje, '¡Error!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });    
-                break;
-            default:
-                toastr.info(mensaje, 'Info', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 2000 });
-        }
-    }
-
-    function confirmar(mensaje,funcion,var1){
-        //event.preventDefault();
-        var1 = var1 || '';
-        swal({
-            title: mensaje,
-            /*text: mensaje,*/
-            //icon: 'info',
-            type: "warning",   
-            showCancelButton: true,   
-            confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Confirmar",   
-            cancelButtonText: "Cancelar",
-        }).then((confirm) => {
-
-            if(confirm.hasOwnProperty('value')){
-                if(var1 != '') funcion(var1);
-                else funcion();
-            } 
+        $('[data-toggle="tooltip"]').tooltip();
+        $(".preloader").fadeOut();
+        // ============================================================== 
+        // Login and Recover Password 
+        // ============================================================== 
+        $('#to-recover').on("click", function() {
+            $("#loginform").slideUp();
+            $("#recoverform").fadeIn();
         });
-    }
+
+        $('#to-loginform').on("click", function() {
+            $("#recoverform").slideUp();
+            $("#loginform").fadeIn();
+        });
+
+        function iniciarSesion(form, event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (form.checkValidity() === true) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url() ?>C_seguridad/iniciar_sesion",
+                    data: $(form).serialize(),
+                    success: function(resp) {
+                        if (resp == 'correcto') {
+                            window.location.href = '<?= base_url() ?>';
+                        } else {
+                            alerta(resp, 'error');
+                        }
+
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alerta(resp, 'error');
+                    }
+                });
+            }
+            form.classList.add('was-validated');
+        }
+
+        function recuperarPassword(form, event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (form.checkValidity() === true) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url() ?>C_seguridad/enviar_correo",
+                    data: $(form).serialize(),
+                    success: function(resp) {
+                        if (resp == 'correcto') {
+
+                            alerta('Se le a enviado un email con las instrucciones para recuperar su contraseña', 'success');
+                        }
+                        if(resp == 'error_token') {
+
+                            alerta('El correo ingresado no se encuentra registrado en el sistema, favor de verificar.', 'warning');
+                        }
+                        if(resp == 'error_email') {
+
+                            alerta('El correo ingresado no se encuentra registrado en el sistema, favor de verificar.', 'warning');
+                        }
+                        if(resp == 'error') {
+
+                            alerta('Se a producido un error, intentar más tarde', 'error');
+                        }
+
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alerta(resp, 'error');
+                    }
+                });
+            }
+            form.classList.add('was-validated');
+        }
+
+        function alerta(mensaje, tipo) {
+            switch (tipo) {
+                case 'success':
+                    toastr.success(mensaje, '¡Exito!', {
+                        "showMethod": "slideDown",
+                        "hideMethod": "slideUp",
+                        timeOut: 2000
+                    });
+                    break;
+                case 'warning':
+                    toastr.warning(mensaje, 'Advertencia', {
+                        "showMethod": "slideDown",
+                        "hideMethod": "slideUp",
+                        timeOut: 2000
+                    });
+                    break;
+                case 'error':
+                    toastr.error(mensaje, '¡Error!', {
+                        "showMethod": "slideDown",
+                        "hideMethod": "slideUp",
+                        timeOut: 2000
+                    });
+                    break;
+                default:
+                    toastr.info(mensaje, 'Info', {
+                        "showMethod": "slideDown",
+                        "hideMethod": "slideUp",
+                        timeOut: 2000
+                    });
+            }
+        }
+
+        function confirmar(mensaje, funcion, var1) {
+            //event.preventDefault();
+            var1 = var1 || '';
+            swal({
+                title: mensaje,
+                /*text: mensaje,*/
+                //icon: 'info',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+            }).then((confirm) => {
+
+                if (confirm.hasOwnProperty('value')) {
+                    if (var1 != '') funcion(var1);
+                    else funcion();
+                }
+            });
+        }
     </script>
 </body>
 

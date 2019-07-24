@@ -38,6 +38,16 @@ class C_dash extends CI_Controller {
                 $datos['dependencias'] = $this->M_dash->dependencias($id);
                 $datos['temas'] = $this->M_dash->temas($id);
                 $datos['actividades'] = $this->M_dash->actividades($id,$an);
+                $data = $this->M_dash->temas($id);
+                    $valores = array();
+                    $rec = '';
+                foreach($data as $dat){
+
+                    $rec = $this->M_dash->totaltemas($dat['iIdTema']);
+                    array_push($valores, $rec);
+                }
+                $datos['avance'] = $valores;
+                //print_r($datos['avance']);
                 $this->load->view('dash/desp', $datos);
             }
         }

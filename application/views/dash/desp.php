@@ -1,5 +1,6 @@
 <!-- echarts -->
 <script src="<?= base_url(); ?>public/assets/libs/echarts/dist/echarts-en.min.js"></script>
+
 <!-- #end echarts -->
 <!-- seccion titulo-->
 
@@ -93,7 +94,9 @@
                     <div class="col-md-12">
                         <div class="row">
                             <?php
+                            $i = 0;
                             foreach ($temas as $tema) {
+                                
                                 ?>
                                 <div class="col-md-4" style="border: 6px solid #f2f4f5; background-color:white;">
                                     <div class="row">
@@ -101,23 +104,25 @@
                                             <?php echo $tema['vTema']; ?>
                                         </div>
                                         <div class="col-md-4" style="padding-top: 5%;">
-                                            <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 15%; padding-left: 10%; padding-right: 10%;">
-                                                <img class="thumbnails" src="<?= base_url(); ?>public/img/elementos_web_sigo/desca/eco-desarrollo-comercial.png" width="100%">
+                                            <div style=" width: 90%; border-radius: 50%; background-color: #3db279; padding-top: 5%; padding-left: 10%; padding-right: 10%;">
+                                                <img class="thumbnails" src="<?= base_url(); ?><?php echo $tema['vIcono']; ?>" width="100%">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
 
-                                            Avance: 28%
+                                            Avance: <?php echo $avance[$i];?>%
 
                                         </div>
                                         <div class="col-md-12">
                                             <div class="progress" style="background-color:gray;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%; height: 6px; background-color: #3cb279"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $avance[$i];?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avance[$i];?>%; height: 6px; background-color: #3cb279"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php
+                            $i++;
+                          
                             }
                             ?>
                         </div>
@@ -163,7 +168,7 @@
             <div class="col-md-12" style="background-color: red;">
                 <div class="row">
                     <div class="col-md-2" style="padding-top: 1rem;">
-                        <img class="thumbnail" src="<?= base_url(); ?>public\img\elementos_web_sigo\ods/ods-1.png" width="70%">
+                        <img class="thumbnail" src="<?= base_url(); ?>public\img\icons\ods/ods-1.png" width="70%">
                     </div>
                     <div class="col-md-6" style="color: white; font-size: 120%; padding: 2rem;">ID Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et erat dictum nisl cursus commodo. Maecenas vulputate nulla dolor, viverra auctor augue gravida nec. Nulla non neque tellus</div>
                     <div class="col-md-1">
@@ -179,12 +184,21 @@
         </div>
 </section>
 
+<section id="tablaactividades">
+<?php
+$array = array();
+foreach ($actividades as $act2) {
+   
+    array_push($array, $act2['nAvance']);
+}
+
+?>
 <!-- end contenido -->
 <!-- end plan anual de trabajo -->
 
 <div class="row">
     <div class="col-12">
-        <div class="card" id="tablaactividades">
+        <div class="card" >
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered display" style="width:100%" id="grid">
@@ -196,7 +210,10 @@
                         </thead>
                         <tbody>
                             <?php
+                            
+                            $c = 0;
                             foreach ($actividades as $act) {
+                                
                                 ?>
                                 <tr>
                                     <td>
@@ -210,11 +227,10 @@
                                                 <a style="cursor:pointer;"><?php echo $act['vActividad']; ?></a>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <div id="basic-doughnut2" style="width: 100%; height:100%;"></div>
+                                                    <div id="basic-doughnu<?php echo $c; ?>" style="width: 100%; height:100%;"></div>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <div style="position: relative; top: 45%; left: -90%; font-size: 70%; color: #11386b">45%</div>
-                                                    <div style="position: relative; top: 60%; left: -103%; font-size: 70%; color: #11386b;">AVANCE GENERAL</div>
+                                                    <div style="position: relative; top: 45%; left: -90%; font-size: 70%; color: #11386b"><?php echo $act['nAvance']; ?></div>
                                                 </div>
                                                 <div class="col-md-2"></div>
                                             </div>
@@ -222,8 +238,11 @@
                                     </td>
                                 </tr>
                             <?php
+                            $c++;
                             }
+                            //print_r($array);
                             ?>
+                           <input style="display:none;" type="text" name="c" id="c" value="<?php echo $c; ?>">
                         </tbody>
                     </table>
                 </div>
@@ -233,7 +252,7 @@
 </div>
 
 
-
+</section>
 <script>
     // based on prepared DOM, initialize echarts instance
     var basicdoughnutChart = echarts.init(document.getElementById('basic-doughnut5'));
@@ -399,7 +418,75 @@
 
     function actividades() {
     var id = document.getElementById("seldep").value;
-    alert(id);
     cargar('<?= base_url(); ?>index.php/C_dash/desplieguetabla/?id='+id, '#tablaactividades');
   }
+
+  
+ 
+  var arrayJS=<?php echo json_encode($array);?>;
+  console.log(arrayJS.length);
+  for(var i=0;i<arrayJS.length;i++){
+
+   
+    console.log(arrayJS[i]);
+
+}
+
+  function ultimaultimaesperanza(){
+//alert("we");
+var c = document.getElementById("c").value;
+//alert(c);
+var co = 2;
+//alert(co);
+var bc = [];
+
+
+for(var i = 0; i < arrayJS.length; i++){
+    
+    var ci = i + 1;
+bc[i] = echarts.init(document.getElementById('basic-doughnu'+i));
+option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+
+        // Add custom colors
+        color: ['#d0282a', '#c0cac8'],
+
+        series: [{
+            name: '',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: true,
+
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                    value: arrayJS[i],
+                    name: 'Porcentaje de avance'
+                },
+
+                {
+                    value: 100,
+                    name: 'Total posible'
+                }
+            ]
+        }]
+    };
+
+
+    bc[i].setOption(option);
+
+}
+  }
+
+  function alertar(ava){
+      var ava = ava;
+      alert(ava); 
+  }
+  ultimaultimaesperanza();
 </script>

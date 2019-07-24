@@ -6,16 +6,15 @@
                     <h4 class="card-title">Modificar usuario</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="buscarUsuario2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                    <button class="btn btn-light" type="submit" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>
             <form class="needs-validation was-validated" onsubmit="modificarUsuario(this,event);">
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Dependencia</label>
+                        <label for="validationCustom04">Dependencia<span class="text-danger">*</span></label>
                         <select id="dependencia" name="dependencia" required class="form-control">
-                            <option value="<?= $consulta->iIdDependencia ?>"><?= $consulta->vDependencia ?></option>
                             <?= $dependencias ?>
                         </select>
                         <div class="invalid-feedback">
@@ -25,7 +24,6 @@
                     <div class="col-md-3 mb-3">
                         <label>Rol<span class="text-danger">*</span></label>
                         <select name="rol" id="rol" required class="form-control">
-                            <option value="<?= $consulta->iIdRol ?>"><?= $consulta->vRol ?></option>
                             <?= $roles ?>
                         </select>
                         <div class="invalid-feedback">
@@ -35,7 +33,6 @@
                     <div class="col-md-3 mb-3">
                         <label>Formación academica<span class="text-danger">*</span></label>
                         <select name="formacionacademica" id="formacionacademica" required class="form-control">
-                            <option value="<?= $consulta->iIdFormacionAcademica ?>"><?= $consulta->vFormacionAcademica ?></option>
                             <?= $formacion_academica ?>
                         </select>
                         <div class="invalid-feedback">
@@ -135,7 +132,7 @@
                 <input type="hidden" value="<?= $consulta->iIdUsuario ?>" name='id' />
                 <center>
                     <button class="btn waves-effect waves-light btn-success" type="submit">Guardar cambios</button>
-                    <button type="reset" class="btn waves-effect waves-light btn-inverse">Cancelar</button>
+                    <button type="reset" class="btn waves-effect waves-light btn-inverse" onclick="regresar()">Cancelar</button>
                 </center>
                 <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -178,7 +175,7 @@
 
                 if (resp == "correcto") {
 
-                    buscarUsuario2();
+                    regresar();
                     alerta('Modificado exitosamente', 'success');
 
                 }

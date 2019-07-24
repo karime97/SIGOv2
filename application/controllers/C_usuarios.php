@@ -22,7 +22,7 @@ class C_usuarios extends CI_Controller {
     	$this->load->view('usuarios/principal',$data);
     }
 
-     //Muestra la pagina para agregar usuarios
+    //Muestra la pagina para agregar usuarios
     public function create(){
 
         $lib = new Class_options();
@@ -115,10 +115,11 @@ class C_usuarios extends CI_Controller {
             $lib = new Class_options();
 
             $data['consulta'] = $this->mu->preparar_update($id);
-            $data['dependencias'] = $lib->options_tabla('dependencias');
-            $data['roles'] = $lib->options_tabla('roles');
-            $data['formacion_academica'] = $lib->options_tabla('formacion_academica');
-            $data['nivel_academico'] = $lib->options_tabla('maximo_nivel_academico');  
+
+            $data['dependencias'] = $lib->options_tabla('dependencias',$data['consulta']->iIdDependencia);
+            $data['roles'] = $lib->options_tabla('roles',$data['consulta']->iIdRol);
+            $data['formacion_academica'] = $lib->options_tabla('formacion_academica',$data['consulta']->iIdFormacionAcademica);
+            $data['nivel_academico'] = $lib->options_tabla('maximo_nivel_academico',$data['consulta']->iIdMaxNivelAcademico);  
 
             $this->load->view('usuarios/contenido_modificar',$data);
 
@@ -149,11 +150,15 @@ class C_usuarios extends CI_Controller {
 
         if(isset($_POST['id'])){
 
-            $id = $_POST['id'];
+            $idus = $_POST['id'];
+            $mensaje = "Reestablecer los permisos dados por el Rol del usuario hara que se deshabilite cualquier permiso otorgado anteriormente";
 
-            //$data['consulta'] = $this->mu->preparar_update($id); 
+            //$data['consulta'] = $this->mu->preparar_update($id);
+            $data['menu'] = $this->contenido_permisos($idus);
+            $data['id_us'] = $idus;
+            $data['mensaje'] = $mensaje;
 
-            $this->load->view('usuarios/asignar_permisos');
+            $this->load->view('usuarios/asignar_permisos',$data);
 
         }else{
             echo "error";
@@ -296,5 +301,436 @@ class C_usuarios extends CI_Controller {
         $this->load->view('usuarios/contenido_tabla',$data);
     }
 
+    //Genera el contenido de los permisos de cada usuario
+    public function contenido_permisos($idus){
+
+        $idusuario = $idus;
+        
+
+        $str = '<div class="row">
+                    <div class="col-md-6">
+                        <h4>Opciones del menu</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Tipo de acceso</h4>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>';
+
+        //Obtiene el listado de menus principal
+        $menu = $this->mu->consultar_menu_sistema(0,1);
+
+        foreach($menu as $padre){
+
+            $str.= '<div class="row">
+                        <div class="col-md-6">
+                            <h6>'.$padre->vPermiso.'</h6>
+                        </div>
+                        ';  
+            //Obtiene el listado de submenu            
+            $submenu = $this->mu->consultar_menu_sistema($padre->iIdPermiso,1);
+
+            //Valida el menu principal para ver si tiene asignado un permiso la tabla de permisos por usuario
+            $checkusuario = $this->mu->mostrar_permisos_usuario($idusuario,$padre->iIdPermiso);
+
+            if(count($checkusuario)>0){
+
+                foreach($checkusuario as $value){
+                    
+                    if($value->iTipoAcceso == 0){
+
+                            $opc_0='checked';
+                            $opc_1='';
+                            $opc_2='';
+                        
+                        }
+                        if($value->iTipoAcceso == 1){
+
+                            $opc_0='';
+                            $opc_1='checked';
+                            $opc_2='';
+                            
+                        }
+                        if($value->iTipoAcceso == 2){
+
+                            $opc_0='';
+                            $opc_1='';
+                            $opc_2='checked';
+                            
+                        }
+
+                        $default = 1;
+                }
+            }else{
+
+                //Valida el menu principal para ver si tiene asignado un permiso la tabla de permisos por rol
+                $checkrol = $this->mu->mostrar_permisos_rol($idusuario,$padre->iIdPermiso,0,1);
+
+                if(count($checkrol) > 0){
+
+                    foreach ($checkrol as $value) {
+
+                        if($value->iTipoAcceso == 0){
+
+                            $opc_0='checked';
+                            $opc_1='';
+                            $opc_2='';
+                        
+                        }
+                        if($value->iTipoAcceso == 1){
+
+                            $opc_0='';
+                            $opc_1='checked';
+                            $opc_2='';
+                            
+                        }
+                        if($value->iTipoAcceso == 2){
+
+                            $opc_0='';
+                            $opc_1='';
+                            $opc_2='checked';
+                            
+                        }
+                        $default = 0;
+                    }
+                }else{
+
+                    $opc_0='';
+                    $opc_1='';
+                    $opc_2='';
+                    $default = 0;
+                }  
+            }
+            
+            $str.='<div class="col-md-6">
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="0" onclick="changecheck(id,'.$padre->iIdPermiso.','.$padre->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt1'.$padre->iIdPermiso.'">Denegado</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="1" onclick="changecheck(id,'.$padre->iIdPermiso.','.$padre->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt2'.$padre->iIdPermiso.'">Lectura</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$padre->iIdPermiso.'" name="'.$padre->iIdPermiso.'" value="2" onclick="changecheck(id,'.$padre->iIdPermiso.','.$padre->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt3'.$padre->iIdPermiso.'">Lectura y escritura</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="val['.$padre->iIdPermiso.']" id="val'.$padre->iIdPermiso.'" value="'.$default.'">
+                <div class="dropdown-divider"></div>';
+
+            if(count($submenu) > 0){
+
+                foreach($submenu as $hijo){
+
+                    //Valida el submenu para ver si tiene asignado un permiso la tabla de permisos por usuario
+                    $checkusuario_submenu = $this->mu->mostrar_permisos_usuario($idusuario,$hijo->iIdPermiso);
+
+                    if(count($checkusuario_submenu) > 0){
+                        foreach($checkusuario_submenu as $value){
+
+                            if($value->iTipoAcceso == 0){
+
+                                $opc_0='checked';
+                                $opc_1='';
+                                $opc_2='';
+                        
+                            }
+                            if($value->iTipoAcceso == 1){
+
+                                $opc_0='';
+                                $opc_1='checked';
+                                $opc_2='';
+                                
+                            }
+                            if($value->iTipoAcceso == 2){
+
+                                $opc_0='';
+                                $opc_1='';
+                                $opc_2='checked';
+                                
+                            }
+                            $default = 1;
+                        }
+                    }else{
+                        //Valida el submenu para ver si tiene asignado un permiso la tabla de permisos por rol
+                        $checkrol_submenu = $this->mu->mostrar_permisos_rol($idusuario,$padre->iIdPermiso,0,1);
+
+                        if(count($checkrol_submenu) > 0){
+
+                            foreach ($checkrol_submenu as $value) {
+
+                                if($value->iTipoAcceso == 0){
+
+                                    $opc_0='checked';
+                                    $opc_1='';
+                                    $opc_2='';
+                                    
+                                }
+                                if($value->iTipoAcceso == 1){
+
+                                    $opc_0='';
+                                    $opc_1='checked';
+                                    $opc_2='';
+                                    
+                                }
+                                if($value->iTipoAcceso == 2){
+
+                                    $opc_0='';
+                                    $opc_1='';
+                                    $opc_2='checked';
+                                    
+                                }
+                                $default = 0;
+                            }
+                        }else{
+
+                            $opc_0='';
+                            $opc_1='';
+                            $opc_2='';
+                            $default = 0;
+                        }                    
+                    }
+
+
+                $str.='<div class="row">
+                    <div class="col-md-4 text-right">
+                        <label class="">'.$hijo->vPermiso.'</label>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="0" onclick="changecheck(id,'.$hijo->iIdPermiso.','.$hijo->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt1'.$hijo->iIdPermiso.'">Denegado</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="1" onclick="changecheck(id,'.$hijo->iIdPermiso.','.$hijo->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt2'.$hijo->iIdPermiso.'">Lectura</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$hijo->iIdPermiso.'" name="'.$hijo->iIdPermiso.'" value="2" onclick="changecheck(id,'.$hijo->iIdPermiso.','.$hijo->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt3'.$hijo->iIdPermiso.'">Lectura y escritura</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="val['.$hijo->iIdPermiso.']" id="val'.$hijo->iIdPermiso.'" value="'.$default.'">
+                <div class="dropdown-divider"></div>';
+                }
+
+            }else{
+
+                
+            }
+
+        }
+
+        $str.='<br><br><br>';
+
+        $str.= '<div class="row">
+                    <div class="col-md-6">
+                        <h4>Acciones especificas</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Tipo de acceso</h4>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>';
+        
+        //Obtiene el listado de permisos especificos
+        $menu = $this->mu->consultar_menu_sistema(0,2);
+
+        foreach($menu as $funciones){
+
+            $str.= '<div class="row">
+                        <div class="col-md-6">
+                            <h6>'.$funciones->vPermiso.'</h6>
+                        </div>
+                        ';
+
+            //Valida el menu principal para ver si tiene asignado un permiso la tabla de permisos por usuario
+            $checkusuario = $this->mu->mostrar_permisos_usuario($idusuario,$funciones->iIdPermiso);
+
+            if(count($checkusuario)>0){
+
+                foreach($checkusuario as $value){
+                    
+                    if($value->iTipoAcceso == 0){
+
+                            $opc_0='checked';
+                            $opc_1='';
+                            $opc_2='';
+                        
+                        }
+                        if($value->iTipoAcceso == 1){
+
+                            $opc_0='';
+                            $opc_1='checked';
+                            $opc_2='';
+                           
+                        }
+                        if($value->iTipoAcceso == 2){
+
+                            $opc_0='';
+                            $opc_1='';
+                            $opc_2='checked';
+                            
+                        }
+                        $default = 1;
+                }
+            }else{
+
+                //Valida el menu principal para ver si tiene asignado un permiso la tabla de permisos por rol
+                $checkrol = $this->mu->mostrar_permisos_rol($idusuario,$funciones->iIdPermiso,0,2);
+
+                if(count($checkrol) > 0){
+
+                    foreach ($checkrol as $value) {
+
+                        if($value->iTipoAcceso == 0){
+
+                            $opc_0='checked';
+                            $opc_1='';
+                            $opc_2='';
+                            
+                        }
+                        if($value->iTipoAcceso == 1){
+
+                            $opc_0='';
+                            $opc_1='checked';
+                            $opc_2='';
+                            
+                        }
+                        if($value->iTipoAcceso == 2){
+
+                            $opc_0='';
+                            $opc_1='';
+                            $opc_2='checked';
+                            
+                        }
+                        $default = 0;
+                    }
+                }else{
+
+                    $opc_0='';
+                    $opc_1='';
+                    $opc_2='';
+                    $default = 0;
+                }  
+            }
+            
+            $str.='<div class="col-md-6">
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_0.' id="rbt1'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="0" onclick="changecheck(id,'.$funciones->iIdPermiso.','.$funciones->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt1'.$funciones->iIdPermiso.'">Denegado</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_1.' id="rbt2'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="1" onclick="changecheck(id,'.$funciones->iIdPermiso.','.$funciones->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt2'.$funciones->iIdPermiso.'">Lectura</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" '.$opc_2.' id="rbt3'.$funciones->iIdPermiso.'" name="'.$funciones->iIdPermiso.'" value="2" onclick="changecheck(id,'.$funciones->iIdPermiso.','.$funciones->iIdPermisoPadre.')">
+                                <label class="custom-control-label" for="rbt3'.$funciones->iIdPermiso.'">Lectura y escritura</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="val['.$funciones->iIdPermiso.']" id="val'.$funciones->iIdPermiso.'" value="'.$default.'">
+                <div class="dropdown-divider"></div>';
+        }
+
+        $str.='<input type="hidden" name="id_usuario" value="'.$idusuario.'">
+                <center>
+                    <button id="guardarpermisos" class="btn waves-effect waves-light btn-success" type="submit" disabled="true">Guardar</button>
+                    <button type="reset" class="btn waves-effect waves-light btn-inverse" onclick="buscarUsuario2()">Cancelar</button>
+                </center>';
+
+                if($this->mu->validar_permisos($idusuario) == TRUE){
+
+                    $validacion = 1;
+
+                }else{
+
+                    $validacion = 0;
+                }
+
+                $str.= '<input type="hidden" id="validacionbtn" name="" value="'.$validacion.'">';
+
+        return $str;
+
+    }
+
+    //Sobreescribe los permisos asignados a cada usuario
+    public function restart(){
+
+        $var = $_POST['val'];
+        $id_us = $_POST['id_usuario'];
+
+        if($this->mu->validar_permisos($id_us) == TRUE){
+
+            $this->mu->eliminar_permisosusuario($id_us);
+
+        }
+
+        foreach($var as $valor => $value){
+
+            if($value == 1){
+
+                $resultado = $_POST[$valor];
+
+                $data['iIdUsuario'] = $id_us;
+                $data['iIdPermiso'] = $valor;
+                $data['iTipoAcceso'] = $resultado;
+
+                $this->mu->agregar_permisos($data);
+
+            }else{
+                
+            }
+
+        }
+        echo "correcto";
+    }
+
+    //Elimina los permisos especiales de un usuario
+    public function restore(){
+
+        if(isset($_POST['id'])){
+
+            $id = $_POST['id'];
+
+            $resultado = $this->mu->eliminar_permisosusuario($id);
+
+            if($resultado == TRUE){
+
+                echo $resultado;
+            }else{
+
+                echo $resultado;
+            }
+
+        }else{
+            echo "algo salio mal";
+        }
+    }
 }
 ?>
