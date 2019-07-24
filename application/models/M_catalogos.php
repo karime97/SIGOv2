@@ -101,15 +101,6 @@ class M_catalogos extends CI_Model {
 		return $this->db->get();
 	}
 
-
-
-
-
-
-
-
-
-
 	public function entidades($where='')
 	{
 		$this->db->select('id_entidad AS id, entidad AS valor ');
