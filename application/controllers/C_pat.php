@@ -11,6 +11,7 @@ class C_pat extends CI_Controller
         session_start();
         $this->load->helper('url');
         $this->load->model('M_pat', 'pat');
+        $this->load->model('M_seguridad', 'mseg');
     }
 
     public function index()
@@ -175,19 +176,65 @@ class C_pat extends CI_Controller
     public function guardarAct()
     {
 
-        if (isset($_POST['id']) && isset($_POST['idAct']) && isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion'])) {
+        if (isset($_POST['id']) && isset($_POST['idAct']) && isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion']))
+        {
 
             $id = $_POST['id'];
             $idActividad = $_POST['idAct'];
 
+            //var_dump($_SESSION['carritoSelec']);
+
+           
+
+            //  Iniciamos laa transaccion
+            $con = $this->mseg->iniciar_transaccion();
+
+            // Actualizamos la atabla Actividad
             $data = array(
                 'vActividad' => $this->input->post('NombAct'),
                 'vObjetivo' => $this->input->post('objGeneral'),
                 'vDescripcion' => $this->input->post('descripcion'),
                 'iIdDependencia' => (int) $_SESSION[PREFIJO . '_iddependencia']
             );
+            $where['iIdActividad'] = $idActividad;
+            $this->mseg->actualiza_registro('Actividad',$where,$data,$con);
 
-            $auxiliar = $this->pat->modificarAct($data, $idActividad);
+            // Actualizamos la tabla DetalleActividad
+            $data1 = array(
+                'iIdActividad' => $idActividad,
+                'iAnio' => $this->input->post('annio'),
+                'dInicio' => $this->input->post('fINICIO'),
+                'dFin' => $this->input->post('fFIN')
+            );
+            $where1['iIdDetalleActividad'] = $id;
+            $this->mseg->actualiza_registro('DetalleActividad',$where1,$data1,$con);
+
+            //Eliminar ActividadLineaAccion
+            $this->mseg->elimina_registro('ActividadLineaAccion',$where,$con);
+
+            //  Guardamos las lineas de acción
+            $actLA = $_SESSION['carritoSelec'];
+    
+            foreach ($actLA as $la) {
+                if($la->iActivo > 0){
+                    $LinAcc['iIdActividad'] = $idActividad;
+                    $LinAcc['iIdLineaAccion'] = $la->iIdLineaAccion;                
+
+                    //$insert = $this->pat->agregarActLineaAcc($LinAcc);
+                    $this->mseg->inserta_registro_no_pk('ActividadLineaAccion',$LinAcc,$con);
+                }
+            }
+
+
+
+            // Finalizar transaccion
+            if($this->mseg->terminar_transaccion($con) == true){
+                echo 'Correcto';
+            } else {
+                echo 'Error';
+            }
+
+            /*$auxiliar = $this->pat->modificarAct($data, $idActividad);
             $eliminarALA = $this->pat->eliminarActLineaAcc($idActividad);
             echo $eliminarALA;
             $eliminarAF = $this->pat->eliminarActFinanciamiento($idActividad);
@@ -316,6 +363,7 @@ class C_pat extends CI_Controller
                     echo $insert3;
                 }
             }
+            */
         }
     }
 
