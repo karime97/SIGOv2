@@ -108,7 +108,7 @@
                     <h1>Objetivo General</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
-                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;"></textarea>
+                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vObjetivo ?>"></textarea>
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -118,7 +118,7 @@
                     <h1>Descripción</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
-                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;"></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vDescripcion ?>"></textarea>
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -129,14 +129,14 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-6">
                             <label for="validationCustom04">Fecha de inicio</label>
-                            <input type="date" class="form-control" id="fINICIO" name="fINICIO" required="">
+                            <input type="date" class="form-control" id="fINICIO" name="fINICIO" required="" value="<?= $consulta->dInicio ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
                         </div>
                         <div class="col-md-6 mb-6">
                             <label for="validationCustom04">Fecha fin</label>
-                            <input type="date" class="form-control" id="fFIN" name="fFIN" required="">
+                            <input type="date" class="form-control" id="fFIN" name="fFIN" required="" value="<?= $consulta->dFin ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -295,7 +295,7 @@
             data: $(f).serialize(),
 
             success: function(resp) {
-                if (resp > 0) {
+                if (resp == 'Correcto') {
                     filter();
                     alerta('Guardado exitosamente', 'success');
                 } else {
@@ -309,12 +309,7 @@
     /* Carrito selectores */
     function agregarCarrito() {
         if ($('#linAcc').val() == '0') {
-            swal("Debe seleccionar una opción", {
-                title: 'Error',
-                icon: "error",
-                button: false,
-                timer: 1500
-            });
+            alerta('Debe seleccionar una opcion', 'error');
 
         } else {
             var formData = new FormData();
@@ -330,9 +325,7 @@
                     if (data == 1) {
                         $("#tabla-grid3").load('<?= base_url() ?>C_pat/generar_tabla');
                     } else {
-                        //$("#grid3");
-                        alert('Error');
-                        //$("#table").load('C_plantilla/GenerateTable');
+                        alerta('No se puede repetir la opcion', 'error');
                     }
                 },
                 cache: false,
@@ -355,9 +348,7 @@
                 if (data == 1) {
                     $("#tabla-grid3").load('<?= base_url() ?>C_pat/generar_tabla');
                 } else {
-                    //$("#grid3");
-                    alert('Error');
-                    //$("#table").load('C_plantilla/GenerateTable');
+                    alerta('Error al eliminar', 'error');
                 }
             },
             cache: false,
@@ -369,13 +360,7 @@
     /* Carrito selectores */
     function agregarCarritoF() {
         if ($('#fuenteF').val() == '0') {
-            swal("Debe seleccionar una opción", {
-                title: 'Error',
-                icon: "error",
-                button: false,
-                timer: 1500
-            });
-
+            alerta('Debe seleccionar una opción', 'error');
         } else {
             var formData = new FormData();
             formData.append('fuenteF', $("#fuenteF").val());
@@ -390,9 +375,7 @@
                     if (data == 1) {
                         $("#tabla-grid").load('<?= base_url() ?>C_pat/tablaFinanciamiento');
                     } else {
-                        //$("#grid3");
-                        alert('Error');
-                        //$("#table").load('C_plantilla/GenerateTable');
+                        alerta('No se puede repetir la opcion', 'error');
                     }
                 },
                 cache: false,
@@ -415,9 +398,7 @@
                 if (data == 1) {
                     $("#tabla-grid").load('<?= base_url() ?>C_pat/tablaFinanciamiento');
                 } else {
-                    //$("#grid3");
-                    alert('Error');
-                    //$("#table").load('C_plantilla/GenerateTable');
+                    alerta('Error al eliminar', 'error');
                 }
             },
             cache: false,
@@ -429,13 +410,7 @@
     /* Carrito UBP y PP */
     function agregarCarritoUP() {
         if ($('#NumUBP').val() == '0') {
-            swal("Debe seleccionar una opción", {
-                title: 'Error',
-                icon: "error",
-                button: false,
-                timer: 1500
-            });
-
+            alerta('Debe seleccionar una opción', 'error');
         } else {
             var formData = new FormData();
             formData.append('NumUBP', $("#NumUBP").val());
@@ -449,7 +424,7 @@
                     if (data == 1) {
                         $("#tabla-grid2").load('<?= base_url() ?>C_pat/tablaUbpsPp');
                     } else {
-                        alert('Error');
+                        alerta('No se puede repetir la opcion', 'error');
                     }
                 },
                 cache: false,
@@ -472,9 +447,7 @@
                 if (data == 1) {
                     $("#tabla-grid2").load('<?= base_url() ?>C_pat/tablaUbpsPp');
                 } else {
-                    //$("#grid3");
-                    alert('Error');
-                    //$("#table").load('C_plantilla/GenerateTable');
+                    alerta('Error al eliminar', 'error');
                 }
             },
             cache: false,

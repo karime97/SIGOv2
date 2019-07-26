@@ -182,9 +182,7 @@ class C_pat extends CI_Controller
             $id = $_POST['id'];
             $idActividad = $_POST['idAct'];
 
-            //var_dump($_SESSION['carritoSelec']);
-
-           
+            //var_dump($_SESSION['carritoSelec']);           
 
             //  Iniciamos laa transaccion
             $con = $this->mseg->iniciar_transaccion();
@@ -225,7 +223,36 @@ class C_pat extends CI_Controller
                 }
             }
 
+            //Eliminar DetalleActividadFinanciamiento
+            $this->mseg->elimina_registro('DetalleActividadFinanciamiento',$where1,$con);
 
+            //  Guardamos financiamiento
+            $actFin = $_SESSION['carritoFinan'];
+    
+            foreach ($actFin as $Af) {
+                if($Af->iActivo > 0){
+                    $fin['iIdDetalleActividad'] = $id;
+                    $fin['iIdFinanciamiento'] = $Af->iIdFinanciamiento;
+                    $fin['monto'] = $Af->montoFinan;
+
+                    $this->mseg->inserta_registro_no_pk('DetalleActividadFinanciamiento',$fin,$con);
+                }
+            }
+
+            //Eliminar DetalleActividadFinanciamiento
+            $this->mseg->elimina_registro('DetalleActividadUBP',$where1,$con);
+
+            //Gardamos las UBPs
+            $ActUbp = $_SESSION['carritoUbpP'];
+
+            foreach ($ActUbp as $Au) {
+                if($Au->iActivo > 0){
+                    $UBP['iIdDetalleActividad'] = $id;
+                    $UBP['iIdUbp'] = $Au->iIdUbp;
+
+                    $this->mseg->inserta_registro_no_pk('DetalleActividadUBP',$UBP,$con);
+                }
+            }
 
             // Finalizar transaccion
             if($this->mseg->terminar_transaccion($con) == true){
