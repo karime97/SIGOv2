@@ -8,7 +8,7 @@
     .desplazada {
         position: relative;
         top: -67%;
-        left: 42%;
+        left: 35%;
         font-size: 25px;
     }
 
@@ -49,6 +49,7 @@
 
 <section>
     <div class="col-12" style="background-color: #f2f4f5;">
+    
         <div class="card" style="padding: 2%;">
             <div class="row">
                 <div class="col-md-6">
@@ -134,7 +135,7 @@
                     <div id="basic-doughnut5" style="width: 100%; height:100%;"></div>
                     <div class="desplazada2">AVANCE GENERAL</div>
 
-                    <div class="desplazada">45%</div>
+                    <div class="desplazada"><?php echo $av; ?>%</div>
                 </div>
                 <!-- fin columna 2 -->
             </div>
@@ -277,13 +278,13 @@ foreach ($actividades as $act2) {
                 }
             },
             data: [{
-                    value: 25,
-                    name: ''
+                    value: <?php echo $av; ?>,
+                    name: 'Avance general'
                 },
 
                 {
-                    value: 75,
-                    name: ''
+                    value: 100,
+                    name: 'Total a alcanzar'
                 }
             ]
         }]

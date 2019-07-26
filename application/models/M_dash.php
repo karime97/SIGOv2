@@ -219,8 +219,7 @@ class M_dash extends CI_Model {
 	}
 
 	public function totaltemas($id){
-		$datos = '';
-		$datos = array();
+		
 		$this->db->select('COALESCE(round("sum"("nAvance") / "count"("nAvance"),2) ,0) as prom');
 		$this->db->from('"DetalleActividad"');
 		$this->db->join('"Actividad"', '"Actividad"."iIdActividad" = "DetalleActividad"."iIdActividad"');
@@ -281,5 +280,35 @@ class M_dash extends CI_Model {
 			];
 		}
 		return $datos;
+	}
+
+	public function avacetotaleje($id, $an){
+		$this->db->select('COALESCE(round("sum"("nAvance") / "count"("nAvance"),2) ,0) as prom');
+		$this->db->from('"DetalleActividad"');
+		$this->db->join('"Actividad"', '"Actividad"."iIdActividad" = "DetalleActividad"."iIdActividad"');
+		$this->db->join('"ActividadLineaAccion"', '"ActividadLineaAccion"."iIdActividad" =  "Actividad"."iIdActividad"');
+		$this->db->join('"PED2019LineaAccion"', '"PED2019LineaAccion"."iIdLineaAccion" = "ActividadLineaAccion"."iIdLineaAccion"');
+		$this->db->join('"PED2019Estrategia"', '"PED2019Estrategia"."iIdEstrategia" = "PED2019LineaAccion"."iIdEstrategia"');
+		$this->db->join('"PED2019Objetivo"', '"PED2019Objetivo"."iIdObjetivo" = "PED2019Estrategia"."iIdObjetivo"');
+		$this->db->join('"PED2019Tema"', '"PED2019Tema"."iIdTema" = "PED2019Objetivo"."iIdTema"');
+		$this->db->join('"PED2019Eje"', '"PED2019Eje"."iIdEje" = "PED2019Tema"."iIdEje"');
+		$this->db->where('"PED2019Eje"."iIdEje" = '.$id. ' and "iAnio" ='.$an.'');
+	
+		return $this->db->get()->row()->prom;
+
+	}
+
+	public function avacetotalejes($an){
+		$this->db->select('COALESCE(round("sum"("nAvance") / "count"("nAvance"),2) ,0) as prom');
+		$this->db->from('"DetalleActividad"');
+		$this->db->join('"Actividad"', '"Actividad"."iIdActividad" = "DetalleActividad"."iIdActividad"');
+		$this->db->join('"ActividadLineaAccion"', '"ActividadLineaAccion"."iIdActividad" =  "Actividad"."iIdActividad"');
+		$this->db->join('"PED2019LineaAccion"', '"PED2019LineaAccion"."iIdLineaAccion" = "ActividadLineaAccion"."iIdLineaAccion"');
+		$this->db->join('"PED2019Estrategia"', '"PED2019Estrategia"."iIdEstrategia" = "PED2019LineaAccion"."iIdEstrategia"');
+		$this->db->join('"PED2019Objetivo"', '"PED2019Objetivo"."iIdObjetivo" = "PED2019Estrategia"."iIdObjetivo"');
+		$this->db->join('"PED2019Tema"', '"PED2019Tema"."iIdTema" = "PED2019Objetivo"."iIdTema"');
+		$this->db->join('"PED2019Eje"', '"PED2019Eje"."iIdEje" = "PED2019Tema"."iIdEje"');
+		$this->db->where('"iAnio"',$an);
+		return $this->db->get()->row()->prom;
 	}
 }
