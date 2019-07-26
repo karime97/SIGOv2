@@ -1,9 +1,21 @@
-<br><br>
 <div class="card">
     <div class="card-body">
-        <h1 class="card-title">Entregables</h1>
-        <h5 class="card-subtitle"> Administración del catálogo de entregables. </h5>
-        <br><br>
+        <div class="row">
+            <div class="col-md-10">
+                <h1 class="card-title">Entregables</h1>
+                <h5 class="card-subtitle"> Administración del catálogo de entregables. </h5>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn waves-effect waves-light btn-primary" style="margin-top:35px" onclick="agregar_entregable()">Agregar</button>
+            </div>
+        </div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs customtab" role="tablist">
             <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#entregable" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Entregables</span></a> </li>

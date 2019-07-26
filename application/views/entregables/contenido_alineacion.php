@@ -1,7 +1,7 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">          
-            <form class="needs-validation was-validated" onsubmit="guardarFinanciamiento(this,event);">
+            <form class="needs-validation was-validated" onsubmit="guardarEntregable(this,event);">
                 <div class="form-row">
                     <div class="col-md-4 mb-4">
                         <label for="validationCustom04">Nombre del entregable</label>
@@ -68,18 +68,17 @@
 
 
 <script>
-    function guardarFinanciamiento(f,e){
+    function guardarEntregable(f,e){
         e.preventDefault();
 
         $.ajax({         
             type: "POST",
-            url: "<?=base_url()?>C_financiamientos/insert", //Nombre del controlador
+            url: "<?=base_url()?>C_entregables/insert", //Nombre del controlador
             data: $(f).serialize(),
 
             success: function(resp) {
               if(resp > 0){
                 
-                cargar('<?= base_url() ?>C_financiamientos/return', '#contenedor'); //Opcion para redirigir a la tabla principal
               } else {
                 alert(resp);
               }

@@ -91,6 +91,10 @@
             cargar('<?= base_url() ?>C_pat/cargar', '#contenido_modulo');
         }
 
+        function abrirEntregables(id) {
+            cargar('<?= base_url() ?>C_entregables/index', '#contenido_modulo', 'POST', 'id=' + id);
+        }
+
         function filter() {
             var keyword = $("#clave").val();
             var year = $("#anio").val();
@@ -140,8 +144,8 @@
                 e.preventDefault();
         }
 
-        function modificarAct() {
-            cargar('<?= base_url() ?>C_pat/edit', '#contenido_modulo');
+        function modificarAct(id) {
+            cargar('<?= base_url() ?>C_pat/edit', '#contenido_modulo', 'POST', 'id=' + id);
         }
 
         function guardarAct(f, e) {

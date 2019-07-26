@@ -4,15 +4,16 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Compromisos</h4>
+                    <h4 class="card-title">Búsqueda</h4>
                     <h6 class="card-subtitle"> </h6>
                     <form class="">
                     	<div class="row">
                     		<div class="col-4">
                     			<div class="form-group">
                     				<label for="eje">Eje</label>
-		                            <select name="eje" id="eje" class="custom-select">
-		                            	<option value="">Todos</option>
+		                            <select name="eje" id="eje" class="custom-select" onchange="cargarResponsables();">
+		                            	<option value="0">Todos</option>
+                                        <?=$options_ejes;?>
 		                            </select>
 		                        </div>
                     		</div>
@@ -20,7 +21,8 @@
                     			<div class="form-group">
                     				<label for="dependencia">Responsable</label>
 		                            <select name="dependencia" id="dependencia" class="custom-select">
-		                            	<option value="">Todos</option>
+		                            	<option value="0">Todos</option>
+                                        <?=$options_dependencias;?>
 		                            </select>
 		                        </div>
                     		</div>
@@ -28,7 +30,8 @@
                     			<div class="form-group">
                     				<label for="estatus">Estatus</label>
 		                            <select name="estatus" id="estatus" class="custom-select">
-		                            	<option value="">Todos</option>
+		                            	<option value="0">Todos</option>
+                                        <?=$options_estatus;?>
 		                            </select>
 		                        </div>
                     		</div>
@@ -70,5 +73,13 @@
 
 </div>
 <script type="text/javascript">
-	
+	function cargarResponsables(){
+        var valor = $("#eje").val();
+        $.post("<?=base_url();?>C_compromisos/cargar_options/",{listado:'responsables',valor:valor},function(resultado,status){
+            
+            $('#dependencia option[value!="0"]').remove();
+            $('#dependencia').append(resultado);
+            
+        });
+    }
 </script>

@@ -6,7 +6,7 @@
                     <h4 class="card-title">Permisos especiales</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="buscarUsuario2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
+                    <button class="btn btn-light" type="submit" onclick="regresar()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
             <br><br>
@@ -48,7 +48,7 @@
             success: function(resp) {
               if(resp == "correcto"){
                 
-                buscarUsuario2();
+                regresar();
                 alerta('Guardado exitosamente','success');
 
               }if(resp == "error"){
@@ -64,15 +64,24 @@
     }
 </script>
 
-
 <script>
-function changecheck(idcheck,id){
+function changecheck(idcheck,id,idpermisopadre){
     $("#"+idcheck).on('click change', function(e) {
         $("#val"+id).val(1);
         $("#guardarpermisos").removeAttr('disabled');
+
+        if(idpermisopadre != 0){
+
+            if($("#rbt1"+idpermisopadre).is(':checked') || $("#rbt2"+idpermisopadre).is(':checked') || $("#rbt3"+idpermisopadre).is(':checked')){               
+
+            }else{
+                $("#rbt2"+idpermisopadre).prop("checked", true);
+            }
+        }
     });
 }  
 </script>
+
 <script>
     function reestablecer(titulo,mensaje,funcion,var1){
             //event.preventDefault();
@@ -110,7 +119,7 @@ function changecheck(idcheck,id){
             success: function(resp) {
                 if (resp == true) {
                     
-                    buscarUsuario2();
+                    regresar();
                     alerta('Restauración exitosa', 'success');
 
                 } else {

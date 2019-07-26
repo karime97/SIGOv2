@@ -1,181 +1,148 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<html dir="ltr">
+
 <head>
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
-
-	<!-- Stylesheets
-	============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/style.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/swiper.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="<?=base_url();?>public/css/magnific-popup.css" type="text/css" />
-
-	<link rel="stylesheet" href="<?=base_url();?>public/css/responsive.css" type="text/css" />
-	<!--Modal Loading -->
-	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading.css" />
-	<link type="text/css" rel="stylesheet" href="<?=base_url();?>admin/plugins/modal-loading/css/modal-loading-animate.css" />
-	<!--Modal Loading -->
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<!-- Document Title
-	============================================= -->
-	<title>Participación Ciudadana</title>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>public/assets/images/favicon.png">
+    <title>SIGO</title>
+    <!-- Custom CSS -->
+    <link href="<?= base_url() ?>public/dist/css/style.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>public/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>public/assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
-<body class="stretched" data-loader="2" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
+<body>
+    <div class="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(<?= base_url() ?>public/img/auth-bg.jpg) no-repeat center center;">
+            <div class="auth-box">
+                <div id="loginform">
+                    <div class="logo">
+                        <span class="db"><img src="<?= base_url() ?>public/img/logo_sigo.png" alt="logo" class="responsive" width="200px" /></span>
+						<h5 class="font-medium m-b-20">Cambiar contraseña</h5>
+                    </div>
+                    <!-- Form -->
+                    <div class="row">
+                        <div class="col-12">
+                            <form class="form-horizontal m-t-20" class="needs-validation" novalidate onsubmit="restaurarPassword(this,event);">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="ti-pencil"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control form-control-lg" name="new_pass" placeholder="Nueva contraseña" aria-label="Usuario" aria-describedby="basic-addon1" required>
+                                    <div class="invalid-feedback">
+                                        Este campo es requerido
+                                    </div>
 
-	<!-- Document Wrapper
-	============================================= -->
-	<div id="wrapper" class="clearfix">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control form-control-lg" name="rep_pass" placeholder="Repetir contraseña" aria-label="Password" aria-describedby="basic-addon1" required>
+                                    <div class="invalid-feedback">
+                                        Este campo es requerido
+                                    </div>
 
-		<div id="home" class="page-section" style="position:absolute;top:0;left:0;width:100%;height:200px;z-index:-2;"></div>
-
-		
-		<!-- Header
-		============================================= -->
-		<?php include('header.php'); ?>
-
-		<div class="clear"></div>
-
-		<!-- Content
-		============================================= -->
-		<section id="content">
-
-			<div class="content-wrap">
-
-				<div class="container clearfix">
-
-					<div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
-
-						<div class="card nobottommargin">
-							<div class="card-body" style="padding: 40px;">
-								<form id="login-form" name="login-form" class="nobottommargin" method="post" action="" onsubmit="">
-
-									<h3>Actualice su contraseña</h3>
-									<div class="col_full">
-										<input type="hidden" name="idusuario" id="idusuario" value="<?php echo $idusuario;?>">
-										<input type="hidden" name="token" id="token" value="<?php echo $token;?>">
-										<label for="login-form-password">Contraseña:</label>
-										<input type="password" id="contrasenia" name="contrasenia" value="" class="form-control" autocomplete="off" />
-									</div>
-
-									<div class="col_full">
-										<label for="login-form-password">Confirme su contraseña:</label>
-										<input type="password" id="contrasenia2" name="contrasenia2" value="" class="form-control" autocomplete="off" />
-									</div>
-
-									<div class="col_full nobottommargin">
-										<button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Guardar cambios</button>
-									</div>
-
-								</form>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-		<!-- Footer
-		============================================= -->
-		<?php include('footer.php'); ?>
-
-	</div><!-- #wrapper end -->
-
-	<!-- Go To Top
-	============================================= -->
-	<div id="gotoTop" class="icon-angle-up"></div>
-
-	<!-- External JavaScripts
-	============================================= -->
-	<script src="<?=base_url();?>public/js/jquery.js"></script>
-	<script src="<?=base_url();?>public/js/plugins.js"></script>
-	<script src="<?=base_url();?>public/js/plugins/jquery.validation.js"></script>
-
-	<!-- Footer Scripts
-	============================================= -->
-	<script src="<?=base_url();?>public/js/functions.js"></script>
-	<script src="<?=base_url();?>public/js/funciones.js?v=4"></script>
-	<!--Modal Loading -->
-	<script src="<?=base_url();?>admin/plugins/modal-loading/js/modal-loading.js"></script>
-	<!--Modal Loading -->
-
+                                </div>
+                                <div class="form-group text-center">
+									<input name="idusuario" type="hidden" value="<?= $idusuario ?>">
+									<input name="token" type="hidden" value="<?= $token ?>">
+                                    <div class="col-xs-12 p-b-20">
+                                        <button class="btn btn-block btn-lg btn-info" type="submit">Cambiar contraseña</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="<?= base_url() ?>public/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="<?= base_url() ?>public/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/toastr/build/toastr.min.js"></script>
+    <script src="<?= base_url() ?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script>
+        $(".preloader").fadeOut(); 
+    </script>
+    
+    <script>
+        function alerta(mensaje,tipo){
+            switch(tipo){
+                case 'success':
+                    toastr.success(mensaje, '¡Exito!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });    
+                    break;
+                case 'warning':
+                    toastr.warning(mensaje, 'Advertencia', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });    
+                    break;
+                case 'error':
+                    toastr.error(mensaje, '¡Error!', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });    
+                    break;
+                default:
+                    toastr.info(mensaje, 'Info', { "showMethod": "slideDown", "hideMethod": "slideUp", timeOut: 4000 });
+            }
+        }
+    </script>
 
 	<script>
+    function restaurarPassword(f, e) {
+		e.preventDefault();
 
-	</script>
-	<!-- External JavaScripts
-				============================================= -->
-				
-	<script >
-		$( "#login-form" ).validate({
-		  	rules: {
-		    	contrasenia: {
-		      		required: true
-		    	},
-		    	contrasenia2: {
-		      		required: true,
-		      		equalTo: "#contrasenia"
-		    	}
-		  	},
-		  	messages: {
-			    contrasenia: "Este campo es requerido",
-			    contrasenia2: {
-			    	required: "Este campo es requerido",
-			    	equalTo: "Las contraseñas deben coincidir"
-			    }
-		  	},
-		  	submitHandler: function(form){
-		  		EnviarForm(form,'<?=base_url();?>C_seguridad/actualizar_contrasenia');
-
-		  	}
-		});
-
-		function EnviarForm(form,url_destino)
-		{
-			var loading = new Loading({
-					discription: 'Espere...',
-			    	defaultApply: true
-			    });
 			$.ajax({
-		        url: url_destino,
-		        type: 'POST',
-		        async: false,	//	Para obligar al usuario a esperar una respuesta
-		        data: $(form).serialize(),
-		        error: function(XMLHttpRequest, errMsg, exception){
-		            var msg = "Ha fallado la petición al servidor";
-		            alert(msg);
-		        },
-		        success: function(htmlcode){
-		        	var cod = htmlcode.split("-");
-		        	switch(cod[0])
-		            {
-		                case "0":
-		                	loading.out();
-		                    Notificacion('Su contraseña ha sido cambiada','success');
-		                    setTimeout(function(){ window.location.href = '<?=base_url();?>Sitio/login?r=1' ; }, 1500);
-		                    break;                    
-		                default:
-		                	loading.out();
-		                    Notificacion(msg[cod[0]],'error');
-		                    break;
-		            }
-		        }
-		    });	
-		}
+				type: "POST",
+				url: "<?= base_url() ?>C_seguridad/reestore_password", //Nombre del controlador
+				data: $(f).serialize(),
 
-	</script>
+				success: function(resp) {
+					if (resp == "correcto") {
 
-	<!-- Footer Scripts
-	============================================= -->
+                        window.location.href = '<?=base_url()?>';
+                        alerta('Restauración exitosa', 'success');
+					}
+					if(resp == "error_passnew"){
+						alerta('La confirmación de la contraseña no coincide con la nueva contraseña', 'warning');
+					}
+                    if(resp == "error_token"){
+						alerta('Se a producido un error, intente nuevamente', 'error');
+					}
+					if (resp == "error") {
+						alerta('Se a producido un error, intente nuevamente', 'error');
+					}
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
 
+				}
+			});
+    }
+</script>
 </body>
 </html>

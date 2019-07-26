@@ -12,12 +12,13 @@ class C_entregables extends CI_Controller
     }
 
     //Muestra la vista principal
-    public function index()
-    {
-        $data['consulta'] = $this->me->mostrar_entregables();
-    	$this->load->view('entregables/principal',$data);
+    public function index(){
+
+        if(isset($_POST['id'])){
+
+            $data['consulta'] = $this->me->mostrar_entregables();
+    	    $this->load->view('entregables/principal',$data);
+
+        }
     }
 }
-
-
-?>

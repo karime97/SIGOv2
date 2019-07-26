@@ -7,9 +7,9 @@
                         <thead>
                             <tr>
                                 <th>Entregable</th>
-                                <th>Unidad de medida</th>
+                                <th width="600px">Unidad de medida</th>
                                 <th>Periodicidad</th>
-                                <th>¿Los beneficios son los mismos en cada periodo?</th>
+                                <th width="1000px">¿Los beneficios son los mismos en cada periodo?</th>
                                 <th>Municipalizable</th>
                                 <th>¿Presenta alineación a compromiso?</th>
                                 <th width="150px"> </th>
