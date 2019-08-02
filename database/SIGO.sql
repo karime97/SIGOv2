@@ -157,6 +157,19 @@ ALTER SEQUENCE public."ComponentePag_iIdComponente_seq" OWNED BY public."Compone
 
 
 --
+-- Name: ComponenteUBP; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ComponenteUBP" (
+    "iIdComponente" integer NOT NULL,
+    "iIdUbp" integer NOT NULL,
+    "nMonto" numeric(20,2) NOT NULL
+);
+
+
+ALTER TABLE public."ComponenteUBP" OWNER TO postgres;
+
+--
 -- Name: Componente_iIdComponente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -186,12 +199,11 @@ CREATE TABLE public."Compromiso" (
     "iIdCompromiso" integer NOT NULL,
     "vCompromiso" character varying(800) NOT NULL,
     "iNumero" integer NOT NULL,
-    "iEstatus" integer NOT NULL,
+    "iRevisado" smallint NOT NULL,
     "dPorcentajeAvance" numeric(5,2) DEFAULT 0 NOT NULL,
     "iIdDependencia" integer NOT NULL,
     "vFeNotarial" character varying(50) NOT NULL,
     "vNombreCorto" character varying(500) NOT NULL,
-    "iEstatusRevision" integer NOT NULL,
     "dUltimaAct" timestamp without time zone,
     "vDescripcion" text NOT NULL,
     "iUltUsuarioAct" integer,
@@ -214,17 +226,10 @@ COMMENT ON TABLE public."Compromiso" IS 'Compromisos del gobernador';
 
 
 --
--- Name: COLUMN "Compromiso"."iEstatus"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN "Compromiso"."iRevisado"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN public."Compromiso"."iEstatus" IS '"Sin iniciar", "En cumplimiento", "Cumplido"';
-
-
---
--- Name: COLUMN "Compromiso"."iEstatusRevision"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."Compromiso"."iEstatusRevision" IS '"Pendiente","Revisado","Publicado"';
+COMMENT ON COLUMN public."Compromiso"."iRevisado" IS '1=Si, 0=No';
 
 
 --
@@ -570,7 +575,8 @@ CREATE TABLE public."Evidencia" (
     "iFotoInicio" smallint DEFAULT 0 NOT NULL,
     "iOrdenFoto" smallint DEFAULT 0 NOT NULL,
     "iIdUsuarioSube" integer,
-    "iIdUsuarioRevisa" integer
+    "iIdUsuarioRevisa" integer,
+    "iActivo" smallint NOT NULL
 );
 
 
@@ -580,7 +586,7 @@ ALTER TABLE public."Evidencia" OWNER TO postgres;
 -- Name: COLUMN "Evidencia"."iEstatus"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN public."Evidencia"."iEstatus" IS '"Eliminado","Nuevo","Rechazado","Aprobado","Pubicado"';
+COMMENT ON COLUMN public."Evidencia"."iEstatus" IS '"Nuevo","Rechazado","Aprobado","Pubicado"';
 
 
 --
@@ -616,6 +622,13 @@ COMMENT ON COLUMN public."Evidencia"."iIdUsuarioSube" IS 'Indica el id del usuar
 --
 
 COMMENT ON COLUMN public."Evidencia"."iIdUsuarioRevisa" IS 'Indica el id del usuario que revisó';
+
+
+--
+-- Name: COLUMN "Evidencia"."iActivo"; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public."Evidencia"."iActivo" IS '1=Activo, 0=Inactivo';
 
 
 --
@@ -888,6 +901,50 @@ CREATE TABLE public."PED2019Tema" (
 
 
 ALTER TABLE public."PED2019Tema" OWNER TO postgres;
+
+--
+-- Name: Parametro; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Parametro" (
+    "iIdParametro" integer NOT NULL,
+    "vValor" text,
+    "vParametro" character varying(250) NOT NULL,
+    "vDescripcion" character varying(250) NOT NULL,
+    "iActivo" smallint DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public."Parametro" OWNER TO postgres;
+
+--
+-- Name: COLUMN "Parametro"."iActivo"; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public."Parametro"."iActivo" IS '0=Inactivo, 1=Activo';
+
+
+--
+-- Name: Parametro_iIdParametro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Parametro_iIdParametro_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Parametro_iIdParametro_seq" OWNER TO postgres;
+
+--
+-- Name: Parametro_iIdParametro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Parametro_iIdParametro_seq" OWNED BY public."Parametro"."iIdParametro";
+
 
 --
 -- Name: Periodicidad; Type: TABLE; Schema: public; Owner: postgres
@@ -1518,6 +1575,13 @@ ALTER TABLE ONLY public."MaxNivelAcademico" ALTER COLUMN "iIdMaxNivelAcademico" 
 
 
 --
+-- Name: Parametro iIdParametro; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Parametro" ALTER COLUMN "iIdParametro" SET DEFAULT nextval('public."Parametro_iIdParametro_seq"'::regclass);
+
+
+--
 -- Name: Permiso iIdPermiso; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1601,10 +1665,18 @@ COPY public."ComponentePag" ("iIdComponente", "vComponente", "vDescripcion", "nP
 
 
 --
+-- Data for Name: ComponenteUBP; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ComponenteUBP" ("iIdComponente", "iIdUbp", "nMonto") FROM stdin;
+\.
+
+
+--
 -- Data for Name: Compromiso; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Compromiso" ("iIdCompromiso", "vCompromiso", "iNumero", "iEstatus", "dPorcentajeAvance", "iIdDependencia", "vFeNotarial", "vNombreCorto", "iEstatusRevision", "dUltimaAct", "vDescripcion", "iUltUsuarioAct", "iUltUsuarioRev", "iIdTema", "vAntes", "vDespues", "iActivo", "vObservaciones") FROM stdin;
+COPY public."Compromiso" ("iIdCompromiso", "vCompromiso", "iNumero", "iRevisado", "dPorcentajeAvance", "iIdDependencia", "vFeNotarial", "vNombreCorto", "dUltimaAct", "vDescripcion", "iUltUsuarioAct", "iUltUsuarioRev", "iIdTema", "vAntes", "vDespues", "iActivo", "vObservaciones") FROM stdin;
 \.
 
 
@@ -1903,13 +1975,13 @@ COPY public."EntregableComponente" ("iIdEntregable", "iIdComponente") FROM stdin
 --
 
 COPY public."Estatus" ("iIdEstatus", "vEstatus", "iActivo", "vEntidadMide") FROM stdin;
-4	Sin iniciar	1	Avance compromiso
-5	En cumplimiento	1	Avance compromiso
-6	Cumplido	1	Avance compromiso
-7	Rechazado	1	Estatus evidencia
-1	Pendiente	1	Estatus evidencia
-2	Revisado	1	Estatus evidencia
-3	Publicado	1	Estatus evidencia
+7	Rechazado	1	Evidencia
+1	Pendiente	1	Evidencia
+3	Publicado	1	Evidencia
+2	Aprobado	1	Evidencia
+4	Sin iniciar	1	Compromiso
+5	En cumplimiento	1	Compromiso
+6	Cumplido	1	Compromiso
 \.
 
 
@@ -1917,7 +1989,7 @@ COPY public."Estatus" ("iIdEstatus", "vEstatus", "iActivo", "vEntidadMide") FROM
 -- Data for Name: Evidencia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Evidencia" ("iIdEvidencia", "iIdComponente", "vEvidencia", "iEstatus", "vTipo", "dFechaSubida", "dFechaRevision", "iFotoInicio", "iOrdenFoto", "iIdUsuarioSube", "iIdUsuarioRevisa") FROM stdin;
+COPY public."Evidencia" ("iIdEvidencia", "iIdComponente", "vEvidencia", "iEstatus", "vTipo", "dFechaSubida", "dFechaRevision", "iFotoInicio", "iOrdenFoto", "iIdUsuarioSube", "iIdUsuarioRevisa", "iActivo") FROM stdin;
 \.
 
 
@@ -3497,6 +3569,28 @@ COPY public."PED2019Tema" ("iIdTema", "vTema", "iIdEje", "vIcono") FROM stdin;
 
 
 --
+-- Data for Name: Parametro; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Parametro" ("iIdParametro", "vValor", "vParametro", "vDescripcion", "iActivo") FROM stdin;
+1	\N	Revision de compromisos	Activa el periodo de revisión de compromisos estatales. Deshabilita la modificación de información para los usuarios que no cuentan con el permiso especial	1
+2	0	PAR_CAP_PAT	Si esta activo los operadores y administradores sectoriales pueden agregar y modificar actividades estratégicas y sus metas. Esto no aplica para los usuarios que cuenten con permisos especiales	1
+3	2015	Año actividades	Año en  curso de las actividades estratégicas	1
+4	4	PAR_TRIMESTRE	Indica el trimestre en curso de las actividades estrategicas	1
+5	\N	revision_informe	2014	1
+6	0	PAR_CAP_AVANCES	Indica si el periodo de captura de avances esta habilitado o no.	1
+7	0	PAR_CAP_ACC_REL	Indica si el periodo de captura de acciones relevantes esta habilitado o no.	1
+8	0	PAR_CAP_INF_TRIM	Indica si el periodo de captura de informes trimestrales esta habilitado o no.	1
+9	1,2,3,4,5,6,7,8,9,10,11,12	PAR_MES_CAP_AVANCES	Indica los meses que se encuentran habilitados para la captura de avances del PAT	1
+10	0	PAR_CAP_INF_ANIOS_ANT	Indica si es posible modificar la información reportada en años anteriores.	1
+11	0	PAR_CAP_PROGRAMAS	Permite a las delegaciones capturar programas 	1
+12	0	PAR_CAP_COMPONENTES	Permite a las delegaciones capturar componentes	1
+13	0	PAR_CAP_ENTREGABLES	Permite a las delegaciones capturar entregables	1
+14	0	PAR_CAP_AVANCES_DEL	Permite a las delegaciones capturar avances	1
+\.
+
+
+--
 -- Data for Name: Periodicidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3551,6 +3645,7 @@ COPY public."Permiso" ("iIdPermiso", "vIdentificador", "vPermiso", "vDescripcion
 28	 	Avance de compromisos	Reporte de avances de compromisos	1	  	6	 	3	1	0
 11	  	UBPS	Permiso para administrar el catálogo de UBPS	1	index.php/C_ubps/	1	mdi mdi-file-document	3	1	0
 2	  	Dependencias	Permiso para administrar el catalogo de dependencias y entidades	1	index.php/C_dependencias/	1	mdi mdi-hospital-building	1	1	0
+29	 	Aprobar avances	Permiso para aprobar avances de los entregables	2	#	0	 	0	1	0
 14	  	Plan Anual de Trabajo	Permiso para acceder al módulo de compromisos estatales	1	index.php/C_pat	0	mdi mdi-book-open-page-variant	4	1	0
 \.
 
@@ -6319,6 +6414,13 @@ SELECT pg_catalog.setval('public."MaxNivelAcademico_iIdMaxNivelAcademico_seq"', 
 
 
 --
+-- Name: Parametro_iIdParametro_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Parametro_iIdParametro_seq"', 1, false);
+
+
+--
 -- Name: id_actividad_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -6378,7 +6480,7 @@ SELECT pg_catalog.setval('public.id_municipio_seq', 1, false);
 -- Name: id_permiso_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.id_permiso_seq', 28, true);
+SELECT pg_catalog.setval('public.id_permiso_seq', 30, true);
 
 
 --
@@ -6439,6 +6541,14 @@ ALTER TABLE ONLY public."Avance"
 
 ALTER TABLE ONLY public."ComponentePag"
     ADD CONSTRAINT "ComponentePag_pkey" PRIMARY KEY ("iIdComponente");
+
+
+--
+-- Name: ComponenteUBP ComponenteUBP_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ComponenteUBP"
+    ADD CONSTRAINT "ComponenteUBP_pkey" PRIMARY KEY ("iIdComponente", "iIdUbp");
 
 
 --
@@ -6658,6 +6768,14 @@ ALTER TABLE ONLY public."PED2019Tema"
 
 
 --
+-- Name: Parametro Parametro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Parametro"
+    ADD CONSTRAINT "Parametro_pkey" PRIMARY KEY ("iIdParametro");
+
+
+--
 -- Name: Periodicidad Periodicidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -6815,6 +6933,22 @@ ALTER TABLE ONLY public."Actividad"
 
 ALTER TABLE ONLY public."Avance"
     ADD CONSTRAINT "FK_Avance_DetEnt" FOREIGN KEY ("iIdDetalleEntregable") REFERENCES public."DetalleEntregable"("iIdDetalleEntregable");
+
+
+--
+-- Name: ComponenteUBP FK_CompUbp_Componente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ComponenteUBP"
+    ADD CONSTRAINT "FK_CompUbp_Componente" FOREIGN KEY ("iIdComponente") REFERENCES public."Componente"("iIdComponente");
+
+
+--
+-- Name: ComponenteUBP FK_CompUbp_UBP; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ComponenteUBP"
+    ADD CONSTRAINT "FK_CompUbp_UBP" FOREIGN KEY ("iIdUbp") REFERENCES public."UBP"("iIdUbp");
 
 
 --
