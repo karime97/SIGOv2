@@ -22,6 +22,7 @@
                 <br><br>
                 <form class="needs-validation was-validated" onsubmit="guardarDetalles(this,event);">
                     <div class="form-row">
+                        <legend>Datos generales</legend>
                         <div class="col-md-10 mb-10">
                             <label for="validationCustom04">Nombre de la actividad</label>
                             <input class="form-control" id="validationCustom04" name="NombAct" required="" type="text" placeholder="" value="<?= $consulta->vActividad ?>">
@@ -38,6 +39,40 @@
                                 Este campo no puede estar vacio.
                             </div>
                         </div>
+
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom04">Fecha de inicio</label>
+                            <input type="date" class="form-control" id="fINICIO" name="fINICIO" required="" value="<?= $consulta->dInicio ?>">
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom04">Fecha fin</label>
+                            <input type="date" class="form-control" id="fFIN" name="fFIN" required="" value="<?= $consulta->dFin ?>">
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Objetivo general</label>
+                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" rows="5" value="<?= $consulta->vObjetivo ?>"></textarea>
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Población objetivo</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" rows="5" value="<?= $consulta->vDescripcion ?>"></textarea>
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+
+                       <legend>Alienación al P.E.D</legend>
+                       
                         <div class="col-md-6">
                             <label for="validationCustom04">Eje</label>
                             <div class="form-group">
@@ -104,8 +139,8 @@
                         </div>
                     </div>
                 </div>
-                <br><br><br>
-                    <h1>Objetivo General</h1>
+                
+                    <!--<h1>Objetivo General</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
                             <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vObjetivo ?>"></textarea>
@@ -124,23 +159,10 @@
                             </div>
                         </div>
                     </div>
-                <br><br><br>
-                    <h1>Modulo monetario</h1>
+                <br><br><br>-->
+                    <legend>Fuentes de financiamiento</legend>
                     <div class="form-row">
-                        <div class="col-md-6 mb-6">
-                            <label for="validationCustom04">Fecha de inicio</label>
-                            <input type="date" class="form-control" id="fINICIO" name="fINICIO" required="" value="<?= $consulta->dInicio ?>">
-                            <div class="invalid-feedback">
-                                Este campo no puede estar vacio.
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-6">
-                            <label for="validationCustom04">Fecha fin</label>
-                            <input type="date" class="form-control" id="fFIN" name="fFIN" required="" value="<?= $consulta->dFin ?>">
-                            <div class="invalid-feedback">
-                                Este campo no puede estar vacio.
-                            </div>
-                        </div>
+                       
                         <div class="col-md-6">
                             <label for="validationCustom04">Fuente de financiamiento</label>
                             <div class="form-group">
@@ -188,8 +210,8 @@
                             </div>
                         </div>
                     </div>
-                <br><br><br>
-                    <h1>Alineacion UBP</h1>
+                
+                    <legend>Alineacion UBP</legend>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="validationCustom04">Número UBP</label>
