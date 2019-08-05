@@ -13,8 +13,7 @@ class C_usuarios extends CI_Controller {
     }
 
     //Muestra la vista principal
-    public function index()
-    {
+    public function index(){
         $lib = new Class_options();
 
         $data['roles'] = $lib->options_tabla('roles');
@@ -145,7 +144,7 @@ class C_usuarios extends CI_Controller {
 
     }
 
-    //Muestra la vistapara editar los permisos de determinado usuario
+    //Muestra la vista para editar los permisos de determinado usuario
     public function editpermisos(){
 
         if(isset($_POST['id'])){
@@ -279,7 +278,7 @@ class C_usuarios extends CI_Controller {
             echo $resultado;
 
         }else{
-            echo "algo salio mal";
+            echo "error";
         }
     }
 
