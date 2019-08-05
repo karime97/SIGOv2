@@ -17,7 +17,8 @@ CREATE TABLE public."Compromiso"
     "iIdTema" integer NOT NULL,
     "vAntes" text NOT NULL,
     "vDespues" text NOT NULL,
-    "iActivo" smallint NOT NULL DEFAULT 1,
+    "vObservaciones" text NOT NULL,
+    "iActivo" smallint NOT NULL DEFAULT 1,    
     PRIMARY KEY ("iIdCompromiso"),
     CONSTRAINT "FK_Compromiso_Dependencia" FOREIGN KEY ("iIdDependencia")
         REFERENCES public."Dependencia" ("iIdDependencia") MATCH SIMPLE

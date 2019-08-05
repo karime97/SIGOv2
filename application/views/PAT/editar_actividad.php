@@ -22,10 +22,11 @@
                 <br><br>
                 <form class="needs-validation was-validated" onsubmit="guardarDetalles(this,event);">
                     <div class="form-row">
+                        <legend>Datos generales</legend>
                         <div class="col-md-10 mb-10">
                             <label for="validationCustom04">Nombre de la actividad</label>
                             <input class="form-control" id="validationCustom04" name="NombAct" required="" type="text" placeholder="" value="<?= $consulta->vActividad ?>">
-                            <input id="id" name="id" type="hidden" value="<?= $consulta->iIdDetalleActividad ?>">
+                            <input id="idAct" name="idAct" type="hidden" value="<?= $consulta->iIdActividad ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -33,10 +34,45 @@
                         <div class="col-md-2 mb-2">
                             <label for="validationCustom04">Año</label>
                             <input class="form-control" id="validationCustom04" name="annio" required="" type="text" placeholder="" onkeypress="solonumeros(event);" maxlength="4" value="<?= $consulta->iAnio ?>">
+                            <input id="id" name="id" type="hidden" value="<?= $consulta->iIdDetalleActividad ?>">
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
                         </div>
+
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom04">Fecha de inicio</label>
+                            <input type="date" class="form-control" id="fINICIO" name="fINICIO" required="" value="<?= $consulta->dInicio ?>">
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-6">
+                            <label for="validationCustom04">Fecha fin</label>
+                            <input type="date" class="form-control" id="fFIN" name="fFIN" required="" value="<?= $consulta->dFin ?>">
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Objetivo general</label>
+                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" rows="5" value="<?= $consulta->vObjetivo ?>"></textarea>
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Población objetivo</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" rows="5" value="<?= $consulta->vDescripcion ?>"></textarea>
+                            <div class="invalid-feedback">
+                                Este campo no puede estar vacio.
+                            </div>
+                        </div>
+
+                       <legend>Alienación al P.E.D</legend>
+                       
                         <div class="col-md-6">
                             <label for="validationCustom04">Eje</label>
                             <div class="form-group">
@@ -103,11 +139,11 @@
                         </div>
                     </div>
                 </div>
-                <br><br><br>
-                    <h1>Objetivo General</h1>
+                
+                    <!--<h1>Objetivo General</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
-                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;"></textarea>
+                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vObjetivo ?>"></textarea>
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -117,29 +153,16 @@
                     <h1>Descripción</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
-                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;"></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vDescripcion ?>"></textarea>
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
                         </div>
                     </div>
-                <br><br><br>
-                    <h1>Modulo monetario</h1>
+                <br><br><br>-->
+                    <legend>Fuentes de financiamiento</legend>
                     <div class="form-row">
-                        <div class="col-md-6 mb-6">
-                            <label for="validationCustom04">Fecha de inicio</label>
-                            <input type="date" class="form-control" id="fINICIO" name="fINICIO" required="">
-                            <div class="invalid-feedback">
-                                Este campo no puede estar vacio.
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-6">
-                            <label for="validationCustom04">Fecha fin</label>
-                            <input type="date" class="form-control" id="fFIN" name="fFIN" required="">
-                            <div class="invalid-feedback">
-                                Este campo no puede estar vacio.
-                            </div>
-                        </div>
+                       
                         <div class="col-md-6">
                             <label for="validationCustom04">Fuente de financiamiento</label>
                             <div class="form-group">
@@ -187,8 +210,8 @@
                             </div>
                         </div>
                     </div>
-                <br><br><br>
-                    <h1>Alineacion UBP</h1>
+                
+                    <legend>Alineacion UBP</legend>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="validationCustom04">Número UBP</label>
@@ -294,7 +317,7 @@
             data: $(f).serialize(),
 
             success: function(resp) {
-                if (resp > 0) {
+                if (resp == 'Correcto') {
                     filter();
                     alerta('Guardado exitosamente', 'success');
                 } else {
@@ -308,12 +331,7 @@
     /* Carrito selectores */
     function agregarCarrito() {
         if ($('#linAcc').val() == '0') {
-            swal("Debe seleccionar una opción", {
-                title: 'Error',
-                icon: "error",
-                button: false,
-                timer: 1500
-            });
+            alerta('Debe seleccionar una opcion', 'error');
 
         } else {
             var formData = new FormData();
@@ -329,9 +347,7 @@
                     if (data == 1) {
                         $("#tabla-grid3").load('<?= base_url() ?>C_pat/generar_tabla');
                     } else {
-                        //$("#grid3");
-                        alert('Error');
-                        //$("#table").load('C_plantilla/GenerateTable');
+                        alerta('No se puede repetir la opcion', 'error');
                     }
                 },
                 cache: false,
@@ -354,9 +370,7 @@
                 if (data == 1) {
                     $("#tabla-grid3").load('<?= base_url() ?>C_pat/generar_tabla');
                 } else {
-                    //$("#grid3");
-                    alert('Error');
-                    //$("#table").load('C_plantilla/GenerateTable');
+                    alerta('Error al eliminar', 'error');
                 }
             },
             cache: false,
@@ -368,13 +382,7 @@
     /* Carrito selectores */
     function agregarCarritoF() {
         if ($('#fuenteF').val() == '0') {
-            swal("Debe seleccionar una opción", {
-                title: 'Error',
-                icon: "error",
-                button: false,
-                timer: 1500
-            });
-
+            alerta('Debe seleccionar una opción', 'error');
         } else {
             var formData = new FormData();
             formData.append('fuenteF', $("#fuenteF").val());
@@ -389,9 +397,7 @@
                     if (data == 1) {
                         $("#tabla-grid").load('<?= base_url() ?>C_pat/tablaFinanciamiento');
                     } else {
-                        //$("#grid3");
-                        alert('Error');
-                        //$("#table").load('C_plantilla/GenerateTable');
+                        alerta('No se puede repetir la opcion', 'error');
                     }
                 },
                 cache: false,
@@ -414,9 +420,7 @@
                 if (data == 1) {
                     $("#tabla-grid").load('<?= base_url() ?>C_pat/tablaFinanciamiento');
                 } else {
-                    //$("#grid3");
-                    alert('Error');
-                    //$("#table").load('C_plantilla/GenerateTable');
+                    alerta('Error al eliminar', 'error');
                 }
             },
             cache: false,
@@ -428,13 +432,7 @@
     /* Carrito UBP y PP */
     function agregarCarritoUP() {
         if ($('#NumUBP').val() == '0') {
-            swal("Debe seleccionar una opción", {
-                title: 'Error',
-                icon: "error",
-                button: false,
-                timer: 1500
-            });
-
+            alerta('Debe seleccionar una opción', 'error');
         } else {
             var formData = new FormData();
             formData.append('NumUBP', $("#NumUBP").val());
@@ -448,7 +446,7 @@
                     if (data == 1) {
                         $("#tabla-grid2").load('<?= base_url() ?>C_pat/tablaUbpsPp');
                     } else {
-                        alert('Error');
+                        alerta('No se puede repetir la opcion', 'error');
                     }
                 },
                 cache: false,
@@ -471,9 +469,7 @@
                 if (data == 1) {
                     $("#tabla-grid2").load('<?= base_url() ?>C_pat/tablaUbpsPp');
                 } else {
-                    //$("#grid3");
-                    alert('Error');
-                    //$("#table").load('C_plantilla/GenerateTable');
+                    alerta('Error al eliminar', 'error');
                 }
             },
             cache: false,

@@ -11,6 +11,7 @@ class C_pat extends CI_Controller
         session_start();
         $this->load->helper('url');
         $this->load->model('M_pat', 'pat');
+        $this->load->model('M_seguridad', 'mseg');
     }
 
     public function index()
@@ -62,9 +63,10 @@ class C_pat extends CI_Controller
         }
     }
 
-    public function actualizarActividad(){
-        if(isset($_POST['id']) && isset($_POST['NombAct'])) {
-            
+    public function actualizarActividad()
+    {
+        if (isset($_POST['id']) && isset($_POST['NombAct'])) {
+
             $id = $_POST['id'];
 
             $data = array(
@@ -73,14 +75,15 @@ class C_pat extends CI_Controller
 
             $resul = $this->pat->modificarAct($id, $data);
             echo $resul;
-        }else {
+        } else {
             echo "No funcionó";
         }
     }
 
-    public function actualizarDeatalleActividad(){
-        if(isset($_POST['id']) && isset($_POST['NombAct']) && isset($_POST['annio'])) {
-            
+    public function actualizarDeatalleActividad()
+    {
+        if (isset($_POST['id']) && isset($_POST['NombAct']) && isset($_POST['annio'])) {
+
             $id = $_POST['id'];
 
             $data = array(
@@ -90,7 +93,7 @@ class C_pat extends CI_Controller
 
             $resul = $this->pat->modificarDetaAct($id, $data);
             echo $resul;
-        }else {
+        } else {
             echo "No funcionó";
         }
     }
@@ -172,84 +175,222 @@ class C_pat extends CI_Controller
 
     public function guardarAct()
     {
-        if (isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion'])) {
+
+        if (isset($_POST['id']) && isset($_POST['idAct']) && isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion']))
+        {
 
             $id = $_POST['id'];
-            
+            $idActividad = $_POST['idAct'];
+
+            //var_dump($_SESSION['carritoSelec']);           
+
+            //  Iniciamos laa transaccion
+            $con = $this->mseg->iniciar_transaccion();
+
+            // Actualizamos la atabla Actividad
             $data = array(
                 'vActividad' => $this->input->post('NombAct'),
                 'vObjetivo' => $this->input->post('objGeneral'),
                 'vDescripcion' => $this->input->post('descripcion'),
                 'iIdDependencia' => (int) $_SESSION[PREFIJO . '_iddependencia']
             );
+            $where['iIdActividad'] = $idActividad;
+            $this->mseg->actualiza_registro('Actividad',$where,$data,$con);
 
-            $idAct = $this->pat->modificarAct($data);
+            // Actualizamos la tabla DetalleActividad
+            $data1 = array(
+                'iIdActividad' => $idActividad,
+                'iAnio' => $this->input->post('annio'),
+                'dInicio' => $this->input->post('fINICIO'),
+                'dFin' => $this->input->post('fFIN')
+            );
+            $where1['iIdDetalleActividad'] = $id;
+            $this->mseg->actualiza_registro('DetalleActividad',$where1,$data1,$con);
 
-            if ($idAct > 0) {
+            //Eliminar ActividadLineaAccion
+            $this->mseg->elimina_registro('ActividadLineaAccion',$where,$con);
+
+            //  Guardamos las lineas de acción
+            $actLA = $_SESSION['carritoSelec'];
+    
+            foreach ($actLA as $la) {
+                if($la->iActivo > 0){
+                    $LinAcc['iIdActividad'] = $idActividad;
+                    $LinAcc['iIdLineaAccion'] = $la->iIdLineaAccion;                
+
+                    //$insert = $this->pat->agregarActLineaAcc($LinAcc);
+                    $this->mseg->inserta_registro_no_pk('ActividadLineaAccion',$LinAcc,$con);
+                }
+            }
+
+            //Eliminar DetalleActividadFinanciamiento
+            $this->mseg->elimina_registro('DetalleActividadFinanciamiento',$where1,$con);
+
+            //  Guardamos financiamiento
+            $actFin = $_SESSION['carritoFinan'];
+    
+            foreach ($actFin as $Af) {
+                if($Af->iActivo > 0){
+                    $fin['iIdDetalleActividad'] = $id;
+                    $fin['iIdFinanciamiento'] = $Af->iIdFinanciamiento;
+                    $fin['monto'] = $Af->montoFinan;
+
+                    $this->mseg->inserta_registro_no_pk('DetalleActividadFinanciamiento',$fin,$con);
+                }
+            }
+
+            //Eliminar DetalleActividadFinanciamiento
+            $this->mseg->elimina_registro('DetalleActividadUBP',$where1,$con);
+
+            //Gardamos las UBPs
+            $ActUbp = $_SESSION['carritoUbpP'];
+
+            foreach ($ActUbp as $Au) {
+                if($Au->iActivo > 0){
+                    $UBP['iIdDetalleActividad'] = $id;
+                    $UBP['iIdUbp'] = $Au->iIdUbp;
+
+                    $this->mseg->inserta_registro_no_pk('DetalleActividadUBP',$UBP,$con);
+                }
+            }
+
+            // Finalizar transaccion
+            if($this->mseg->terminar_transaccion($con) == true){
+                echo 'Correcto';
+            } else {
+                echo 'Error';
+            }
+
+            /*$auxiliar = $this->pat->modificarAct($data, $idActividad);
+            $eliminarALA = $this->pat->eliminarActLineaAcc($idActividad);
+            echo $eliminarALA;
+            $eliminarAF = $this->pat->eliminarActFinanciamiento($idActividad);
+            echo $eliminarAF;
+            $eliminarAU = $this->pat->eliminarActUBP($idActividad);
+            echo $eliminarAU;
+
+            if ($auxiliar == true) {
                 $data1 = array(
-                    'iIdActividad' => $idAct,
+                    'iIdActividad' => $idActividad,
                     'iAnio' => $this->input->post('annio'),
                     'dInicio' => $this->input->post('fINICIO'),
                     'dFin' => $this->input->post('fFIN')
                 );
-                $idDetAct = $this->pat->modificarDetaAct($data1);
+                $auxiliar2 = $this->pat->modificarDetaAct($data1, $id);
             }
 
-            if ($idAct > 0) {
-                $data1 = array(
-                    'iIdActividad' => $idAct,
-                    'iIdLineaAccion' => $this->input->post('linAcc')
-                );
-
-                $actLA = $_SESSION['carritoSelec'];
-
-                foreach($actLA as $la ){
-                    $LinAcc['iIdActividad'] = $idAct;
-                    $LinAcc['iIdLineaAccion'] = $this->input->post('linAcc');
-
-                    $insert = $this->pat->agregarActLineaAcc($LinAcc);
+            if ($auxiliar == true) {
+                if ($eliminarALA == true) {
+                    $data1 = array(
+                        'iIdActividad' => $idActividad,
+                        'iIdLineaAccion' => $this->input->post('linAcc')
+                    );
+    
+                    $actLA = $_SESSION['carritoSelec'];
+    
+                    foreach ($actLA as $la) {
+                        $LinAcc['iIdActividad'] = $idActividad;
+                        $LinAcc['iIdLineaAccion'] = $this->input->post('linAcc');
+    
+                        $insert = $this->pat->agregarActLineaAcc($LinAcc);
+                    }
+    
+                    echo $insert;
+                }else {
+                    $data1 = array(
+                        'iIdActividad' => $idActividad,
+                        'iIdLineaAccion' => $this->input->post('linAcc')
+                    );
+    
+                    $actLA = $_SESSION['carritoSelec'];
+    
+                    foreach ($actLA as $la) {
+                        $LinAcc['iIdActividad'] = $idActividad;
+                        $LinAcc['iIdLineaAccion'] = $this->input->post('linAcc');
+    
+                        $insert = $this->pat->agregarActLineaAcc($LinAcc);
+                    }
+    
+                    echo $insert;
                 }
-
-                echo $insert;
             }
 
-            if ($idDetAct > 0) {
-                $data1 = array(
-                    'iIdDetalleActividad' => $idDetAct,
-                    'iIdFinanciamiento' => $this->input->post('fuenteF'),
-                    'monto' => $this->input->post('montoF')
-                );
-
-                $actFin = $_SESSION['carritoFinan'];
-
-                foreach($actFin as $Af ){
-                    $fin['iIdDetalleActividad'] = $idDetAct;
-                    $fin['iIdFinanciamiento'] = $this->input->post('fuenteF');
-                    $fin['monto'] = $this->input->post('montoF');
-
-                    $insert2 = $this->pat->agregarActFinanciamiento($fin);
+            if ($auxiliar2 == true) {
+                if ($eliminarAF == true) {
+                    $data1 = array(
+                        'iIdDetalleActividad' => $id,
+                        'iIdFinanciamiento' => $this->input->post('fuenteF'),
+                        'monto' => $this->input->post('montoF')
+                    );
+    
+                    $actFin = $_SESSION['carritoFinan'];
+    
+                    foreach ($actFin as $Af) {
+                        $fin['iIdDetalleActividad'] = $id;
+                        $fin['iIdFinanciamiento'] = $this->input->post('fuenteF');
+                        $fin['monto'] = $this->input->post('montoF');
+    
+                        $insert2 = $this->pat->agregarActFinanciamiento($fin);
+                    }
+    
+                    echo $insert2;
+                }else {
+                    $data1 = array(
+                        'iIdDetalleActividad' => $id,
+                        'iIdFinanciamiento' => $this->input->post('fuenteF'),
+                        'monto' => $this->input->post('montoF')
+                    );
+    
+                    $actFin = $_SESSION['carritoFinan'];
+    
+                    foreach ($actFin as $Af) {
+                        $fin['iIdDetalleActividad'] = $id;
+                        $fin['iIdFinanciamiento'] = $this->input->post('fuenteF');
+                        $fin['monto'] = $this->input->post('montoF');
+    
+                        $insert2 = $this->pat->agregarActFinanciamiento($fin);
+                    }
+    
+                    echo $insert2;
                 }
-
-                echo $insert2;
             }
 
-            if ($idDetAct > 0) {
-                $data1 = array(
-                    'iIdDetalleActividad' => $idDetAct,
-                    'iIdUbp' => $this->input->post('NumUBP')
-                );
-
-                $ActUbp = $_SESSION['carritoUbpP'];
-
-                foreach($ActUbp as $Au ){
-                    $UBP['iIdDetalleActividad'] = $idDetAct;
-                    $UBP['iIdUbp'] = $this->input->post('NumUBP');
-                    
-                    $insert3 = $this->pat->agregarActUBP($UBP);
+            if ($auxiliar2 == true) {
+                if ($eliminarAU == true) {
+                    $data1 = array(
+                        'iIdDetalleActividad' => $id,
+                        'iIdUbp' => $this->input->post('NumUBP')
+                    );
+    
+                    $ActUbp = $_SESSION['carritoUbpP'];
+    
+                    foreach ($ActUbp as $Au) {
+                        $UBP['iIdDetalleActividad'] = $id;
+                        $UBP['iIdUbp'] = $this->input->post('NumUBP');
+    
+                        $insert3 = $this->pat->agregarActUBP($UBP);
+                    }
+    
+                    echo $insert3;
+                }else {
+                    $data1 = array(
+                        'iIdDetalleActividad' => $id,
+                        'iIdUbp' => $this->input->post('NumUBP')
+                    );
+    
+                    $ActUbp = $_SESSION['carritoUbpP'];
+    
+                    foreach ($ActUbp as $Au) {
+                        $UBP['iIdDetalleActividad'] = $id;
+                        $UBP['iIdUbp'] = $this->input->post('NumUBP');
+    
+                        $insert3 = $this->pat->agregarActUBP($UBP);
+                    }
+    
+                    echo $insert3;
                 }
-
-                echo $insert3;
             }
+            */
         }
     }
 

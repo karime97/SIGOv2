@@ -16,17 +16,44 @@ class C_dash extends CI_Controller {
 
     public function index()
     {   
-        $datos['ejes1'] = $this->M_dash->ejes1();
-        $datos['ejes2'] = $this->M_dash->ejes2();
-        $datos['ejes3'] = $this->M_dash->ejes3();
-        $datos['ejes4'] = $this->M_dash->ejes4();
-        $datos['ejes5'] = $this->M_dash->ejes5();
-        $datos['ejes6'] = $this->M_dash->ejes6();
-        $datos['ejes7'] = $this->M_dash->ejes7();
-        $datos['ejes8'] = $this->M_dash->ejes8();
-        $datos['ejes9'] = $this->M_dash->ejes9();
-        $datos['ejes'] = $this->M_dash->ejes();
-        $this->load->view('dash/dashboard', $datos);
+        $this->load->view('dash/dashboard');
+    }
+
+    public function datosdash(){
+        if($_REQUEST['an']){
+            $an = $_REQUEST['an'];
+            $datos['ejes1'] = $this->M_dash->ejes1();
+            $datos['aveje1'] = $this->M_dash->avacetotaleje(1,$an);
+            $datos['ejes2'] = $this->M_dash->ejes2();
+            $datos['aveje2'] = $this->M_dash->avacetotaleje(2,$an);
+            $datos['ejes3'] = $this->M_dash->ejes3();
+            $datos['aveje3'] = $this->M_dash->avacetotaleje(3,$an);
+            $datos['ejes4'] = $this->M_dash->ejes4();
+            $datos['aveje4'] = $this->M_dash->avacetotaleje(4,$an);
+            $datos['ejes5'] = $this->M_dash->ejes5();
+            $datos['aveje5'] = $this->M_dash->avacetotaleje(5,$an);
+            $datos['ejes6'] = $this->M_dash->ejes6();
+            $datos['aveje6'] = $this->M_dash->avacetotaleje(6,$an);
+            $datos['ejes7'] = $this->M_dash->ejes7();
+            $datos['aveje7'] = $this->M_dash->avacetotaleje(7,$an);
+            $datos['ejes8'] = $this->M_dash->ejes8();
+            $datos['aveje8'] = $this->M_dash->avacetotaleje(8,$an);
+            $datos['ejes9'] = $this->M_dash->ejes9();
+            $datos['aveje9'] = $this->M_dash->avacetotaleje(9,$an);
+            $datos['ejes'] = $this->M_dash->ejes();
+            $datos['avejes'] = $this->M_dash->avacetotalejes($an);
+
+            $data = $this->M_dash->ejes();
+                    $valores = array();
+                    $rec = '';
+                foreach($data as $dat){
+
+                    $rec = $this->M_dash->avacetotaleje($dat['iIdEje'], $an);
+                    array_push($valores, $rec);
+                }
+                $datos['avance'] = $valores;
+            $this->load->view('dash/dashdatos', $datos);
+        }
     }
 
     public function despliegue(){
@@ -36,6 +63,7 @@ class C_dash extends CI_Controller {
                 $an = $_REQUEST['an'];
                 $this->session->set_userdata('anio', $an);
                 $datos['dependencias'] = $this->M_dash->dependencias($id);
+                $datos['av'] = $this->M_dash->avacetotaleje($id, $an);
                 $datos['temas'] = $this->M_dash->temas($id);
                 $datos['actividades'] = $this->M_dash->actividades($id,$an);
                 $data = $this->M_dash->temas($id);
@@ -47,6 +75,7 @@ class C_dash extends CI_Controller {
                     array_push($valores, $rec);
                 }
                 $datos['avance'] = $valores;
+                
                 //print_r($datos['avance']);
                 $this->load->view('dash/desp', $datos);
             }
