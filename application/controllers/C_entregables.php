@@ -595,7 +595,7 @@ class C_entregables extends CI_Controller
                                                 $str.= '<button type="button" class="btn btn-circle waves-effect waves-light btn-success" data-toggle="tooltip" data-placement="top" title="Municipalización" onclick="municipalizacion('.$value->iIdEntregable.')"><i class="mdi mdi-garage"></i></button>';
                                             }
 
-                                        $str.='<button type="button" class="btn btn-circle waves-effect waves-light btn-info"><i        class="mdi mdi-trending-up" onclick=""></i></button>';
+                                        $str.='<button type="button" class="btn btn-circle waves-effect waves-light btn-info"><i        class="mdi mdi-trending-up" onclick="mostrar_avances()"></i></button>';
 
                                       $str.='</td>
                                         </tr>';

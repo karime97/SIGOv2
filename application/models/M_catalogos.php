@@ -224,6 +224,19 @@ class M_catalogos extends CI_Model {
 		return $this->db->get();
 	}
 
+	//Muestra los temas
+	public function tema($where=''){
+
+		$this->db->select('iIdComponente AS id, vTema AS valor ');
+		$this->db->from('PED2019Tema');
+		$this->db->where('iActivo',1);
+		$this->db->order_by('vTema');
+
+		if($where != '') $this->db->where($where);
+
+		return $this->db->get();
+	}
+
 	
 }
 
