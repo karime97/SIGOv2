@@ -27,6 +27,9 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<!-- swicht -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
 
 <body class="" style="height: 100% !important;">
@@ -228,6 +231,10 @@
     <script src="<?=base_url()?>public/dist/js/pages/datatable/datatable-basic.init.js"></script>
     <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
     <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- switch -->
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="<?=base_url()?>public/assets/libs/ckeditor/ckeditor.js"></script>
+
     
     <script type="text/javascript">
         var moduloInicial = '<?=$modulo_inicial?>';

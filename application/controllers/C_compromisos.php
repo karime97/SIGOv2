@@ -104,5 +104,8 @@ class C_compromisos extends CI_Controller
             echo  $options->options_tabla('dependencias_nombre_largo',0,$where_dependencias);
         }
     }
+    public function create(){
+        $this->load->view('compromisos/contenido_agregar');
+    }
 }
 ?>
