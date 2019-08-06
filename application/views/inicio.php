@@ -30,6 +30,9 @@
 
 <!-- swicht -->
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+<!-- select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
 </head>
 
 <body class="" style="height: 100% !important;">
@@ -233,6 +236,10 @@
     <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <!-- switch -->
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.js"></script>
+    
     <script src="<?=base_url()?>public/assets/libs/ckeditor/ckeditor.js"></script>
 
     

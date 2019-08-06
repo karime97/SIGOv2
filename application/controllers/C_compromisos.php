@@ -12,7 +12,8 @@ class C_compromisos extends CI_Controller
         $this->load->helper('funciones');
         $this->load->library('Class_seguridad');
         $this->load->library('Class_options');
-    	$this->load->model('M_compromisos','comp');
+        $this->load->model('M_compromisos','comp');
+        $this->load->model('M_catalogos', 'catlogs');
     }
   
   	public function index()
@@ -30,7 +31,10 @@ class C_compromisos extends CI_Controller
             $where_estatus['vEntidadMide'] = 'Avance compromiso';
             $datos['options_estatus']  = $options->options_tabla('estatus',0,$where_estatus);
 
-  			$this->load->view('compromisos/index',$datos);
+              $this->load->view('compromisos/index',$datos);
+            //   var_dump($this->listar_ejes());
+        
+    
   		}
   		else 
   		{
@@ -38,7 +42,6 @@ class C_compromisos extends CI_Controller
   		}
 
   	}
-
     public function tabla_compromisos($where)
     {
         $compromisos = $this->comp->buscar_compromisos($where);
@@ -105,7 +108,35 @@ class C_compromisos extends CI_Controller
         }
     }
     public function create(){
-        $this->load->view('compromisos/contenido_agregar');
+        $options = new Class_options();
+
+            $datos['options_ejes']  = $options->options_tabla('eje');
+            $datos['politica_publica']  = $options->options_tabla('tema');
+            $datos['dependencias']  = $options->options_tabla('dependencias');
+            $datos['estatus']  = $options->options_tabla('estatus');
+        $this->load->view('compromisos/contenido_agregar',$datos);
+    }
+    public function insertarCompromiso(){
+        $vCompromiso=$this->input->post("vCompromiso");
+        $iNumero=$this->input->post("iNumero");
+        $iRevisado=$this->input->post("iRevisado");
+        $dPorcentajeAvance=$this->input->post("dPorcentajeAvance");
+        $iIdDependencia=$this->input->post("iIdDependencia");
+        $vFeNotarial=$this->input->post("vFeNotarial");
+        $iRevisado=$this->input->post("iRevisado");
+
+        $data=array(
+            'vCompromiso'=>$vCompromiso,
+            'iNumero'=>$iNumero,
+            'iRevisado'=>$iRevisado,
+            'dPorcentajeAvance'=>$dPorcentajeAvance,
+            'iIdDependencia' =>,
+            'vFeNotarial'=>,
+            'iRevisado'=>
+
+        );
+
+        
     }
 }
 ?>

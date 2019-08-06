@@ -24,8 +24,8 @@
        </div>
                 <div class="form-row">
                     <div class="col-md-6">
-                        <label class="form-inline"  type="number">Numero:</label>
-                        <input type="text" class="form-control" name="numero" require="requiere" />
+                        <label class="form-inline">Numero:</label>
+                        <input  class="form-control" name="numero" require="requiere" type="number" maxlength="4"/>
                         <label class="form-inline">Nombre corto:</label>
                         <input type="text" class="form-control" require="requiere" name="nombrecorto" />
                         <label class="form-inline">Nombre completo:</label>
@@ -42,25 +42,40 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-inline">Eje:</label>
-                        <select class="form-control"></select>
+                        <select class="form-control">
+                        <option value="0">Seleccione</option>
+                                        <?=$options_ejes;?>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-inline">Política pública:</label>
-                        <select class="form-control"></select>
+                        <select class="form-control">
+                        <option value="0">Seleccione</option>
+                        <?=$politica_publica;?>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-inline">Estatus del compromiso:</label>
+                        <select class="form-control">
+                        <option value="0">Seleccione</option>
+                        <?=$estatus;?>
+                        
+                        </select>
                     </div>
                 
-                    <div class="col-md-3">
-                        <label class="form-inline">Dependencia responsable:</label>
-                        <select class="form-control"></select>
+                    <div class="col-md-6 ">
+                        <label class="form-inline" >Dependencia responsable:</label>
+                        <select class="form-control js-example-basic-multiple"  multiple="multiple" >
+                        <?=$dependencias;?>
+                        </select>
                     </div>
-                    <div class="col-md-3">
-                        <label class="form-inline">Dependencia correspondiente:</label>
-                        <select class="form-control"></select>
+                    <div class="col-md-6">
+                        <label class="form-inline" >Dependencia corresponsable:</label>
+                        <select   class="form-control js-example-basic-multiple"  multiple="multiple">
+                        <?=$dependencias;?>
+                        </select>
                     </div>
-                    <div class="col-md-12">
-                        <label class="form-inline">Estatus del compromiso:</label>
-                        <select class="form-control"></select>
-                    </div>
+                   
                     <div class="col-md-12">
                         <label class="form-inline">Eviencia fotografica:</label>
                         <div class="row">
@@ -94,6 +109,7 @@
                     </div>
                 </div>
             </form>
+            
             <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function() {
@@ -165,7 +181,7 @@ function guardarCompromiso(f, e) {
 
 var editor1 = CKEDITOR.replace('editor1', {
     extraAllowedContent: 'div',
-    height: 300
+    height: 164
 });
 // editor1.on('instanceReady', function() {
 //     // Output self-closing tags the HTML4 way, like <br>.
@@ -187,10 +203,17 @@ var editor1 = CKEDITOR.replace('editor1', {
 //     this.setMode('source');
 // });
 </script>
+<script>
+
+    $('.js-example-basic-multiple').select2();
+
+</script>
 
 <script>
 function guardar_compromiso(){
 console.log($("#frmCompromiso").serializeArray());
+
+
 
 }
 </script>
