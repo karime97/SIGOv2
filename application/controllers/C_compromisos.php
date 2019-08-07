@@ -30,9 +30,8 @@ class C_compromisos extends CI_Controller
             $datos['options_dependencias']  = $options->options_tabla('dependencias_nombre_largo',0,$where_dependencias);
             $where_estatus['vEntidadMide'] = 'Avance compromiso';
             $datos['options_estatus']  = $options->options_tabla('estatus',0,$where_estatus);
-
-              $this->load->view('compromisos/index',$datos);
-            //   var_dump($this->listar_ejes());
+            $datos['tabla_compromisos']=$this->tabla_compromisos(''); 
+            $this->load->view('compromisos/index',$datos);
         
     
   		}
@@ -41,15 +40,28 @@ class C_compromisos extends CI_Controller
   			echo '<p>Acceso denegado</p>';
   		}
 
-  	}
+      }
+      public function listartablacompromiso(){
+        $datos['tabla_compromisos']=$this->tabla_compromisos(''); 
+        $this->load->view('compromisos/tabla',$datos);
+      }
     public function tabla_compromisos($where)
     {
         $compromisos = $this->comp->buscar_compromisos($where);
-        $html = '';
+        //  return $compromisos->result();
+        
+         $html = '';
 
         if($compromisos->num_rows() > 0)
         {
-            $html = '<table class="table">
+            $html='
+            <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">';
+
+                $html.= '<table class="table table-striped table-bordered display" style="width:100%" id="grid">
+                  <thead>
                         <tr>
                             <th>Estatus</th>
                             <th>#</th>
@@ -58,7 +70,9 @@ class C_compromisos extends CI_Controller
                             <th>% Avance</th>
                             <th>Última <br> actualización</th>
                             <th width="200px;">Opciones</th>
-                        </tr>';
+                        </tr>
+            </thead>
+            <tbody>';
 
             $compromisos = $compromisos->result();
             foreach ($compromisos as $c)
@@ -68,13 +82,18 @@ class C_compromisos extends CI_Controller
                             <td>'.$c->iNumero.'</td>
                             <td>'.$c->vCompromiso.'</td>
                             <td>'.$c->vDependencia.'</td>
-                            <td>'.$c->nPorcentajeAvance.'</td>
+                            <td>'.$c->dPorcentajeAvance.'</td>
                             <td>'.$c->dUltimaAct.'</td>
-                            <td width="200px;">'.$opciones.'</td>
+                            <td width="200px;"></td>
                         </tr>';
             }
+            // '.$opciones.'
 
-            $html.= '</table>';
+            $html.= ' </tbody></table>
+            </div>
+            </div>
+        </div>
+    </div>';
         }
 
         return $html;

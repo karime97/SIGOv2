@@ -6,7 +6,7 @@
                     <h4 class="card-title">Nuevo compromiso</h4>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento2()"><i
+                    <button class="btn btn-light" type="submit" onclick="listar_compromiso()"><i
                             class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
                 <div class="col-md-12"><br></div>

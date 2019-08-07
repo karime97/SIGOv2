@@ -83,7 +83,11 @@
             </div>
         </div>
     </div>
-	<section id="contenedor"></section>
+	<section id="contenedor">
+    <?php
+    include_once('tabla.php');
+    ?>
+    </section>
 </div>
 <script type="text/javascript">
 function cargarResponsables() {
@@ -104,7 +108,11 @@ function cargarResponsables() {
     function agregar_compromiso() {
         cargar('<?= base_url() ?>C_compromisos/create', '#contenedor');
     }
+    function listar_compromiso(){
+        cargar('<?= base_url() ?>C_compromisos/listartablacompromiso', '#contenedor');
+    }
 </script>
+
 
 <script>
     function buscar_compromiso(f,e){
