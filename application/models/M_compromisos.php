@@ -20,5 +20,30 @@ class M_compromisos extends CI_Model {
 
 		if($where != '') $this->db->where($where);
 	}
+	function listarpp($ideje){
+		$this->db->select('pp.iIdTema as id, pp.vTema as tema');
+		$this->db->from('PED2019Tema pp');
+		if($ideje>0){
+			$this->db->where('pp.iIdEje',$ideje);
+		}
+		$this->db->order_by('pp.vTema');
+		$query = $this->db->get();
+			
+			foreach ($query->result() as $row) {
+				$datos[] = [
+				'iIdTema' =>$row->id,
+				'vTema' => $row->tema
+				];
+			}
+			return $datos;
+	}
+	function insertarCompromiso($data){
+		$this->db->insert('Compromiso', $data);
+		$insert_id = $this->db->insert_id();
+		return  $insert_id;
+	}
+	function agregar_CompromisoCorresponsable($data){
+		$this->db->insert('CompromisoCorresponsable', $data);
+	}
 }
 ?>

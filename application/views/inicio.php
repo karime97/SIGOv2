@@ -155,6 +155,7 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <?=$menu_navegacion?>
+                <input type="text" value="<?= base_url() ?>" id="base_url" style="display:none">
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->

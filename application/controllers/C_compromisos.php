@@ -120,23 +120,55 @@ class C_compromisos extends CI_Controller
         $vCompromiso=$this->input->post("vCompromiso");
         $iNumero=$this->input->post("iNumero");
         $iRevisado=$this->input->post("iRevisado");
-        $dPorcentajeAvance=$this->input->post("dPorcentajeAvance");
         $iIdDependencia=$this->input->post("iIdDependencia");
         $vFeNotarial=$this->input->post("vFeNotarial");
-        $iRevisado=$this->input->post("iRevisado");
-
+        $vNombreCorto=$this->input->post("vNombreCorto");
+        $fecha = date("Y-m-d H:i:s");
+        $vDescripcion=$this->input->post("vDescripcion");
+        $iUltUsuarioAct= $_SESSION[PREFIJO.'_idusuario'];
+        $iIdTema=$this->input->post("iIdTema");
+        $vObservaciones=$this->input->post("vObservaciones");
         $data=array(
-            'vCompromiso'=>$vCompromiso,
-            'iNumero'=>$iNumero,
-            'iRevisado'=>$iRevisado,
-            'dPorcentajeAvance'=>$dPorcentajeAvance,
-            'iIdDependencia' =>,
-            'vFeNotarial'=>,
-            'iRevisado'=>
-
+            "vCompromiso"=>$vCompromiso,
+            "iNumero" =>$iNumero,
+            "iRevisado" =>$iRevisado,
+            "dPorcentajeAvance" =>0,
+            "iIdDependencia" =>$iIdDependencia,
+            "vFeNotarial" =>"*",
+            "vNombreCorto" =>$vNombreCorto,
+            "dUltimaAct" =>$fecha,
+            "vDescripcion" =>$vDescripcion,
+            "iUltUsuarioAct" =>NULL,
+            "iUltUsuarioRev" =>NULL,
+            "iIdTema" =>$iIdTema,
+            "vAntes" =>"*",
+            "vDespues" =>"*",
+            "iActivo"=>1,
+            "vObservaciones"=>base64_encode($vObservaciones)
         );
+        $idCompromiso=$this->comp->insertarCompromiso($data);
+        $this->agregar_CompromisoCorresponsable($idCompromiso);
+    }
+    public function agregar_CompromisoCorresponsable($id)
+	{
+        $iIdDependenciaCble = $this->input->post('iIdDependenciaCble');
+        // linea para convertir el string separado por comas en array
+        $dependenciascble=explode (",",  $iIdDependenciaCble);  
 
-        
+		for ($i = 0; $i < count($dependenciascble); $i++) {
+			$datos=array(
+			'iIdCompromiso' =>$id,
+			'iIdDependencia' =>$dependenciascble[$i]
+			);
+			$this->comp->agregar_CompromisoCorresponsable($datos);
+		
+		}
+		echo "correcto";	
+	}
+    public function listarpp(){
+        $ideje=$this->input->post("iIdEje");
+         $data= $this->comp->listarpp($ideje);
+         echo json_encode($data);
     }
 }
 ?>

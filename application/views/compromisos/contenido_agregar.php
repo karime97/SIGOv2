@@ -25,53 +25,53 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <label class="form-inline">Numero:</label>
-                        <input  class="form-control" name="numero" require="requiere" type="number" maxlength="4"/>
+                        <input  class="form-control" name="iNumero" type="number" maxlength="4" required/>
                         <label class="form-inline">Nombre corto:</label>
-                        <input type="text" class="form-control" require="requiere" name="nombrecorto" />
+                        <input type="text" class="form-control" name="vNombreCorto" required />
                         <label class="form-inline">Nombre completo:</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" name="vCompromiso" required></textarea>
                         <label class="form-inline">Descripción:</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control" name="vDescripcion" required></textarea>
                     </div>
 
                     <div class="col-6">
                         <label class="form-inline">Observaciones</label>
                         <div class="form-group">
-                        <textarea cols="80" id="editor1" name="editor1" rows="5" data-sample="1" data-sample-short=""></textarea>
+                        <textarea cols="80" id="editor1" name="editor1" rows="5" data-sample="1" data-sample-short="" required></textarea>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-inline">Eje:</label>
-                        <select class="form-control">
-                        <option value="0">Seleccione</option>
+                        <select class="form-control" onchange="buscarPolitica()" id="cboEje">
+                        <option value="0">Todos</option>
                                         <?=$options_ejes;?>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-inline">Política pública:</label>
-                        <select class="form-control">
+                        <select class="form-control" name="iIdTema" id="iIdTema">
                         <option value="0">Seleccione</option>
                         <?=$politica_publica;?>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-inline">Estatus del compromiso:</label>
-                        <select class="form-control">
+                        <select class="form-control" name="iRevisado" id="iRevisado">
                         <option value="0">Seleccione</option>
                         <?=$estatus;?>
-                        
                         </select>
                     </div>
                 
                     <div class="col-md-6 ">
                         <label class="form-inline" >Dependencia responsable:</label>
-                        <select class="form-control js-example-basic-multiple"  multiple="multiple" >
+                        <select class="form-control" name="iIdDependencia" id="iIdDependencia" >
+                        <option value="0">Seleccione</option>
                         <?=$dependencias;?>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-inline" >Dependencia corresponsable:</label>
-                        <select   class="form-control js-example-basic-multiple"  multiple="multiple">
+                        <select   class="form-control js-example-basic-multiple"  multiple="multiple" id="iIdDependenciaCble">
                         <?=$dependencias;?>
                         </select>
                     </div>
@@ -204,16 +204,38 @@ var editor1 = CKEDITOR.replace('editor1', {
 // });
 </script>
 <script>
-
     $('.js-example-basic-multiple').select2();
-
 </script>
+
+<script src="<?=base_url()?>public/dist/js/customs/ejes.js"></script>
+
 
 <script>
 function guardar_compromiso(){
-console.log($("#frmCompromiso").serializeArray());
+    if($("#iIdTema").val()<=0 || $("#iRevisado").val()<=0  || $("#iIdDependencia").val<=0){
+        alerta('Llene los campos correctamente','error');
+    }else{
+        var observaciones= CKEDITOR.instances.editor1.getData();
+    var data = $("#frmCompromiso").serializeArray();
+    data.push({name: 'vObservaciones', value: `${observaciones}`});
+    var iIdDependenciaCble=$("#iIdDependenciaCble").val();
+    data.push({name: 'iIdDependenciaCble', value: `${iIdDependenciaCble}`});
+    
+    $.ajax({
+            type: 'POST',
+            //dataType: 'json',
+            url: "<?= base_url() ?>C_compromisos/insertarCompromiso", //Nombre del controlador
+            data: data,
+            success: function( data ) {
+               if(data=="correcto"){
+                alerta('Guardado exitosamente','success');
+               }else{
+                alerta('Error en la comunicación','error');
+               }
+            }
+        });
 
-
-
+    }
+   
 }
 </script>
