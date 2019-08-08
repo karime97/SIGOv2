@@ -8,7 +8,7 @@
                     <h6 class="card-subtitle">Administración del catalogo de compromisos </h6>
                     <h4 class="card-title">Búsqueda</h4>
                     <h6 class="card-subtitle"> </h6>
-                    <form class="" onsubmit="buscar_compromiso(this,event);">
+                    <form class="" id="buscarCompromiso"  onsubmit="buscar_compromiso(this,event);">
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -43,7 +43,7 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="eje">Última actualización posterior a:</label>
-                                    <input type="text" class="form-control" name="fecha" id="fecha" value="">
+                                    <input type="date" class="form-control" name="fecha" id="fecha" value="">
                                 </div>
                             </div>
                             <div class="col-4">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-1">
                                 <div class="form-group" style="margin-top: 30px;">
-                                    <button type="submit" class="btn waves-effect waves-light">Buscar</button>
+                                    <button type="submit" class="btn waves-effect waves-light" onclick="listar_compromiso_busqueda()">Buscar</button>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -111,13 +111,16 @@ function cargarResponsables() {
     function listar_compromiso(){
         cargar('<?= base_url() ?>C_compromisos/listartablacompromiso', '#contenedor');
     }
+    function listar_compromiso_busqueda(){
+        cargar('<?= base_url() ?>C_compromisos/listartablacompromiso', '#contenedor','POST', $("#buscarCompromiso").serializeArray());
+}
+
 </script>
 
 
 <script>
     function buscar_compromiso(f,e){
         e.preventDefault();
-
     //     $.ajax({         
     //         type: "POST",
     //         url: "<?=base_url()?>C_financiamientos/insert", //Nombre del controlador
@@ -141,6 +144,4 @@ function cargarResponsables() {
     }
 
 </script>
-
-
 

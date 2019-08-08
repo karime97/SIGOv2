@@ -42,7 +42,12 @@ class C_compromisos extends CI_Controller
 
       }
       public function listartablacompromiso(){
-        $datos['tabla_compromisos']=$this->tabla_compromisos(''); 
+
+          if(isset($_POST['palabra'])){
+            $datos['tabla_compromisos']=$this->tabla_compromisos($_POST);
+          }else{
+            $datos['tabla_compromisos']=$this->tabla_compromisos('');
+          }
         $this->load->view('compromisos/tabla',$datos);
       }
     public function tabla_compromisos($where)

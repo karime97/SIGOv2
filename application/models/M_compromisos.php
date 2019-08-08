@@ -9,15 +9,44 @@ class M_compromisos extends CI_Model {
 	function buscar_compromisos($where='')
 	{
 
-		$this->db->select('c.iIdCompromiso, c.vCompromiso, c.iNumero, c.dPorcentajeAvance, c.dUltimaAct, e.vEstatus, d.vDependencia');
+		$this->db->select('c.iIdCompromiso, c.vCompromiso, c.iNumero, c.dPorcentajeAvance, c.dUltimaAct, e.vEstatus, d.vDependencia, c.iIdDependencia');
 		$this->db->from('Compromiso c');
 		$this->db->join('Estatus e','e.iIdEstatus = c.iRevisado');
 		$this->db->join('PED2019Tema t','t.iIdTema = c.iIdTema');
 		$this->db->join('PED2019Eje ej','ej.iIdEje = t.iIdEje');
 		$this->db->join('Dependencia d','d.iIdDependencia = c.iIdDependencia');
-		$this->db->where('c.iActivo',1);
-		$this->db->order_by('c.iNumero');
-		if($where != '') $this->db->where($where);
+		
+		if (!empty($where) && $where != null && $where !=''){
+			
+		// $eje= $where["eje"];
+		if($palabra=$where["palabra"]==""){
+		$sqlPalabra=false;
+		}else{
+			$palabra=$palabra=$where["palabra"];
+			$sqlPalabra="\"vCompromiso\" ilike '%$palabra%'";
+		}
+		if($dependencia=$where["dependencia"]<=0){
+			$sqldependencia=false;
+		}else{
+			$dependencia=$dependencia=$where["dependencia"];
+			$sqldependencia="\"c\".\"iIdDependencia\"='$dependencia'";
+		}
+		// $estatus=$where["estatus"];
+		// $fecha=​$where["fecha"];
+		$wheresql="";
+		if($sqlPalabra!=false){
+		$wheresql.=$sqlPalabra." and";
+		}
+		if($sqldependencia!=false){
+			$wheresql.=$sqldependencia;
+		}
+		if($where!=""){
+			$this->db->where("( $wheresql )");
+		}
+		
+		 }
+		//  $this->db->where('c.iActivo',1);
+		 $this->db->order_by('c.iNumero');
 		$query =  $this->db->get();
         // $resultado = $query->result();
         return $query;
