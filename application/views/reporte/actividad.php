@@ -34,8 +34,15 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="SelEje">Eje</label>
-                            <select class="form-control" id="SelEje">
+                            <select class="form-control" id="SelEje" onchange="dependencia();">
                                 <option class="selected">Seleccione..</option>
+                                <?php
+                                    foreach($ejes as $key){
+                                        ?>
+                                            <option value="<?php echo $key['iIdEje']; ?>"><?php echo $key['vEje']; ?></option>
+                                        <?php
+                                    }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -49,49 +56,101 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="SelAño">Año</label>
-                            <select class="form-control" id="SelAño">
-                                <option class="selected">Seleccione..</option>
-                            </select>
+                            <label readonly for="anio">Año</label>
+                            <input type="text" id="anio" class="form-control" value="<?php echo date('Y'); ?>">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12">
-                <h5>Incluir en el reporte</h5>
-                <hr>
+             
 
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="">Fuente de fianciamiento</label>
-                        </div>
+                        
                         <br>
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="">Entregables</label>
-                        </div>
+                        
                         <div class="col-md-12">
-                        <a style="cursor:pointer; color:blue;"><i class="m-r-10 mdi mdi-briefcase-download"></i>Descargar</a>
+                        <a href="<?=base_url();?>public/reportes/actividadesBD.xls" style="cursor:pointer; color:blue;"><i class="m-r-10 mdi mdi-briefcase-download"></i>Descargar</a>
                         
                         </div>
                     </div>
                     <div class="col-md-4">
-                    <div class="checkbox">
-                            <label><input type="checkbox" value="">Alineacion al PED</label>
-                        </div>
+                   
                         <br>
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="">Avances</label>
-                        </div>
+                        
                     </div>
-                    <div class="col-md-4">
-                    <label><input type="checkbox" value="">UBP</label>
-                    </div>
+                   
                 </div>
-                <div style="float:right;"> <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Generar</button></div>
+                <div style="float:right;"> <button onclick="generar();" type="button" class="btn waves-effect waves-light btn-block btn-danger">Generar</button></div>
             </div>
         </div>
     </div>
 </section>
 <!-- fin tabla -->
 <!-- endformulario-->
+
+
+<script>
+function dependencia(){
+    var id = document.getElementById("SelEje").value;
+    $.ajax({         
+      type: "POST",
+      url:"<?=base_url()?>index.php/C_reporte/dependencias",
+      data: 'id='+id,
+      success: function(r) {  
+        $("#SelDep").html(r);
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        notie.alert({ type: 3, text: 'Ha ocurrido un error. Contacte al administrador', time: 2 });
+          /*alert("Status: " + textStatus);
+          alert("Error: " + errorThrown);*/
+
+      }
+    });
+  }
+
+function generar2(){
+    
+    var id = 1;
+    $.ajax({         
+      type: "GET",
+      url:"<?=base_url()?>index.php/C_reporte/reporte",
+      data: 'id='+id,
+      success: function(data) {  
+        console.log(data);
+       
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        notie.alert({ type: 3, text: 'Ha ocurrido un error. Contacte al administrador', time: 2 });
+          /*alert("Status: " + textStatus);
+          alert("Error: " + errorThrown);*/
+
+      }
+    });
+  }
+
+  function generar(){
+    var eje = document.getElementById("SelEje").value;
+    var dep = document.getElementById("SelDep").value;
+    var anio = document.getElementById("anio").value;
+    $.ajax({         
+      type: "GET",
+      url:"<?=base_url()?>index.php/C_reporte/generarrepo",
+      data: {
+          'eje': eje,
+          'dep':dep,
+          'anio':anio
+        },
+      success: function(data) {  
+        console.log(data);
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        notie.alert({ type: 3, text: 'Ha ocurrido un error. Contacte al administrador', time: 2 });
+          /*alert("Status: " + textStatus);
+          alert("Error: " + errorThrown);*/
+
+      }
+    });
+  }
+</script>
