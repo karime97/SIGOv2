@@ -283,7 +283,7 @@
                         <!-- columna 1 -->
                         <?php
                         $i = 0;
-                        print_r($avance);
+                        
                         foreach($ejes as $key){
                             ?>
                             <div class="col-md-6" style="background-color:white; padding-bottom: 1rem; padding-top: 2rem; border-right: 6px solid #f2f4f5; border-bottom: 6px solid #f2f4f5;">
