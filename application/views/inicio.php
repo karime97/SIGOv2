@@ -27,6 +27,12 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<!-- swicht -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+<!-- select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
 </head>
 
 <body class="" style="height: 100% !important;">
@@ -149,6 +155,7 @@
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <?=$menu_navegacion?>
+                <input type="text" value="<?= base_url() ?>" id="base_url" style="display:none">
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -228,6 +235,14 @@
     <script src="<?=base_url()?>public/dist/js/pages/datatable/datatable-basic.init.js"></script>
     <script src="<?=base_url()?>public/assets/libs/toastr/build/toastr.min.js"></script>
     <script src="<?=base_url()?>public/assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- switch -->
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.js"></script>
+    
+    <script src="<?=base_url()?>public/assets/libs/ckeditor/ckeditor.js"></script>
+
     
     <script type="text/javascript">
         var moduloInicial = '<?=$modulo_inicial?>';

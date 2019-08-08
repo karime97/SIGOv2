@@ -14,7 +14,8 @@ class M_pat extends CI_Model
 	{
 		$this->db->select();
 		$this->db->from('DetalleActividad da');
-		$this->db->join('Actividad a', 'da.iIdActividad = a.iIdActividad', 'JOIN');
+		$this->db->join('Actividad a', 'da.iIdActividad = a.iIdActividad', 'JOIN');		
+		$this->db->where('da.iActivo', 1);
 
 		if (!empty($keyword) && $keyword != null) {
 			$this->db->where("(\"vActividad\" ilike '%$keyword%')");
@@ -174,6 +175,57 @@ class M_pat extends CI_Model
 		return $query;
 	}
 
+	public function preparar_carrito($id)
+	{
+		$this->db->select();
+		$this->db->from('ActividadLineaAccion al');
+		$this->db->join('PED2019LineaAccion la', 'al.iIdLineaAccion = la.iIdLineaAccion', 'JOIN');
+		$this->db->where('iIdActividad', $id);
+
+		$query =  $this->db->get()->row();
+
+		return $query;
+	}
+
+	public function getCarritoSelec($id)
+	{
+		$datosDA = $this->DAA($id);
+
+		$this->db->select('la.*,al.*,e.*,o.*,t.*,ej.*,1 as "iActivo"');
+		$this->db->from('ActividadLineaAccion al');
+		$this->db->join('DetalleActividad da', 'al.iIdActividad = da.iIdActividad', 'JOIN');
+		$this->db->join('PED2019LineaAccion la', 'al.iIdLineaAccion = la.iIdLineaAccion', 'JOIN');
+		$this->db->join('PED2019Estrategia e', 'la.iIdEstrategia = e.iIdEstrategia', 'JOIN');
+		$this->db->join('PED2019Objetivo o', 'e.iIdObjetivo = o.iIdObjetivo', 'JOIN');
+		$this->db->join('PED2019Tema t', 'o.iIdTema = t.iIdTema', 'JOIN');
+		$this->db->join('PED2019Eje ej', 't.iIdEje = ej.iIdEje', 'JOIN');
+		$this->db->where('da.iIdActividad', $datosDA->iIdActividad);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getCarritoFinan($id)
+	{
+		$this->db->select('da.*,daf.*,1 as "iActivo"');
+		$this->db->from('DetalleActividadFinanciamiento daf');
+		$this->db->join('Financiamiento da', 'daf.iIdFinanciamiento = da.iIdFinanciamiento', 'JOIN');
+		$this->db->where('daf.iIdDetalleActividad', $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getCarritoUbpP($id)
+	{
+		$this->db->select('da.*,dau.*,u.*,pp.*,1 as "iActivo"');
+		$this->db->from('DetalleActividadUBP dau');
+		$this->db->join('DetalleActividad da', 'dau.iIdDetalleActividad = da.iIdDetalleActividad', 'JOIN');
+		$this->db->join('UBP u', 'dau.iIdUbp = u.iIdUbp', 'JOIN');
+		$this->db->join('ProgramaPresupuestario pp', 'u.iIdProgramaPresupuestario = pp.iIdProgramaPresupuestario', 'JOIN');
+		$this->db->where('dau.iIdDetalleActividad', $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	public function modificarDetaAct($data1, $id)
 	{
 		$this->db->where('iIdDetalleActividad', $id);
@@ -221,6 +273,13 @@ class M_pat extends CI_Model
 		} else {
 			return FALSE;
 		}
+	}	
+
+    public function eliminarDetaActividad($id){
+		$this->db->where('iIdDetalleActividad', $id);
+		$data = array('iActivo' => 0);
+		$this->db->update('DetalleActividad', $data);
+		return $this->db->affected_rows();
 	}
 
 	/* Consulta linea de accion (join) */
@@ -237,6 +296,15 @@ class M_pat extends CI_Model
 		return $query->result();
 	}
 
+	public function DAA($id){
+		$this->db->select();
+		$this->db->from('DetalleActividad da');
+		$this->db->where('iIdDetalleActividad', $id);
+		$query = $this->db->get()->row();
+		return $query;
+	}
+
+	
 	/* Consulta financiamiento */
 	public function getFinanciamiento($id)
 	{
