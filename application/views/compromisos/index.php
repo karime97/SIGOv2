@@ -33,7 +33,7 @@
                                     <label for="estatus">Estatus</label>
                                     <select name="estatus" id="estatus" class="custom-select">
                                         <option value="0">Todos</option>
-                                        <?=$options_estatus;?>
+                                        <?=$estatus;?>
                                     </select>
                                 </div>
                             </div>

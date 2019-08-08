@@ -9,7 +9,7 @@ class M_compromisos extends CI_Model {
 	function buscar_compromisos($where='')
 	{
 
-		$this->db->select('c.iIdCompromiso, c.vCompromiso, c.iNumero, c.dPorcentajeAvance, c.dUltimaAct, e.vEstatus, d.vDependencia, c.iIdDependencia');
+		$this->db->select('c.iIdCompromiso, c.vCompromiso, c.iNumero, c.dPorcentajeAvance, c.dUltimaAct , e.vEstatus, d.vDependencia, c.iIdDependencia');
 		$this->db->from('Compromiso c');
 		$this->db->join('Estatus e','e.iIdEstatus = c.iRevisado');
 		$this->db->join('PED2019Tema t','t.iIdTema = c.iIdTema');
@@ -31,21 +31,42 @@ class M_compromisos extends CI_Model {
 			$dependencia=$dependencia=$where["dependencia"];
 			$sqldependencia="\"c\".\"iIdDependencia\"='$dependencia'";
 		}
-		// $estatus=$where["estatus"];
-		// $fecha=​$where["fecha"];
+		if($estatus=$where["estatus"]<=0){
+			$sqlestatus=false;
+		}else{
+			$estatus=$where["estatus"];
+			$sqlestatus="\"e\".\"iIdEstatus\"='$estatus'";
+		}
+		if($fecha=$where["fecha"]<=0){
+			$sqlfecha=false;
+		}else{
+			$fecha=$where["fecha"];
+			$sqlfecha="date(\"c\".\"dUltimaAct\")='$fecha'";
+			// $sqlfecha="c"."."."dUltimaAct:: DATE, dd/mm/yyyy =".$fecha;
+		}
+		
+		 
 		$wheresql="";
 		if($sqlPalabra!=false){
-		$wheresql.=$sqlPalabra." and";
+		$wheresql.=$sqlPalabra;
 		}
 		if($sqldependencia!=false){
-			$wheresql.=$sqldependencia;
+			$wheresql.=" and ".$sqldependencia;
 		}
-		if($where!=""){
-			$this->db->where("( $wheresql )");
+		if($sqlestatus!=false){
+			$wheresql.=" and ".$sqlestatus;
+		}
+		if($sqlfecha!=false){
+			$wheresql.=" and ".$sqlfecha;
+		}
+		if($wheresql!==""){
+			 $this->db->where("( $wheresql )");
+		}else{
+  			$this->db->where('c.iActivo',1);
 		}
 		
 		 }
-		//  $this->db->where('c.iActivo',1);
+		
 		 $this->db->order_by('c.iNumero');
 		$query =  $this->db->get();
         // $resultado = $query->result();

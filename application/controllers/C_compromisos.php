@@ -26,6 +26,7 @@ class C_compromisos extends CI_Controller
             $options = new Class_options();
 
             $datos['options_ejes']  = $options->options_tabla('eje');
+            $datos['estatus']  = $options->options_tabla('estatus');
             $where_dependencias['iIdEje'] = 0;
             $datos['options_dependencias']  = $options->options_tabla('dependencias_nombre_largo',0,$where_dependencias);
             $where_estatus['vEntidadMide'] = 'Avance compromiso';
