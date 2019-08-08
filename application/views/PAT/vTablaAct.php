@@ -71,7 +71,7 @@
                                     <td><?= $value->iAnio ?></td>
                                     <td align="center">
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_edit" onclick="modificarAct(<?= $value->iIdDetalleActividad ?>)"><i class="mdi mdi-border-color"></i></button>
-                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick=""><i class="mdi mdi-close"></i></button>
+                                        <button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="confirmar('¿Está seguro de eliminar?', eliminarActividad,<?= $value->iIdDetalleActividad ?>);"><i class="mdi mdi-close"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton" onclick="abrirEntregables(<?= $value->iIdDetalleActividad ?>)"><i class="icon-badge"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_desc" onclick=""><i class="mdi mdi-download"></i></button>
                                         <button type="button" class="btn btn-circle waves-effect waves-light boton_InfTex" onclick=""><i class="icon-book-open"></i></button>
@@ -85,7 +85,6 @@
         </div>
     </div>
 </div>
-<div id="holi"></div>
 
 <script src="<?=base_url()?>public/assets/extra-libs/knob/jquery.knob.min.js"></script>
     <script>
@@ -99,4 +98,26 @@
         $('#grid').DataTable();
         //$('#grid').DataTable().ajax.reload(); 
     });
+
+    function eliminarActividad(key) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>C_pat/eliminarActividad",
+            data: {
+                'key': key
+            },
+            //contentType: 'json',
+            success: function(resp) {
+                if (resp == true) {
+                    filter2();
+                    alerta('Eliminado exitosamente', 'success');
+                } else {
+                    alerta('Error al eliminar', 'error');
+                }
+            },
+            error: function(XMLHHttRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
 </script>
