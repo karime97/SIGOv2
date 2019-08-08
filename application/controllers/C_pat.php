@@ -59,8 +59,31 @@ class C_pat extends CI_Controller
             $data3['finan'] = $this->pat->mostrarFinanciamiento();
             $data3['ubp'] = $this->pat->mostrarUbp();
             $data3['consulta'] = $this->pat->preparar_update($id);
+            $this->pintarT_selectores($id);
+            $this->pintarT_financiamiento($id);
+            $this->pintarT_ubps($id);
             $this->load->view('PAT/editar_actividad', $data3);
         }
+    }
+
+    public function pintarT_selectores($id)
+    {
+        $rec = $this->pat->getCarritoSelec($id);
+        //print_r($rec );
+        // $recc = $this->pat->preparar_carrito($rec->iIdActividad);
+        $_SESSION['carritoSelec'] = $rec;
+    }
+
+    public function pintarT_financiamiento($id)
+    {
+        $fin = $this->pat->getCarritoFinan($id);
+        $_SESSION['carritoFinan'] = $fin;
+    }
+
+    public function pintarT_ubps($id)
+    {
+        $ubp = $this->pat->getCarritoUbpP($id);
+        $_SESSION['carritoUbpP'] = $ubp;
     }
 
     public function actualizarActividad()
@@ -98,6 +121,12 @@ class C_pat extends CI_Controller
         }
     }
 
+    public function eliminarActividad()
+    {
+        $key = $_POST['key'];
+        echo $this->pat->eliminarDetaActividad($key);
+    }
+
     ////////////////
 
     public function dPoliPub($eje)
@@ -105,9 +134,9 @@ class C_pat extends CI_Controller
         //$eje = 0;
 
         /*if (!empty($_POST['eje']) && $_POST['eje'] != '0') {
-            $eje = $_POST['eje'];
-        }
-        echo $eje;*/
+                $eje = $_POST['eje'];
+            }
+            echo $eje;*/
         $PolPub = $this->pat->mostrarPpublica($eje);
         $opc = '<option value="0">Seleccione...</option>';
         foreach ($PolPub as $value) {
@@ -176,8 +205,7 @@ class C_pat extends CI_Controller
     public function guardarAct()
     {
 
-        if (isset($_POST['id']) && isset($_POST['idAct']) && isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion']))
-        {
+        if (isset($_POST['id']) && isset($_POST['idAct']) && isset($_POST['NombAct']) && isset($_POST['objGeneral']) && isset($_POST['descripcion'])) {
 
             $id = $_POST['id'];
             $idActividad = $_POST['idAct'];
@@ -195,7 +223,7 @@ class C_pat extends CI_Controller
                 'iIdDependencia' => (int) $_SESSION[PREFIJO . '_iddependencia']
             );
             $where['iIdActividad'] = $idActividad;
-            $this->mseg->actualiza_registro('Actividad',$where,$data,$con);
+            $this->mseg->actualiza_registro('Actividad', $where, $data, $con);
 
             // Actualizamos la tabla DetalleActividad
             $data1 = array(
@@ -205,192 +233,61 @@ class C_pat extends CI_Controller
                 'dFin' => $this->input->post('fFIN')
             );
             $where1['iIdDetalleActividad'] = $id;
-            $this->mseg->actualiza_registro('DetalleActividad',$where1,$data1,$con);
+            $this->mseg->actualiza_registro('DetalleActividad', $where1, $data1, $con);
 
             //Eliminar ActividadLineaAccion
-            $this->mseg->elimina_registro('ActividadLineaAccion',$where,$con);
+            $this->mseg->elimina_registro('ActividadLineaAccion', $where, $con);
 
             //  Guardamos las lineas de acción
             $actLA = $_SESSION['carritoSelec'];
-    
+
             foreach ($actLA as $la) {
-                if($la->iActivo > 0){
+                if ($la->iActivo > 0) {
                     $LinAcc['iIdActividad'] = $idActividad;
-                    $LinAcc['iIdLineaAccion'] = $la->iIdLineaAccion;                
+                    $LinAcc['iIdLineaAccion'] = $la->iIdLineaAccion;
 
                     //$insert = $this->pat->agregarActLineaAcc($LinAcc);
-                    $this->mseg->inserta_registro_no_pk('ActividadLineaAccion',$LinAcc,$con);
+                    $this->mseg->inserta_registro_no_pk('ActividadLineaAccion', $LinAcc, $con);
                 }
             }
 
             //Eliminar DetalleActividadFinanciamiento
-            $this->mseg->elimina_registro('DetalleActividadFinanciamiento',$where1,$con);
+            $this->mseg->elimina_registro('DetalleActividadFinanciamiento', $where1, $con);
 
             //  Guardamos financiamiento
             $actFin = $_SESSION['carritoFinan'];
-    
+
             foreach ($actFin as $Af) {
-                if($Af->iActivo > 0){
+                if ($Af->iActivo > 0) {
                     $fin['iIdDetalleActividad'] = $id;
                     $fin['iIdFinanciamiento'] = $Af->iIdFinanciamiento;
-                    $fin['monto'] = $Af->montoFinan;
+                    $fin['monto'] = $Af->monto;
 
-                    $this->mseg->inserta_registro_no_pk('DetalleActividadFinanciamiento',$fin,$con);
+                    $this->mseg->inserta_registro_no_pk('DetalleActividadFinanciamiento', $fin, $con);
                 }
             }
 
             //Eliminar DetalleActividadFinanciamiento
-            $this->mseg->elimina_registro('DetalleActividadUBP',$where1,$con);
+            $this->mseg->elimina_registro('DetalleActividadUBP', $where1, $con);
 
             //Gardamos las UBPs
             $ActUbp = $_SESSION['carritoUbpP'];
 
             foreach ($ActUbp as $Au) {
-                if($Au->iActivo > 0){
+                if ($Au->iActivo > 0) {
                     $UBP['iIdDetalleActividad'] = $id;
                     $UBP['iIdUbp'] = $Au->iIdUbp;
 
-                    $this->mseg->inserta_registro_no_pk('DetalleActividadUBP',$UBP,$con);
+                    $this->mseg->inserta_registro_no_pk('DetalleActividadUBP', $UBP, $con);
                 }
             }
 
             // Finalizar transaccion
-            if($this->mseg->terminar_transaccion($con) == true){
+            if ($this->mseg->terminar_transaccion($con) == true) {
                 echo 'Correcto';
             } else {
                 echo 'Error';
             }
-
-            /*$auxiliar = $this->pat->modificarAct($data, $idActividad);
-            $eliminarALA = $this->pat->eliminarActLineaAcc($idActividad);
-            echo $eliminarALA;
-            $eliminarAF = $this->pat->eliminarActFinanciamiento($idActividad);
-            echo $eliminarAF;
-            $eliminarAU = $this->pat->eliminarActUBP($idActividad);
-            echo $eliminarAU;
-
-            if ($auxiliar == true) {
-                $data1 = array(
-                    'iIdActividad' => $idActividad,
-                    'iAnio' => $this->input->post('annio'),
-                    'dInicio' => $this->input->post('fINICIO'),
-                    'dFin' => $this->input->post('fFIN')
-                );
-                $auxiliar2 = $this->pat->modificarDetaAct($data1, $id);
-            }
-
-            if ($auxiliar == true) {
-                if ($eliminarALA == true) {
-                    $data1 = array(
-                        'iIdActividad' => $idActividad,
-                        'iIdLineaAccion' => $this->input->post('linAcc')
-                    );
-    
-                    $actLA = $_SESSION['carritoSelec'];
-    
-                    foreach ($actLA as $la) {
-                        $LinAcc['iIdActividad'] = $idActividad;
-                        $LinAcc['iIdLineaAccion'] = $this->input->post('linAcc');
-    
-                        $insert = $this->pat->agregarActLineaAcc($LinAcc);
-                    }
-    
-                    echo $insert;
-                }else {
-                    $data1 = array(
-                        'iIdActividad' => $idActividad,
-                        'iIdLineaAccion' => $this->input->post('linAcc')
-                    );
-    
-                    $actLA = $_SESSION['carritoSelec'];
-    
-                    foreach ($actLA as $la) {
-                        $LinAcc['iIdActividad'] = $idActividad;
-                        $LinAcc['iIdLineaAccion'] = $this->input->post('linAcc');
-    
-                        $insert = $this->pat->agregarActLineaAcc($LinAcc);
-                    }
-    
-                    echo $insert;
-                }
-            }
-
-            if ($auxiliar2 == true) {
-                if ($eliminarAF == true) {
-                    $data1 = array(
-                        'iIdDetalleActividad' => $id,
-                        'iIdFinanciamiento' => $this->input->post('fuenteF'),
-                        'monto' => $this->input->post('montoF')
-                    );
-    
-                    $actFin = $_SESSION['carritoFinan'];
-    
-                    foreach ($actFin as $Af) {
-                        $fin['iIdDetalleActividad'] = $id;
-                        $fin['iIdFinanciamiento'] = $this->input->post('fuenteF');
-                        $fin['monto'] = $this->input->post('montoF');
-    
-                        $insert2 = $this->pat->agregarActFinanciamiento($fin);
-                    }
-    
-                    echo $insert2;
-                }else {
-                    $data1 = array(
-                        'iIdDetalleActividad' => $id,
-                        'iIdFinanciamiento' => $this->input->post('fuenteF'),
-                        'monto' => $this->input->post('montoF')
-                    );
-    
-                    $actFin = $_SESSION['carritoFinan'];
-    
-                    foreach ($actFin as $Af) {
-                        $fin['iIdDetalleActividad'] = $id;
-                        $fin['iIdFinanciamiento'] = $this->input->post('fuenteF');
-                        $fin['monto'] = $this->input->post('montoF');
-    
-                        $insert2 = $this->pat->agregarActFinanciamiento($fin);
-                    }
-    
-                    echo $insert2;
-                }
-            }
-
-            if ($auxiliar2 == true) {
-                if ($eliminarAU == true) {
-                    $data1 = array(
-                        'iIdDetalleActividad' => $id,
-                        'iIdUbp' => $this->input->post('NumUBP')
-                    );
-    
-                    $ActUbp = $_SESSION['carritoUbpP'];
-    
-                    foreach ($ActUbp as $Au) {
-                        $UBP['iIdDetalleActividad'] = $id;
-                        $UBP['iIdUbp'] = $this->input->post('NumUBP');
-    
-                        $insert3 = $this->pat->agregarActUBP($UBP);
-                    }
-    
-                    echo $insert3;
-                }else {
-                    $data1 = array(
-                        'iIdDetalleActividad' => $id,
-                        'iIdUbp' => $this->input->post('NumUBP')
-                    );
-    
-                    $ActUbp = $_SESSION['carritoUbpP'];
-    
-                    foreach ($ActUbp as $Au) {
-                        $UBP['iIdDetalleActividad'] = $id;
-                        $UBP['iIdUbp'] = $this->input->post('NumUBP');
-    
-                        $insert3 = $this->pat->agregarActUBP($UBP);
-                    }
-    
-                    echo $insert3;
-                }
-            }
-            */
         }
     }
 
@@ -459,40 +356,39 @@ class C_pat extends CI_Controller
             $data = $_SESSION['carritoSelec'];
         }
         $row = '';
-
         foreach ($data as $r) {
-            if ($r->iActivo === 1) {
+            if ($r->iActivo == 1) {
                 $row .= '<tr>
-                <td>' . $r->vEje . '</td>
-                <td>' . $r->vTema . '</td>
-                <td>' . $r->vObjetivo . '</td>
-                <td>' . $r->vEstrategia . '</td>
-                <td>' . $r->vLineaAccion . '</td>
-                <td align="center"><button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="eliminarCarrito(' . $r->iIdLineaAccion . ')"><i class="mdi mdi-close"></i></button></td>
-            </tr>';
+                    <td>' . $r->vEje . '</td>
+                    <td>' . $r->vTema . '</td>
+                    <td>' . $r->vObjetivo . '</td>
+                    <td>' . $r->vEstrategia . '</td>
+                    <td>' . $r->vLineaAccion . '</td>
+                    <td align="center"><button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="eliminarCarrito(' . $r->iIdLineaAccion . ')"><i class="mdi mdi-close"></i></button></td>
+                </tr>';
             }
         }
         $tb = '<table class="table table-striped table-bordered display" style="width:100%" id="grid3">
-        <thead>
-            <tr>
-                <th>Eje</th>
-                <th>Politica pública</th>
-                <th>Objetivo</th>
-                <th>Estrategia</th>
-                <th>Linea de accion</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            ' . $row . '
-        </tbody>
-    </table>
-    <script>
-    $(document).ready(function() {
-        $("#grid3").DataTable();
-    });
-    </script>
-    ';
+            <thead>
+                <tr>
+                    <th>Eje</th>
+                    <th>Politica pública</th>
+                    <th>Objetivo</th>
+                    <th>Estrategia</th>
+                    <th>Linea de accion</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                ' . $row . '
+            </tbody>
+        </table>
+        <script>
+        $(document).ready(function() {
+            $("#grid3").DataTable();
+        });
+        </script>
+        ';
         echo $tb;
     }
 
@@ -526,9 +422,9 @@ class C_pat extends CI_Controller
                 if (isset($instrumento[0])) {
                     $instrumento = $instrumento[0];
                     if (isset($_POST['montoF'])) {
-                        $instrumento->montoFinan = $_POST['montoF'];
+                        $instrumento->monto = $_POST['montoF'];
                     } else {
-                        $instrumento->montoFinan = null;
+                        $instrumento->monto = null;
                     }
                     $instrumento->iActivo = 1;
                     $data[] = $instrumento;
@@ -583,33 +479,33 @@ class C_pat extends CI_Controller
         $row = '';
 
         foreach ($data as $r) {
-            if ($r->iActivo === 1) {
+            if ($r->iActivo == 1) {
                 $row .= '
-                <tr>
-                <td>' . $r->vFinanciamiento . '</td>
-                <td> $' . $r->montoFinan . '</td>
-                <td align="center"><button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="eliminarCarritoF(' . $r->iIdFinanciamiento . ')"><i class="mdi mdi-close"></i></button></td>
-                </tr>';
+                    <tr>
+                    <td>' . $r->vFinanciamiento . '</td>
+                    <td> $' . $r->monto . '</td>
+                    <td align="center"><button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="eliminarCarritoF(' . $r->iIdFinanciamiento . ')"><i class="mdi mdi-close"></i></button></td>
+                    </tr>';
             }
         }
         $tb = '<table class="table table-striped table-bordered display" style="width:100%" id="grid">
-        <thead>
-            <tr>
-                <th>Nombre de la fuente de financiamiento</th>
-                <th>Monto</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        ' . $row . '
-        </tbody>
-    </table>
-    <script>
-    $(document).ready(function() {
-        $("#grid").DataTable();
-    });
-    </script>
-    ';
+            <thead>
+                <tr>
+                    <th>Nombre de la fuente de financiamiento</th>
+                    <th>Monto</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            ' . $row . '
+            </tbody>
+        </table>
+        <script>
+        $(document).ready(function() {
+            $("#grid").DataTable();
+        });
+        </script>
+        ';
         echo $tb;
     }
 
@@ -681,37 +577,53 @@ class C_pat extends CI_Controller
         $row = '';
 
         foreach ($data as $r) {
-            if ($r->iActivo === 1) {
+            if ($r->iActivo == 1) {
                 $row .= '
-                <tr>
-                    <td>' . $r->vClave . '</td>
-                    <td>' . $r->vUBP . '</td>
-                    <td>' . $r->iIdProgramaPresupuestario . '</td>
-                    <td>' . $r->vProgramaPresupuestario . '</td>
-                    <td align="center"><button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="eliminarCarritoUP(' . $r->iIdUbp . ')"><i class="mdi mdi-close"></i></button></td>
-                </tr>';
+                    <tr>
+                        <td>' . $r->vClave . '</td>
+                        <td>' . $r->vUBP . '</td>
+                        <td>' . $r->iIdProgramaPresupuestario . '</td>
+                        <td>' . $r->vProgramaPresupuestario . '</td>
+                        <td align="center"><button type="button" class="btn btn-circle waves-effect waves-light boton_eliminar " onclick="eliminarCarritoUP(' . $r->iIdUbp . ')"><i class="mdi mdi-close"></i></button></td>
+                    </tr>';
             }
         }
         $tb = '<table class="table table-striped table-bordered display" style="width:100%" id="grid2">
-        <thead>
-            <tr>
-            <th>Número UBP</th>
-            <th>Nombre UBP</th>
-            <th>Número PP</th>
-            <th>Nombre PP</th>
-            <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        ' . $row . '
-        </tbody>
-    </table>
-    <script>
-    $(document).ready(function() {
-        $("#grid2").DataTable();
-    });
-    </script>
-    ';
+            <thead>
+                <tr>
+                <th>Número UBP</th>
+                <th>Nombre UBP</th>
+                <th>Número PP</th>
+                <th>Nombre PP</th>
+                <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            ' . $row . '
+            </tbody>
+        </table>
+        <script>
+        $(document).ready(function() {
+            $("#grid2").DataTable();
+        });
+        </script>
+        ';
         echo $tb;
+    }
+
+    //Recuperar datos del carrito
+    function recuperarLineaAccion($id)
+    {
+        $query = $this->pat->getLineaAccion($id);
+        $ids = '';
+        if ($query) {
+            $query = $query->result();
+
+            foreach ($query as $dato) {
+                if ($ids != '') $ids .= ',';
+                $ids .= $dato->iIdLineaAccion;
+            }
+        }
+        return $ids;
     }
 }

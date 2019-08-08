@@ -108,7 +108,7 @@
                     <h1>Objetivo General</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
-                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vObjetivo ?>"></textarea>
+                            <textarea class="form-control" id="objGeneral" name="objGeneral" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;"><?= $consulta->vObjetivo ?></textarea>
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
@@ -118,7 +118,7 @@
                     <h1>Descripción</h1>
                     <div class="form-row">
                         <div class="col-md-12 mb-12">
-                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;" value="<?= $consulta->vDescripcion ?>"></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" aria-invalid="false" required="" placeholder="" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 1125px; height: 190px;"><?= $consulta->vDescripcion ?></textarea>
                             <div class="invalid-feedback">
                                 Este campo no puede estar vacio.
                             </div>
