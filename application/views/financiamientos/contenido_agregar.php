@@ -9,7 +9,7 @@
                     <button class="btn btn-light" type="submit" onclick="buscarfinanciamiento2()"><i class="mdi mdi-arrow-left">Regresar</i></button>
                 </div>
             </div>
-            <br><br>           
+            <br><br>
             <form class="needs-validation was-validated" onsubmit="guardarFinanciamiento(this,event);">
                 <div class="form-row">
                     <div class="col-md-3 mb-3">
@@ -27,14 +27,14 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-6">
-                    <label for="validationCustom04">Fuente de financiamiento</label>
-                    <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 520px; height: 128px;"></textarea>
-                    <div class="invalid-feedback">
-                        Este campo no puede estar vacio.
+                        <label for="validationCustom04">Fuente de financiamiento</label>
+                        <textarea class="form-control" id="textarea" name="financiamiento" aria-invalid="false" required="" placeholder="Ingresar fuente de financiamiento" cols="40" rows="5" style="resize: both; margin: 0px -246px 0px 0px; width: 520px; height: 128px;"></textarea>
+                        <div class="invalid-feedback">
+                            Este campo no puede estar vacio.
+                        </div>
                     </div>
                 </div>
-                </div>
-                </div>
+                <br>
                 <center>
                     <button class="btn waves-effect waves-light btn-success" type="submit">Guardar</button>
                 </center>
@@ -61,39 +61,36 @@
             </script>
         </div>
     </div>
-</div>
 
+    <script>
+        function guardarFinanciamiento(f, e) {
+            e.preventDefault();
 
-<script>
-    function guardarFinanciamiento(f,e){
-        e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "<?= base_url() ?>C_financiamientos/insert", //Nombre del controlador
+                data: $(f).serialize(),
 
-        $.ajax({         
-            type: "POST",
-            url: "<?=base_url()?>C_financiamientos/insert", //Nombre del controlador
-            data: $(f).serialize(),
+                success: function(resp) {
+                    if (resp > 0) {
 
-            success: function(resp) {
-              if(resp > 0){
-                
-                buscarfinanciamiento();
-                alerta('Guardado exitosamente','success');
+                        buscarfinanciamiento();
+                        alerta('Guardado exitosamente', 'success');
 
-              } else {
-                alerta('Error al guardar','error');
-              }
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              
-            }
-        });
-    }
-
-    function solonumeros(e)
-                    {
-         var key = window.event ? e.which : e.keyCode;
-                        if(key < 48 || key > 57)
-                            e.preventDefault();
+                    } else {
+                        alerta('Error al guardar', 'error');
                     }
-</script>
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        }
+
+        function solonumeros(e) {
+            var key = window.event ? e.which : e.keyCode;
+            if (key < 48 || key > 57)
+                e.preventDefault();
+        }
+    </script>

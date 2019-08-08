@@ -1,4 +1,4 @@
-<div id="">
+<div id="contenidoPAT">
     <br><br>
     <div class="row">
         <div class="col-md-12">
@@ -92,7 +92,7 @@
         }
 
         function abrirEntregables(id) {
-            cargar('<?= base_url() ?>C_entregables/index', '#contenido_modulo', 'POST', 'id=' + id);
+            cargar('<?= base_url() ?>index.php/C_entregables/','#contenido', 'POST', 'id=' + id);
         }
 
         function filter() {
