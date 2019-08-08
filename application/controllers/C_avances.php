@@ -15,9 +15,33 @@ class C_avances extends CI_Controller {
     //Muestra la vista principal
     public function index()
     {
-        $data['consulta'] = $this->ma->mostrar_avances();
+        $id_detent = $this->input->post('id');
+
+        $data['consulta'] = $this->ma->mostrar_actividadentregable($id_detent);
     	$this->load->view('avances/principal',$data);
     }
+
+    //Funcion para insertar
+    public function insert(){
+
+        if(isset($_POST['mes_corte']) && isset($_POST['avance']) && isset($_POST['monto']) && isset($_POST['beneficiario']) && isset($_POST['observaciones'])){
+
+            $data['nAvance'] = $this->input->post('avance');
+            $data['nAvance'] = $this->input->post('avance');
+
+        }else{
+            echo 'error';
+        }
+    }
+
+    //Muestra la tabla de trimestres
+    public function tabla_trimestres(){
+
+        $html = '';
+
+        return $html;
+    }
+
 }
 
 ?>

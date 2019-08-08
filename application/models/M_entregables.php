@@ -30,19 +30,6 @@ class M_entregables extends CI_Model{
         return $resultado;
     }
     
-    //Obtiene el id de la dependencia a la que pertenece el usuario actual
-    public function obtener_iddependencia($idusuario){
-
-        $this->db->select('u.iIdDependencia');
-        $this->db->from('Dependencia d');
-        $this->db->join('Usuario u','d.iIdDependencia = u.iIdDependencia','JOIN');
-        $this->db->where('u.iIdUsuario',$idusuario);
-
-        $query =  $this->db->get()->row();
-        
-        return $query;
-    }
-
     //Guarda el entregable y el detalle entregable en la DB
     public function guardado_general($table,$data){
 
@@ -204,6 +191,23 @@ class M_entregables extends CI_Model{
         $query =  $this->db->get()->row();
         
         return $query;
+    }
+
+    //mostrar todos los entregables y los componentes
+    public function mostrar_entregablecompromiso(){
+
+        $this->db->select();
+        $this->db->from('Entregable e');
+        $this->db->join('EntregableComponente ec','ec.iIdEntregable = e.iIdEntregable','LEFT OUTER');
+        $this->db->join('Componente c','ec.iIdComponente = c.iIdComponente','LEFT OUTER');
+        $this->db->join('Compromiso cp','c.iIdCompromiso = cp.iIdCompromiso','LEFT OUTER');
+        $this->db->where('e.iActivo',1);
+        
+        $query =  $this->db->get();
+
+        $resultado = $query->result();
+        return $resultado;
+
     }
 
     //Mostrar compromisos y componentes

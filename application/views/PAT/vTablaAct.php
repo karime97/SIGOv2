@@ -62,7 +62,11 @@
                             <?php
                             foreach ($actividad as $value) { ?>
                                 <tr>
-                                    <td></td>
+                                    <td>
+                                        <div class="text-center">
+                                        <input data-plugin="knob" data-width="80" data-height="80" data-min="-100" data-fgColor="#7E70E9" data-displayPrevious=true value="89" />
+                                        </div>
+                                    </td>
                                     <td><?= $value->vActividad ?></td>
                                     <td><?= $value->iAnio ?></td>
                                     <td align="center">
@@ -82,6 +86,13 @@
     </div>
 </div>
 <div id="holi"></div>
+
+<script src="<?=base_url()?>public/assets/extra-libs/knob/jquery.knob.min.js"></script>
+    <script>
+    $(function() {
+        $('[data-plugin="knob"]').knob();
+    });
+</script>
 
 <script>
     $(document).ready(function() {

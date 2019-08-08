@@ -15,7 +15,7 @@
                     ?>
                 </div>
             </div>
-            <div class="tab-pane  p-20" id="alineacion" role="tabpanel">
+            <div class="tab-pane" id="alineacion" role="tabpanel">
                 <div class="p-20">
                     <?php
                     include_once('contenido_alineacion.php');

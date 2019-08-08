@@ -7,7 +7,7 @@
 </script>
 
 <script>
-    function EliminarEntregable(id) {
+    function EliminarEntregable(id){
         event.preventDefault();
 
         $.ajax({

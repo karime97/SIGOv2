@@ -60,4 +60,8 @@
         
         cargar('<?= base_url() ?>C_entregables/showponderacion', '#contenedor','POST', variables);
     }
+
+    function mostrar_avances(id){
+        cargar('<?= base_url() ?>C_avances/index', '#contenido','POST', 'id=' + id);
+    }
 </script>

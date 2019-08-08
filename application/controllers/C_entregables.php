@@ -19,6 +19,7 @@ class C_entregables extends CI_Controller
 
             $data['id_detact'] = $this->input->post('id');
             $data['tabla'] = $this->vista_tabla_entregables($data['id_detact']);
+            $data['tabla_alineacion'] = $this->vista_tabla_alineacion();
             $this->load->view('entregables/principal',$data);
         }
     }
@@ -44,8 +45,6 @@ class C_entregables extends CI_Controller
         if(isset($_POST['entregable']) && isset($_POST['unidadmedida']) && isset($_POST['sujetoafectado']) 
         && isset($_POST['periodicidad']) && isset($_POST['meta']) && isset($_POST['id_detalleactividad'])){
 
-            $resultado = $this->get_dependencia($_SESSION[PREFIJO.'_idusuario']);
-
             $data['vEntregable'] = $this->input->post('entregable');
             $data['iIdUnidadMedida'] = $this->input->post('unidadmedida');
             $data['iIdPeriodicidad'] = $this->input->post('periodicidad');
@@ -64,7 +63,7 @@ class C_entregables extends CI_Controller
 
             $data['iMunicipalizacion'] = $municipalizacion;
             $data['iMismosBeneficiarios'] = $beneficios;
-            $data['iIdDependencia'] = $resultado->iIdDependencia;
+            $data['iIdDependencia'] = $_SESSION[PREFIJO.'_iddependencia'];
             $data['iIdSujetoAfectado'] = $this->input->post('sujetoafectado');
             $data['iActivo']= 1;
 
@@ -131,12 +130,6 @@ class C_entregables extends CI_Controller
         }
     }
 
-    //obtiene la dependencia actual
-    public function get_dependencia($id){
-
-        return $this->me->obtener_iddependencia($id);
-    }
-
     //Muestra la pantalla de editar
     public function edit(){
 
@@ -171,7 +164,6 @@ class C_entregables extends CI_Controller
         if(isset($_POST['entregable']) && isset($_POST['unidadmedida']) && isset($_POST['sujetoafectado']) 
         && isset($_POST['periodicidad']) && isset($_POST['meta']) && isset($_POST['id_entregable']) && isset($_POST['id_detalleactividad'])){
 
-            $resultado = $this->get_dependencia($_SESSION[PREFIJO.'_idusuario']);
             $id_ent = $this->input->post('id_entregable');
 
             $data['vEntregable'] = $this->input->post('entregable');
@@ -192,7 +184,7 @@ class C_entregables extends CI_Controller
 
             $data['iMunicipalizacion'] = $municipalizacion;
             $data['iMismosBeneficiarios'] = $beneficios;
-            $data['iIdDependencia'] = $resultado->iIdDependencia;
+            $data['iIdDependencia'] = $_SESSION[PREFIJO.'_iddependencia'];
             $data['iIdSujetoAfectado'] = $this->input->post('sujetoafectado');
             $data['iActivo']= 1;
             
@@ -595,10 +587,57 @@ class C_entregables extends CI_Controller
                                                 $str.= '<button type="button" class="btn btn-circle waves-effect waves-light btn-success" data-toggle="tooltip" data-placement="top" title="Municipalización" onclick="municipalizacion('.$value->iIdEntregable.')"><i class="mdi mdi-garage"></i></button>';
                                             }
 
-                                        $str.='<button type="button" class="btn btn-circle waves-effect waves-light btn-info"><i        class="mdi mdi-trending-up" onclick="mostrar_avances()"></i></button>';
+                                        $str.='<button type="button" class="btn btn-circle waves-effect waves-light btn-info" onclick="mostrar_avances('.$value->iIdDetalleEntregable.')"><i class="mdi mdi-trending-up"></i></button>';
 
                                       $str.='</td>
                                         </tr>';
+                                        }
+                                $str.='</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+
+            return $str;
+    }
+
+    //Funcion para crear la vista de la tabla de entregables
+    public function vista_tabla_alineacion(){
+
+        $str='<div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered display table2" style="width:100%" id="grid2">
+                                    <thead>
+                                        <tr>
+                                            <th>Entregable</th>
+                                            <th>Compromiso</th>
+                                            <th>Componente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                                    $consulta = $this->me->mostrar_entregablecompromiso();
+                                
+                                        foreach($consulta as $value){
+                                            if($value->vCompromiso != NULL){
+                                                $compromiso = $value->vCompromiso;
+                                            }else{
+                                                $compromiso = '-------';
+                                            }
+                                            if($value->vComponente != NULL){
+                                                $componente = $value->vComponente;
+                                            }else{
+                                                $componente = '-------';
+                                            }                                  
+                                $str.=  '<tr>
+                                            <td>'.$value->vEntregable.'</td>
+                                            <td>'.$compromiso.'</td>
+                                            <td>'.$componente.'</td>';
+                                $str.=  '</tr>';
                                         }
                                 $str.='</tbody>
                                 </table>
@@ -634,5 +673,3 @@ class C_entregables extends CI_Controller
         }
     }
 }
-
-?>
